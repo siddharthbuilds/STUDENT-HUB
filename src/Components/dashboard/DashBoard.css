@@ -1,0 +1,42 @@
+.div-dashboard{
+    margin-top:20vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-dashboard{
+    height: 50vh;
+    width: 250px;
+    border-radius: 50px;
+    border: 10px solid white;
+    background-color:rgb(1,1,63);
+    color:white;
+    font-family: 'Google Sans';
+    font-weight: 600;
+    font-size: larger;
+    margin:50px;
+    transition: transform 0.35s;
+}
+
+.btn-dashboard:hover{
+    cursor: pointer;
+    transform: translate(20px,-50px);
+}
+
+.img-dashboard{
+    width: 40%;
+}
+
+.div-header-name{
+    display:inline-block;
+    animation: zoom 3s ease-in-out infinite;
+}
+@keyframes zoom{
+    from{
+        transform: scale3d(0,0,0);
+    }
+    to{
+        transform: scale3d(1,1,1);
+    }
+}

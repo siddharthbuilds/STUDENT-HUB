@@ -1,0 +1,84 @@
+
+
+.div-login{
+    margin-top:20vh;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height:40vh;
+}
+
+.btn-login, .input-login{
+    background-color:rgb(1,1,63);
+    color:white;
+    font-family: "Google Sans";
+    font-size:20px;
+    font-weight: bolder;
+    padding:10px;
+    border:3px solid rgb(1,1,63);
+    border-radius:8px;
+    transition: border-color 0.85s, background-color 0.85s;
+}
+
+.btn-login:hover{
+    cursor: pointer;
+    opacity:0.85;
+    border-color:rgb(255, 255, 255);
+    background-color:blue;
+}
+
+.input-login{
+    padding-right: 50px;
+}
+
+.input-login::placeholder{
+    color:rgba(255, 255, 255, 0.823);
+}
+
+.input-login:focus{
+    outline:none;
+    border-color: white;
+}
+.div-login-txt1{
+    font-size: 50px;
+    width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    padding:0;
+    border:none;
+}
+
+.div-login-txt2{
+    font-size: 18px;
+}
+
+.div-login-txt1{
+    animation: type 7s steps(22) infinite,
+    blink .8s infinite;
+}
+
+
+
+@keyframes type{
+    from{
+        width: 0;
+    }
+
+    to{
+        width: 22ch;
+    }
+}
+
+@keyframes blink
+{
+    50%{
+        border-color: transparent;
+    }
+}
+
+.dot{
+    position:relative;
+    top:-3px;
+}
+

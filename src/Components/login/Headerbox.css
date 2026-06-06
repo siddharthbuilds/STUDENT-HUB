@@ -1,0 +1,13 @@
+.div-header{
+    border-width: 2px;
+    border-color: white;
+    border-style:solid;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:3px;
+}
+
+.img-header-logo{
+    width:180px;
+}
