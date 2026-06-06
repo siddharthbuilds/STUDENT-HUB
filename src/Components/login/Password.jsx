@@ -45,7 +45,7 @@ export function Password({capsCheck,setCapsCheck})
                     {currentPassword.length>0 && 
                     <button type="button" className="btn-password-toggle" onClick={toggleView}>
                         <img className="img-btn-password-toggle" 
-                        src={viewPassWord? viewImage: hideImage }
+                        src={viewPassWord? hideImage: viewImage }
                         /> 
                     </button>
                     }
