@@ -1,5 +1,6 @@
 import { LoginPage } from "./Pages/LoginPage"
 import { DashBoardPage } from "./Pages/DashBoardPage"
+import { RegisterPage } from "./Pages/RegisterPage"
 function App() {
   
 
@@ -7,6 +8,7 @@ function App() {
     <>
     <LoginPage />
     <DashBoardPage />
+    <RegisterPage />
     </>
   )
 }

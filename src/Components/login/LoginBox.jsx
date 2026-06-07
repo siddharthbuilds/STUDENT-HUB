@@ -1,5 +1,6 @@
 import { Password } from "./Password"
 import { Input } from "./Input";
+import { ButtonLogin } from "./ButtonLogin";
 import "./LoginBox.css"
 import { useState } from "react";
 export function LoginBox()
@@ -12,13 +13,11 @@ export function LoginBox()
                     Login to your Account!
                 </div>
 
-                <Input setCapsCheck={setCapsCheck} />
+                <Input placeholder="Account ID" type="text" setCapsCheck={setCapsCheck} />
 
                 <Password capsCheck={capsCheck} setCapsCheck={setCapsCheck} />
                 
-                <div>
-                    <button className="btn-login"> Login </button>
-                </div>
+                <ButtonLogin text="Log In" />
                 
                 <div className="div-login-txt2">
                     New User? Register
