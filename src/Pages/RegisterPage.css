@@ -1,6 +1,12 @@
 .div-register{
+    margin-top: 20vh;
     display:flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    height: 40vh; 
+}
+
+.div-register-txt1{
+    font-size: 45px;
 }
