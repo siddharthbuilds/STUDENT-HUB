@@ -1,4 +1,5 @@
 import { Password } from "./Password"
+import { Input } from "./Input";
 import "./LoginBox.css"
 import { useState } from "react";
 export function LoginBox()
@@ -11,14 +12,7 @@ export function LoginBox()
                     Login to your Account!
                 </div>
 
-                <div>
-                    <input placeholder="Account ID"
-                     size="25" 
-                     className="input-login" 
-                     name="id"
-                     onClick={()=>{setCapsCheck(false)}}
-                     />
-                </div>
+                <Input setCapsCheck={setCapsCheck} />
 
                 <Password capsCheck={capsCheck} setCapsCheck={setCapsCheck} />
                 

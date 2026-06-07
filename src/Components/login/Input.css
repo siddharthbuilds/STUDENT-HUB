@@ -1,25 +1,3 @@
-.div-password{
-   position: relative;
-   display: inline-block;
-}
-
-.btn-password-toggle{
-    background-color: transparent;
-    border:none;
-    position:absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.btn-password-toggle:hover{
-    cursor: pointer;
-}
-
-.img-btn-password-toggle{
-    width:30px;
-}
-
 .input-login{
     background-color:rgb(1,1,63);
     color:white;
