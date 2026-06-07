@@ -1,0 +1,24 @@
+.div-attendance-months{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+    padding:12px;
+}
+
+.btn-attendance-months{
+    padding: 15px;
+    background-color: rgb(1, 1, 63);
+    color:white;
+    font-family: 'Google Sans';
+    font-weight: 600;
+    font-size: larger;
+    border-radius:20px;
+    border: 3px solid white;
+    padding-left:4px;
+}
+
+.input-month-radio{
+    width: 30px;
+    height: 18px;
+}

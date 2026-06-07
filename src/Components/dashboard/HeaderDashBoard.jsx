@@ -1,5 +1,5 @@
 import "./HeaderDashBoard.css";
-export  function HeaderDashboard()
+export  function HeaderDashBoard()
         {
         return(
             <>
