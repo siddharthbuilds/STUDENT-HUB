@@ -11,3 +11,16 @@
 .img-header-logo{
     width:180px;
 }
+
+.div-header-slogan{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    column-gap: 8px;
+}
+
+.dot{
+    position: absolute;
+    top:-10%;
+}

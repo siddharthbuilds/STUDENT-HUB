@@ -10,7 +10,11 @@ export function Headerbox()
 
                 <div>
                     Student Hub
-                    <div className="div-header-slogan"> Plan <span className="dot">.</span> Track <span className="dot">.</span> Achieve</div>
+                    <div className="div-header-slogan"> 
+                        <div> Plan <span className="dot">.</span> </div>
+                        <div> Track <span className="dot"> .</span> </div>
+                        <div> Achieve </div>
+                    </div>
                 </div>
 
                 <div>

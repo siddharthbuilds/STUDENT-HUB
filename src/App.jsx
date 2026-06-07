@@ -6,8 +6,8 @@ function App() {
 
   return (
     <>
-    {/* <LoginPage />
-    <DashBoardPage /> */}
+    <LoginPage />
+    <DashBoardPage />
     <RegisterPage />
     </>
   )
