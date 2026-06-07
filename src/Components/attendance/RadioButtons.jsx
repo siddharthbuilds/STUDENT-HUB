@@ -9,7 +9,7 @@ export function RadioButtons()
                     className="input-month-radio" 
                     id="month-july"
                     value="july"/>
-                    <label for="month-july"> July </label>
+                    <label htmlFor="month-july"> July </label>
                 </button>
                 
                 <button className="btn-attendance-months">
@@ -18,7 +18,7 @@ export function RadioButtons()
                     className="input-month-radio" 
                     id="month-august"
                     value="august"/>
-                    <label for="month-august"> August </label>
+                    <label htmlFor="month-august"> August </label>
                 </button>
                 
                 <button className="btn-attendance-months">
@@ -27,7 +27,7 @@ export function RadioButtons()
                     className="input-month-radio"
                     id="month-september"
                     value="september"/>
-                    <label for="month-september"> September </label>
+                    <label htmlFor="month-september"> September </label>
                 </button>
                 
                 <button className="btn-attendance-months">
@@ -36,7 +36,7 @@ export function RadioButtons()
                     className="input-month-radio"
                     id="month-october"
                     value="october"/>
-                    <label for="month-october"> October </label>
+                    <label htmlFor="month-october"> October </label>
                 </button>
                 
             </div>
