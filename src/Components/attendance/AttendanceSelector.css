@@ -1,0 +1,32 @@
+.div-attendance-pages{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top:10px;
+    padding-bottom:6px;
+}
+
+.div-attendance-page{
+    background-color: rgb(1, 1, 63);
+    color:white;
+    font-family: 'Google Sans';
+    font-weight: 600;
+    font-size: larger;
+    padding: 8px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    width:50lh;
+    border: 4px solid white;
+    border-radius: 16px;
+    transition: border 0.8s;
+}
+
+.div-attendance-page:hover{
+    cursor: pointer;
+    box-shadow: 0px 8px 8px rgba(0, 253, 249, 0.307);
+}
+
+.style-clicked{
+    border-color: aqua;
+}
