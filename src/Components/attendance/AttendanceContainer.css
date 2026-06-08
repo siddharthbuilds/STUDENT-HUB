@@ -1,0 +1,13 @@
+.div-attendance-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    background-color:transparent;
+    color:white;
+    font-family: 'Google Sans';
+    font-weight: 600;
+    font-size: 30px;
+    height: fit-content;
+    padding:8px;
+    width:600px;
+}

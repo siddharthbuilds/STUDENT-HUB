@@ -1,0 +1,50 @@
+
+.div-attendance-course{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    column-gap:10px;
+}
+
+.div-attendance-overall{
+    display:flex;
+    flex-direction:column;
+    row-gap:5px;
+    background-color: transparent;
+    border-radius: 20px;
+    border: 3px solid white;
+    padding:15px;
+}
+
+.div-attendance-details{
+    display: flex;
+    column-gap:15px;
+    padding:8px;
+    justify-content: space-between;
+}
+
+.div-attendance-subdetails{
+    display:flex;
+    flex-direction: column;
+    row-gap:5px;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Google Sans';
+    font-size: 20px;
+}
+
+.style-safe-bunk{
+    color: limegreen;
+    font-size:25px;
+}
+
+.style-risk-bunk{
+    color:yellow;
+    font-size:25px;
+}
+
+.style-bad-bunk{
+    color: red;
+    font-size:25px;
+}
