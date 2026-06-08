@@ -45,7 +45,13 @@ export function AttendancePage()
             {courseWise&&<AttendanceContainer />}
         </div>
             
-            {trackConfirmation&&<ConfirmationBox setTrackConfirmation={setTrackConfirmation}/>}
+            {trackConfirmation&&<ConfirmationBox 
+            message1="Are you sure want to save the changes?"
+            message2="Note: Data once Saved, cannot be edited."
+            option1="Save"
+            option2="Cancel"
+            toastmessage="All Changes Saved"
+            setTrackConfirmation={setTrackConfirmation}/>}
         </>
     )
 }

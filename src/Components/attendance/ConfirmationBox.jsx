@@ -1,7 +1,7 @@
 import "./ConfirmationBox.css"
 import {useState} from "react"
 import { Toast } from "../register/Toast";
-export function ConfirmationBox({setTrackConfirmation})
+export function ConfirmationBox({message1,message2,option1, option2, toastmessage,setTrackConfirmation})
 {
     const [trackSave,setTrackSave] = useState(false);
     function onClickConfirmSave()
@@ -23,24 +23,24 @@ export function ConfirmationBox({setTrackConfirmation})
             <div className="div-confirmation-container">
             <div className="div-confirmation-message">
                 <div> 
-                    Are you sure want to save the changes?
+                    {message1}
                 </div> 
                 <div>
-                    Note: Data once Saved, cannot be edited.
+                    {message2}
                 </div>
                 
             </div>
             <div className="div-confirmation-options">
                 <div className="div-confirmation-option" onClick={onClickConfirmSave}>
-                Save
+                {option1}
                 </div>
                 <div className="div-confirmation-option div-cancel-option" onClick={onClickConfirmCancel}>
-                Cancel
+                {option2}
                 </div>
             </div>
             
         </div>}
-        <Toast message="All Changes Saved" show={trackSave} />
+        <Toast message={toastmessage} show={trackSave} />
         </>
         
     )
