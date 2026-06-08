@@ -7,12 +7,13 @@ import {AttendanceContainer} from "../Components/attendance/AttendanceContainer"
 import {AttendanceSelector} from "../Components/attendance/AttendanceSelector"
 import { ButtonLogin } from "../Components/login/ButtonLogin"
 import { Toast } from "../Components/register/Toast"
+import { ConfirmationBox } from "../Components/attendance/ConfirmationBox"
 import { useState } from "react"
 export function AttendancePage()
 {
     const [courseWise, setCourseWise] = useState(false);
     const [dayWise, setDayWise] = useState(true);
-    const [trackSave, setTrackSave] = useState(false);
+    const [trackConfirmation, setTrackConfirmation] = useState(false);
 
     function styleCourseWise(){
         setCourseWise(true);
@@ -24,13 +25,11 @@ export function AttendancePage()
     }
 
     function onClickSave(){
-        setTrackSave(true);
-        setTimeout(()=>{
-            setTrackSave(false);
-        },3000)
+            setTrackConfirmation(true);
     }
     return(
         <>
+        <div className={trackConfirmation?"div-noblur div-blur":"div-noblur"}>
             <HeaderDashBoard />
             <AttendanceSelector dayWise={dayWise} 
             styleDayWise={styleDayWise}
@@ -42,9 +41,11 @@ export function AttendancePage()
             <DateSelector />
             <EachHour />
             <ButtonLogin text="Save" onClick={onClickSave}/>
-            <Toast message="All Changes Saved" show={trackSave} />
             </>}
             {courseWise&&<AttendanceContainer />}
+        </div>
+            
+            {trackConfirmation&&<ConfirmationBox setTrackConfirmation={setTrackConfirmation}/>}
         </>
     )
 }

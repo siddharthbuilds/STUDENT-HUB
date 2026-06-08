@@ -1,0 +1,49 @@
+.div-confirmation-container{
+    background-color: white;
+    font-family: 'Google Sans';
+    font-weight: 600;
+    font-size:large;
+    display:flex;
+    flex-direction: column;
+    row-gap: 2px;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform: translate3d(-50%,-50%,0);
+    width:300px;
+    padding:8px;
+    border:none;
+    border-radius:15px;
+}
+
+.div-confirmation-message{
+    color:black;
+    overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+}
+
+.div-confirmation-options{
+    color: rgb(1,1,63);
+    overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 5px;
+}
+
+.div-cancel-option{
+    color:red;
+    border-top: 1px solid black;
+    /* width:300px; */
+}
+
+.div-confirmation-option{
+    padding:5px;
+    padding-bottom: 2px;
+}
+
+.div-confirmation-option:hover{
+    cursor: pointer;
+    background-color: rgba(193, 193, 193, 0.344);
+}

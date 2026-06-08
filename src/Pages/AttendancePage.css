@@ -1,0 +1,6 @@
+.div-noblur{
+    transition: filter 0.4s;
+}
+.div-blur{
+    filter: blur(5px);
+}
