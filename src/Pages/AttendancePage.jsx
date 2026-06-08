@@ -5,11 +5,14 @@ import { DateSelector } from "../Components/attendance/DateSelector"
 import {EachHour } from "../Components/attendance/EachHour"
 import {AttendanceContainer} from "../Components/attendance/AttendanceContainer"
 import {AttendanceSelector} from "../Components/attendance/AttendanceSelector"
+import { ButtonLogin } from "../Components/login/ButtonLogin"
+import { Toast } from "../Components/register/Toast"
 import { useState } from "react"
 export function AttendancePage()
 {
     const [courseWise, setCourseWise] = useState(false);
     const [dayWise, setDayWise] = useState(true);
+    const [trackSave, setTrackSave] = useState(false);
 
     function styleCourseWise(){
         setCourseWise(true);
@@ -20,6 +23,12 @@ export function AttendancePage()
         setCourseWise(false)
     }
 
+    function onClickSave(){
+        setTrackSave(true);
+        setTimeout(()=>{
+            setTrackSave(false);
+        },3000)
+    }
     return(
         <>
             <HeaderDashBoard />
@@ -32,6 +41,8 @@ export function AttendancePage()
             <RadioButtons />
             <DateSelector />
             <EachHour />
+            <ButtonLogin text="Save" onClick={onClickSave}/>
+            <Toast message="All Changes Saved" show={trackSave} />
             </>}
             {courseWise&&<AttendanceContainer />}
         </>
