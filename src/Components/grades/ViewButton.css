@@ -1,0 +1,25 @@
+.div-viewdetails{
+    display: flex;
+    align-items: center;
+}
+
+.btn-viewdetails{
+    background-color: transparent;
+    padding:8px;
+    color:white;
+    font-family: 'Google Sans';
+    font-weight: bold;
+    font-size:15px;
+    border:2px solid white;
+    border-radius:10px;
+    display: flex;
+    column-gap: 10px;
+}
+
+.btn-viewdetails:hover{
+    cursor: pointer;
+}
+
+.img-dropdown{
+    width:15px;
+}

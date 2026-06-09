@@ -41,8 +41,6 @@ export function GradesPage()
             </div>
         </div> */}
         <OverallGradeBox />
-        <GradeBox />
-        <GradeBox />
         </>
     )
 }

@@ -1,0 +1,32 @@
+.div-cgpa-circle{
+    width:80px;
+    height:80px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:10px;
+}
+
+.div-cgpa-inner{
+    width:65px;
+    height:65px;
+
+    background-color:rgb(1,1,63);
+
+    border-radius:50%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.div-cgpa-value{
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}

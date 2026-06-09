@@ -1,5 +1,7 @@
 import "./GradeBox.css"
-import { ProgressBar } from "../attendance/ProgressBar"
+import { CGPACircle } from "./CGPACirle"
+import { ViewButton } from "./ViewButton"
+import {GradeBox} from "./GradeBox"
 export function OverallGradeBox()
 {
     return(
@@ -11,11 +13,11 @@ export function OverallGradeBox()
                         Overall
                     </div>
                     <div className="div-grades-sgp">
-                        9.04
+                        <CGPACircle cgpa="9.04" />
                     </div>
                 </div>
-                <ProgressBar width="90.4" />
             </div>
+            <ViewButton message="View Semester Wise" component={GradeBox}/>
         </div>
         </>
     )

@@ -1,13 +1,13 @@
 import "./GradeBox.css"
-import { useState } from "react"
-import dropdownImage from "../../images/dropdown.png"
-import dropupImage from "../../images/dropup.png"
-
+// import { useState } from "react"
+import { CGPACircle } from "./CGPACirle"
+import { ViewButton } from "./ViewButton"
+import { GradeCourse } from "./GradeCourse"
 export function GradeBox(){
-    const [viewButton,setViewButton] = useState(false);
-    function toggleViewButton(){
-        setViewButton(!viewButton);
-    }
+    // const [viewButton,setViewButton] = useState(false);
+    // // function toggleViewButton(){
+    // //     setViewButton(!viewButton);
+    // // }
     return(
         <>
         <div className="div-grades-container">
@@ -17,10 +17,11 @@ export function GradeBox(){
                         Semester 1
                     </div>
                     <div className="div-grades-sgp">
-                        9.04
+                        <CGPACircle cgpa="9.04" />
                     </div>
                 </div>
-                <div className="div-viewdetails">
+                
+                {/* <div className="div-viewdetails">
                     <button className="btn-viewdetails" 
                     onClick={()=>{
                         toggleViewButton();
@@ -37,8 +38,9 @@ export function GradeBox(){
                         <div className="div-grades-coursename">Problem Solving And Programming In C</div>
                         <div className="div-grades-coursegrade">S</div>
                     </div>
-                </div>}
-                
+                </div>} */}
+                <ViewButton message="View Course Wise" component={GradeCourse}/>
+
             </div>
         </div>
         </>
