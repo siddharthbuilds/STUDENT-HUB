@@ -8,10 +8,10 @@ function App() {
 
   return (
     <>
-    {/* <LoginPage />
+    <LoginPage />
     <DashBoardPage />
     <RegisterPage />
-    <AttendancePage /> */}
+    <AttendancePage />
     <GradesPage />
     </>
   )
