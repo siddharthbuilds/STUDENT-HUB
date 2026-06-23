@@ -33,7 +33,6 @@ export function AttendancePage()
             <HeaderDashBoard />
             <AttendanceSelector dayWise={dayWise} 
             styleDayWise={styleDayWise}
-            courseWise ={courseWise}
             styleCourseWise={styleCourseWise}
             />
             {dayWise&&<>

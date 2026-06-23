@@ -3,30 +3,44 @@
     align-items: center;
     justify-content: space-between;
     padding-top:10px;
-    padding-bottom:6px;
+    padding-bottom:10px;
+    position:relative;
+    border-radius: 30px;
+    overflow:hidden;
+    background-color:rgb(26,1,63);
 }
 
 .div-attendance-page{
-    background-color: rgb(1, 1, 63);
     color:white;
     font-family: 'Google Sans';
     font-weight: 600;
     font-size: larger;
-    padding: 8px;
-    display:flex;
-    justify-content:center;
-    align-items: center;
-    width:50lh;
-    border: 4px solid white;
-    border-radius: 16px;
-    transition: border 0.8s;
+    padding: 18px;
+    text-align: center;
+    flex:1;
+    border: none;
+    border-radius: 30px;
+    z-index:2;
+    transition: background-color 0.2s;
 }
 
 .div-attendance-page:hover{
     cursor: pointer;
-    box-shadow: 0px 8px 8px rgba(0, 253, 249, 0.307);
 }
 
-.style-clicked{
-    border-color: aqua;
+
+.div-slider{
+    position:absolute;
+    left:0;
+    top:0;
+    width:50%;
+    height:100%;
+    background-color:rgba(0,255,255,0.18);
+    border-radius:30px;
+    transition:transform 0.4s ease;
+    z-index:1;
+}
+
+.div-slider-right{
+    transform:translateX(100%);
 }
