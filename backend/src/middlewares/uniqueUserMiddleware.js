@@ -1,5 +1,5 @@
 import User from "../models/userModel.js"
-async function checkUniqueID(req,res,next)
+async function uniqueUserMiddleware(req,res,next)
 {
     const exist = await User.checkUniqueId(req.body.userId);
     if(exist)
@@ -9,4 +9,4 @@ async function checkUniqueID(req,res,next)
     next();
 }
 
-export default checkUniqueID
+export default uniqueUserMiddleware
