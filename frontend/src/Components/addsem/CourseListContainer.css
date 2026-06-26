@@ -1,0 +1,11 @@
+.div-course-list{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.div-course-list-headings{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

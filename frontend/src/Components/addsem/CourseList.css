@@ -1,0 +1,35 @@
+.div-course{
+    display:flex;
+    flex-direction: row;
+    padding:30px;
+    border: 3px solid white;
+    border-radius: 8px;
+    justify-content: space-between;
+    background-color: rgb(0, 38, 64);
+    flex:auto;
+    color:rgb(255, 255, 255);
+    font-size:30px;
+    align-items: center;
+}
+
+.btn-course-list{
+    background-color: transparent;
+    border:none;
+}
+
+.btn-course-list:hover{
+    cursor: pointer;
+}
+
+.div-course-list-credits{
+    display:flex;
+    flex-direction: column;
+    row-gap:3px;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-course-list-credits-txt{
+    font-size: 18px;
+    color: gray;
+}
