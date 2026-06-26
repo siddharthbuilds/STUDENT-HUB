@@ -4,6 +4,7 @@ import { RegisterPage } from "./Pages/RegisterPage"
 import { AttendancePage } from "./Pages/AttendancePage"
 import { GradesPage } from "./Pages/GradesPage"
 import { HomePage } from "./Pages/HomePage"
+import { AddSemPage } from "./Pages/AddSemPage"
 function App() {
   
 
@@ -13,8 +14,9 @@ function App() {
     <DashBoardPage />
     <RegisterPage />
     <AttendancePage />
-    <GradesPage /> */}
-    <HomePage />
+    <GradesPage />
+    <HomePage /> */}
+    <AddSemPage />
     </>
   )
 }

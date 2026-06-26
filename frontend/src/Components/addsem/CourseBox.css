@@ -1,0 +1,16 @@
+.div-course-box{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    position:fixed;
+    top:50%;
+    left:10%;
+    transform: translateY(-50%);
+    border: 5px solid whitesmoke;
+    border-radius: 18px;
+    padding:20px;
+}
+
+.div-course-attributes{
+    display:flex;
+}
