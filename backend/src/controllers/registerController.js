@@ -1,12 +1,10 @@
 import User from "../models/userModel.js"
+import bcrypt from "bcrypt"
 async function registerController (req,res)
 {
+    req.body.password = await bcrypt.hash(req.body.password,10)
     try{
-        await User.createUser(
-        req.body.userId,
-        req.body.userName,
-        req.body.password,
-        req.body.email)
+        await User.createUser(req.body);
     }
 
     catch(err){

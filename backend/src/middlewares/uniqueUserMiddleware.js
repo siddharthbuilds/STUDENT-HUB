@@ -5,10 +5,14 @@ async function uniqueUserMiddleware(req,res,next)
     {
         return res.status(400).json({message: 'All fields are mandatory'})
     }
-    const exist = await User.checkUniqueId(req.body.userId);
-    if(exist)
+    if(await User.existsId(req.body.userId)) 
     {
         return res.status(400).json({message:'UserID Already Exists!!'})
+    }
+    if (await User.existsEmail(req.body.email))
+    {
+        return res.status(400).json({message:'Email Already Exists!!'})
+
     }
     next();
 }
