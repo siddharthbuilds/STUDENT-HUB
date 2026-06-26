@@ -1,0 +1,7 @@
+.div-all-semesters{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
