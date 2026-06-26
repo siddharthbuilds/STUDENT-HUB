@@ -1,5 +1,5 @@
 import "./Input.css"
-export function Input({placeholder, type, setCapsCheck,size=25})
+export function Input({placeholder, type, setCapsCheck,size=25,onChange})
 {
     return(
     <div>
@@ -7,7 +7,8 @@ export function Input({placeholder, type, setCapsCheck,size=25})
             size={size} 
             className="input-login" 
             name="id"
-            onClick={()=>{setCapsCheck(false)}}
+            // onClick={()=>{setCapsCheck(false)}}
+            onChange={onChange}
             type={type}
             />
     </div>
