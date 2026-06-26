@@ -1,0 +1,7 @@
+.bi-trash{
+    transition: fill 0.4s;
+}
+
+.bi-trash:hover{
+    fill: red;
+}
