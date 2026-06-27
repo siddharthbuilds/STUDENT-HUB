@@ -15,7 +15,7 @@ function App() {
     <RegisterPage />
     <AttendancePage />
     <GradesPage />
-    <HomePage /> */}
+    <HomePage />  */}
     <AddSemPage />
     </>
   )

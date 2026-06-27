@@ -1,4 +1,4 @@
-.btn-login{
+.btn-login, .btn-bad{
     background-color:rgb(1,1,63);
     color:white;
     font-family: "Google Sans";
@@ -10,8 +10,12 @@
     transition: background-color 0.4s;
 }
 
-.btn-login:hover{
+.btn-login:hover, .btn-bad:hover{
     cursor: pointer;
     opacity:0.85;
     background-color:blue;
+}
+
+.btn-bad:hover{
+    background-color: red;
 }

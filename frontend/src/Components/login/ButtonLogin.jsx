@@ -1,9 +1,12 @@
 import "./ButtonLogin.css"
-export function ButtonLogin({text,onClick})
+export function ButtonLogin({text,onClick,bad=false})
 {
     return(
         <div>
-            <button className="btn-login" onClick={onClick}> {text} </button>
+            <button className={bad?"btn-bad":"btn-login"}
+            onClick={onClick}> 
+            {text} 
+            </button>
          </div>
     )
 }

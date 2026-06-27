@@ -1,17 +1,24 @@
 import "./CourseListContainer.css"
 import { CourseList } from "./CourseList.jsx"
-export function CourseListContainer({courseList})
+export function CourseListContainer({courseList,setCourseList})
 {
+   
     return(
         <>
-            {courseList.map((course)=>{
+        <div className="div-course-list">
+            {courseList.map((course,index)=>{
                 return(<CourseList 
                     key={course.courseName}
                     courseName={course.courseName}
                     courseCredits={course.courseCredits}
+                    courseList={courseList}
+                    setCourseList={setCourseList}
+                    index={index}
                 />)
                 
             })}
+        </div>
+            
         </>
     )
     

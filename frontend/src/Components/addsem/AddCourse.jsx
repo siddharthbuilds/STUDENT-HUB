@@ -16,9 +16,19 @@ export function AddCourse()
         <div className={showCourseBox?"div-addcourse blurred":"div-addcourse"}>
             <div className="div-addcourse-text"> Add Your Courses</div>
             <div className="div-btn-addcourse">
-                <button className="btn-addcourse" onClick={toggleShowCourseBox}> + </button>
+                <div>
+                    <button className="btn-addcourse" 
+                        onClick={toggleShowCourseBox}> + Add 
+                    </button>
+                </div>
+                <div className="div-btn-addcourse-count">
+                    {courseList.length>1?`${courseList.length} Courses`
+                        :courseList.length==1?"1 Course"
+                        :"No Courses"} Added 
+                    </div>
             </div>
-            <CourseListContainer courseList={courseList}/>
+            {courseList.length>0&&<CourseListContainer courseList={courseList} 
+                setCourseList={setCourseList}/>}
         </div>
          {showCourseBox&&<CourseBox toggleShowCourseBox={toggleShowCourseBox} 
                             courseList={courseList}

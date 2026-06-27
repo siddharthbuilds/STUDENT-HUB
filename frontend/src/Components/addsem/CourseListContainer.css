@@ -1,11 +1,7 @@
 .div-course-list{
+    margin-top:5px;
     display: flex;
-    flex-direction: column;
-    row-gap: 5px;
-}
-
-.div-course-list-headings{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
+    column-gap:15px;
+    row-gap: 10px;
+    flex-wrap: wrap;
 }

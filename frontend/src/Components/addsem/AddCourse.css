@@ -4,10 +4,12 @@
     row-gap: 5px;
     justify-content: center;
     transition: opacity 0.4s;
+    font-size: 30px;
+    align-items: center;
 }
 
 .blurred{
-    opacity:0.5;
+    opacity:0;
     pointer-events: none;
 }
 
@@ -23,4 +25,16 @@
 .btn-addcourse:hover{
     cursor: pointer;
     background-color: blue;
+}
+
+.div-btn-addcourse{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.div-btn-addcourse-count{
+    font-size: 22px;
 }

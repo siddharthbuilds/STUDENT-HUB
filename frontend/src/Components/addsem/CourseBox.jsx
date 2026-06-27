@@ -33,8 +33,9 @@ export function CourseBox({toggleShowCourseBox, courseList, setCourseList})
                 <Input placeholder="Course Name" size="40" onChange={trackCourseName}/>
                 <Input placeholder="Credits" size="3" onChange={trackCourseCredits}/>
             </div>
-            <div>
+            <div className="div-course-buttons">
                 <ButtonLogin text="Add" onClick={addCourseBtn}/>
+                <ButtonLogin text="Cancel" onClick={toggleShowCourseBox} bad={true}/>
             </div>
         </div>
         </>

@@ -1,3 +1,37 @@
 .div-addsem-dates{
     display:flex;
+    column-gap: 5px;
+}
+
+.div-addsem-page{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    padding:50px;
+    align-items: center;
+    transform: translate3d(40%,0%,0);
+    width:40lh;
+    border: 5px solid rgb(255, 255, 255);
+    border-radius:30px;
+    background-color: #12193A;
+    position: relative;
+}
+
+.div-addsem-eachdate{
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    align-items: center;
+}
+
+.div-option-cancel-addsem{
+    position:absolute;
+    left:5%;
+    top:2%;
+}
+
+.div-option-save-addsem{
+    position:absolute;
+    right:5%;
+    top:2%;
 }
