@@ -1,0 +1,23 @@
+.error-box {
+  position: relative;
+  background-color: #f0f0f0;
+  color: #cc0000;
+  border: 1px solid #ff9999;
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  display: inline-block;
+  margin-top: 20px; /* Space for the triangle */
+}
+
+/* The Triangle */
+.error-box::after {
+  content: "";
+  position: absolute;
+  bottom: 100%; /* Positions the triangle just above the box */
+  left: 30px; /* Adjust this to slide the triangle left/right */
+  border-width: 10px;
+  border-style: solid;
+  /* Make the bottom border colored to point up, make others transparent */
+  border-color: transparent transparent #ff9999 transparent;
+}
