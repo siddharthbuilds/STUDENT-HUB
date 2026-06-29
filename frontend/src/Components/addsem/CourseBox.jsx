@@ -4,6 +4,7 @@ import {ButtonLogin} from "../login/ButtonLogin.jsx"
 import { Tooltip } from "../ToolTip.jsx"
 import { useState } from "react"
 import CustomDropdown from "./DropDown.jsx"
+import getObj from "../../Models/Course.js"
 export function CourseBox({toggleShowCourseBox, 
         courseList, setCourseList,
         dropdown1=false,dropdown2=false})
@@ -39,20 +40,28 @@ export function CourseBox({toggleShowCourseBox,
         const name = dropdown1?selectedOption1:courseName;
         const credits = dropdown2?selectedOption2:courseCredits;
 
-        if(name && credits)
-        {
-            const obj = {courseName: name,courseCredits: credits};
-            const newList = [...courseList,obj];
-            setCourseList(newList);
-            toggleShowCourseBox();
-        }
-        else if (!name)
+        if (!name)
         {
             showToolTipName(true);
         }
         else if(!credits)
         {
             showToolTipCredits(true);
+        }
+
+        
+        if(!dropdown1&&!dropdown2)
+        {
+            const obj = getObj(name,credits);
+            const newList = [...courseList,obj];
+            setCourseList(newList);
+            toggleShowCourseBox();
+        }
+        else{
+            const course = courseList.find(course=>{return course.courseName==name});
+            course.mon=credits;
+            console.log(course);
+            toggleShowCourseBox();
         }
         
     }
@@ -65,7 +74,8 @@ export function CourseBox({toggleShowCourseBox,
                    {!dropdown1?
                    <Input placeholder="Course Name" 
                         size="40" onChange={trackCourseName}/>
-                        :<CustomDropdown options={dropdown1} name="Course Name"
+                        :<CustomDropdown options={courseList} name="Course Name"
+                        property="courseName"
                         selectedOption={selectedOption1} 
                         setSelectedOption={setSelectedOption1}
                         />

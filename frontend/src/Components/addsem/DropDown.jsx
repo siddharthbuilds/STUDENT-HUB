@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./DropDown.css"
-export default function CustomDropdown({options,name,selectedOption,setSelectedOption}) {
+export default function CustomDropdown({options,name,selectedOption,setSelectedOption,property}) {
   const [isOpen, setIsOpen] = useState(false);
   
 
@@ -39,11 +39,11 @@ export default function CustomDropdown({options,name,selectedOption,setSelectedO
           {options.map((option) => (
             <li
              className="li-dropdown"
-              key={option} 
-              onClick={() => handleOptionClick(option)}
+              key={property?option[property]:option} 
+              onClick={() => handleOptionClick(property?option[property]:option)}
               style={{ padding: "8px 16px", cursor: "pointer" }}
             >
-              {option}
+              {property?option[property]:option}
             </li>
           ))}
         </ul>
