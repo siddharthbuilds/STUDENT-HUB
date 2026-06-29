@@ -5,11 +5,11 @@ import { CourseListContainer } from "./CourseListContainer";
 import { useState } from "react"
 
 
-export function ScheduleAdd()
+export function ScheduleAdd({courseList,setCourseList})
 {
     const [showCourseBox, setShowCourseBox] = useState(false);
-    const [hourList,setHourList]=useState([]);
-    const dropdown1=["a","b","c"];
+    // const [hourList,setHourList]=useState([]);
+    // const dropdown1=["a","b","c"];
     const dropdown2=["x 1","x 2","x 3"];
     function toggleShowCourseBox()
     {
@@ -21,13 +21,15 @@ export function ScheduleAdd()
         <ButtonAddCourse text="+ Add Hours" toggleShowCourseBox={toggleShowCourseBox}/>
         </div>
         {showCourseBox&&<CourseBox toggleShowCourseBox={toggleShowCourseBox}
-                            courseList={hourList}
-                            setCourseList={setHourList}
-                            dropdown1={dropdown1}
+                            courseList={courseList}
+                            setCourseList={setCourseList}
+                            dropdown1={courseList}
                             dropdown2={dropdown2}
         />}
-        {hourList.length>0&&<CourseListContainer courseList={hourList} 
-                                setCourseList={setHourList} />}
+        {courseList.length>0&&<CourseListContainer courseList={courseList} 
+                                setCourseList={setCourseList}
+                                property2="mon"
+                                />}
         </>
     )
 }

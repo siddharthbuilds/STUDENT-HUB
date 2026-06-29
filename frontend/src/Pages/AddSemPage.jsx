@@ -3,8 +3,10 @@ import "./AddSemPage.css"
 import { AddCourse } from "../Components/addsem/AddCourse.jsx"
 import { ButtonLogin } from "../Components/login/ButtonLogin.jsx"
 import { ScheduleDay } from "../Components/addsem/ScheduleDay.jsx"
+import { useState } from "react"
 export function AddSemPage()
 {
+    const [courseList,setCourseList] = useState([]);
     return(
         <>
             <div className="div-addsem-page">
@@ -41,11 +43,11 @@ export function AddSemPage()
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 <div>
-                    <AddCourse />
+                    <AddCourse courseList={courseList} setCourseList={setCourseList}/>
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 <div>
-                    <ScheduleDay />
+                    <ScheduleDay courseList={courseList} setCourseList={setCourseList}/>
                 </div>
             </div>
             

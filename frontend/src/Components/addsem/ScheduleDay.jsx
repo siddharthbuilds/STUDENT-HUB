@@ -1,6 +1,6 @@
 import "./ScheduleDay.css"
 import { ScheduleAdd } from "./ScheduleAdd";
-export function ScheduleDay()
+export function ScheduleDay({courseList,setCourseList})
 {
     const dayList=["Mon","Tue","Wed","Thu","Fri"];
     return(
@@ -19,7 +19,7 @@ export function ScheduleDay()
                 )
             })}
             </div>
-            <ScheduleAdd />
+            <ScheduleAdd courseList={courseList} setCourseList={setCourseList}/>
             
         </>
     )
