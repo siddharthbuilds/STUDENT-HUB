@@ -1,0 +1,23 @@
+.btn-dropdown{
+    font-family: 'Google Sans';
+    font-size:25px;
+    background-color: rgb(1, 1, 77);
+    color:white;
+    padding:10px;
+    border:2px solid white;
+    border-radius:10px;
+}
+
+.li-dropdown{
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.li-dropdown:hover{
+    background-color: rgb(0, 84, 97);
+}
+
+.li-dropdown:active{
+    background-color: rgb(0, 120, 140);
+}

@@ -4,8 +4,8 @@ export function Tooltip({message})
 {
     return(
         <>
-        <div class="error-box">
-            <span class="error-message">{message}</span>
+        <div className="error-box">
+            <span className="error-message">{message}</span>
         </div>
 
         </>
