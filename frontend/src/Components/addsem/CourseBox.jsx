@@ -61,7 +61,7 @@ export function CourseBox({toggleShowCourseBox, courseList, setCourseList})
                     } 
                 </div>
                 <div className="div-course-attributes-credits">
-                    <Input placeholder="Credits" size="3" onChange={trackCourseCredits}/>
+                    <Input placeholder="Credits" size="3" onChange={trackCourseCredits} type="number"/>
                     {toolTipCredits&&<div className="div-course-attributes-tooltip">
                     <Tooltip message="Enter Credits"/>
                     </div>
