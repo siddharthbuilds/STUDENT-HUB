@@ -7,7 +7,7 @@ import CustomDropdown from "./DropDown.jsx"
 import getObj from "../../Models/Course.js"
 export function CourseBox({toggleShowCourseBox, 
         courseList, setCourseList,
-        dropdown1=false,dropdown2=false})
+        dropdown1=false,dropdown2=false,day})
 {
     const [courseName, setCourseName] = useState('');
     const [courseCredits, setCourseCredits]= useState('');
@@ -59,8 +59,7 @@ export function CourseBox({toggleShowCourseBox,
         }
         else{
             const course = courseList.find(course=>{return course.courseName==name});
-            course.mon=credits;
-            console.log(course);
+            course[day]=credits;
             toggleShowCourseBox();
         }
         
