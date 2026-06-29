@@ -12,6 +12,8 @@
     padding: 12px 16px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    font-size: 20px;
+    font-family: 'Google Sans';
 }
 
 .li-dropdown:hover{
