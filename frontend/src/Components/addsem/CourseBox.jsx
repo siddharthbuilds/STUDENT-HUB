@@ -41,7 +41,7 @@ export function CourseBox({toggleShowCourseBox,
 
         if(name && credits)
         {
-            const obj = {name,credits};
+            const obj = {courseName: name,courseCredits: credits};
             const newList = [...courseList,obj];
             setCourseList(newList);
             toggleShowCourseBox();

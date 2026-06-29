@@ -1,6 +1,6 @@
 import "./CourseListContainer.css"
 import { CourseList } from "./CourseList.jsx"
-export function CourseListContainer({courseList,setCourseList})
+export function CourseListContainer({courseList,setCourseList,keyword=""})
 {
    
     return(
@@ -14,6 +14,7 @@ export function CourseListContainer({courseList,setCourseList})
                     courseList={courseList}
                     setCourseList={setCourseList}
                     index={index}
+                    keyword={keyword}
                 />)
                 
             })}

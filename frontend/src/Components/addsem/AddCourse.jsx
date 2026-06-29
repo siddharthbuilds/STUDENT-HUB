@@ -26,7 +26,7 @@ export function AddCourse()
                     </div>
             </div>
             {courseList.length>0&&<CourseListContainer courseList={courseList} 
-                setCourseList={setCourseList}/>}
+                setCourseList={setCourseList} keyword="C R E D I T S"/>}
         </div>
          {showCourseBox&&<CourseBox toggleShowCourseBox={toggleShowCourseBox} 
                             courseList={courseList}
