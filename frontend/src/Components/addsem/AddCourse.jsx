@@ -3,6 +3,7 @@ import "./AddCourse.css"
 import {CourseBox} from "./CourseBox.jsx"
 import { CourseListContainer } from "./CourseListContainer.jsx";
 import { CourseList } from "./CourseList.jsx";
+import { ButtonAddCourse } from "./ButtonAddCourse.jsx";
 export function AddCourse()
 {
     const [courseList,setCourseList] = useState([]);
@@ -16,11 +17,8 @@ export function AddCourse()
         <div className={showCourseBox?"div-addcourse blurred":"div-addcourse"}>
             <div className="div-addcourse-text"> Add Your Courses</div>
             <div className="div-btn-addcourse">
-                <div>
-                    <button className="btn-addcourse" 
-                        onClick={toggleShowCourseBox}> + Add 
-                    </button>
-                </div>
+                <ButtonAddCourse toggleShowCourseBox={toggleShowCourseBox}
+                    text="+ Add" />
                 <div className="div-btn-addcourse-count">
                     {courseList.length>1?`${courseList.length} Courses`
                         :courseList.length==1?"1 Course"
