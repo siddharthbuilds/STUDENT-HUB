@@ -2,6 +2,7 @@ import {Input} from "../Components/login/Input.jsx"
 import "./AddSemPage.css"
 import { AddCourse } from "../Components/addsem/AddCourse.jsx"
 import { ButtonLogin } from "../Components/login/ButtonLogin.jsx"
+import { ScheduleDay } from "../Components/addsem/ScheduleDay.jsx"
 export function AddSemPage()
 {
     return(
@@ -38,8 +39,13 @@ export function AddSemPage()
                         <div>Semester End Date </div>
                     </div>
                 </div>
+                <hr style={{width:'100%',margin:'0'}}></hr>
                 <div>
                     <AddCourse />
+                </div>
+                <hr style={{width:'100%',margin:'0'}}></hr>
+                <div>
+                    <ScheduleDay />
                 </div>
             </div>
             
