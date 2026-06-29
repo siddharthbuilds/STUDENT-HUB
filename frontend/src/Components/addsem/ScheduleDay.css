@@ -1,0 +1,34 @@
+.div-schedule-day{
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+}
+
+.btn-schedule-day{
+    font-family: 'Google Sans';
+    font-weight: bolder;
+    background-color: rgb(0, 80, 94);
+    padding:12px;
+    border: 3px solid white;
+    color: white;
+    border-radius:8px;
+    font-size: 20px;
+    transition: transform 0.4s;
+}
+
+.btn-schedule-day:hover{
+    cursor: pointer;
+    transform: translateY(-8px);
+    box-shadow: 2px 2px 2px white;
+}
+
+.btn-clicked{
+    transform: translateY(-8px);
+    box-shadow: 6px 8px 6px rgb(1, 119, 115);
+}
+
+.div-schedule-day-header{
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
