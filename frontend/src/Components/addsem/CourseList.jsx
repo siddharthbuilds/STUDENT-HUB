@@ -1,6 +1,6 @@
 import "./CourseList.css"
 import {TrashImage} from "../home/TrashImage.jsx"
-export function CourseList({courseName, courseCredits,courseList,index,setCourseList})
+export function CourseList({courseName, courseCredits,courseList,index,setCourseList,keyword})
 {
     function removeCourse()
     {
@@ -16,7 +16,7 @@ export function CourseList({courseName, courseCredits,courseList,index,setCourse
                 </div>
                 <div className="div-course-list-credits">
                     <div>{courseCredits}</div>
-                    <div className="div-course-list-credits-txt"> C R E D I T S</div>
+                    <div className="div-course-list-credits-txt"> {keyword}</div>
                 </div>
                 <div className="div-course-list-btn">
                     <button className="btn-course-list">
