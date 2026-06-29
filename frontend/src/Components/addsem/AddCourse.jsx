@@ -4,9 +4,9 @@ import {CourseBox} from "./CourseBox.jsx"
 import { CourseListContainer } from "./CourseListContainer.jsx";
 import { CourseList } from "./CourseList.jsx";
 import { ButtonAddCourse } from "./ButtonAddCourse.jsx";
-export function AddCourse()
+export function AddCourse({courseList,setCourseList})
 {
-    const [courseList,setCourseList] = useState([]);
+    
     const [showCourseBox,setShowCourseBox] = useState(false);
     function toggleShowCourseBox()
     {
@@ -26,7 +26,8 @@ export function AddCourse()
                     </div>
             </div>
             {courseList.length>0&&<CourseListContainer courseList={courseList} 
-                setCourseList={setCourseList} keyword="C R E D I T S"/>}
+                setCourseList={setCourseList} keyword="C R E D I T S" 
+                property2="courseCredits"/>}
         </div>
          {showCourseBox&&<CourseBox toggleShowCourseBox={toggleShowCourseBox} 
                             courseList={courseList}
