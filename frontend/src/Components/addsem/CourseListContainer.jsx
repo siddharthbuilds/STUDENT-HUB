@@ -1,13 +1,13 @@
 import "./CourseListContainer.css"
 import { CourseList } from "./CourseList.jsx"
-export function CourseListContainer({courseList,setCourseList,keyword="",property2})
+export function CourseListContainer({courseList,setCourseList,keyword="",property2,trashFunction=null})
 {
    
     return(
         <>
         <div className="div-course-list">
             {courseList.map((course,index)=>{
-                return(<CourseList 
+                return(course[property2]!=0&&<CourseList 
                     key={course.courseName}
                     courseName={course.courseName}
                     courseCredits={course[property2]}
@@ -15,6 +15,7 @@ export function CourseListContainer({courseList,setCourseList,keyword="",propert
                     setCourseList={setCourseList}
                     index={index}
                     keyword={keyword}
+                    trashFunction={trashFunction}
                 />)
                 
             })}

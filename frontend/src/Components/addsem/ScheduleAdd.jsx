@@ -5,8 +5,15 @@ import { CourseListContainer } from "./CourseListContainer";
 import { useState } from "react"
 
 
-export function ScheduleAdd({courseList,setCourseList})
+export function ScheduleAdd({courseList,setCourseList,day})
 {
+    function trashFunction(index)
+    {
+        courseList[index][day]=0;
+        const newList =[...courseList];
+        setCourseList(newList);
+    }
+  
     const [showCourseBox, setShowCourseBox] = useState(false);
     // const [hourList,setHourList]=useState([]);
     // const dropdown1=["a","b","c"];
@@ -23,12 +30,14 @@ export function ScheduleAdd({courseList,setCourseList})
         {showCourseBox&&<CourseBox toggleShowCourseBox={toggleShowCourseBox}
                             courseList={courseList}
                             setCourseList={setCourseList}
-                            dropdown1={courseList}
+                            dropdown1={true}
                             dropdown2={dropdown2}
+                            day={day}
         />}
         {courseList.length>0&&<CourseListContainer courseList={courseList} 
                                 setCourseList={setCourseList}
-                                property2="mon"
+                                property2={day}
+                                trashFunction={trashFunction}
                                 />}
         </>
     )

@@ -1,12 +1,18 @@
 import "./CourseList.css"
 import {TrashImage} from "../home/TrashImage.jsx"
-export function CourseList({courseName, courseCredits,courseList,index,setCourseList,keyword})
+export function CourseList({courseName, courseCredits,courseList,index,setCourseList,keyword,trashFunction=null})
 {
-    function removeCourse()
+    function removeCourseFunction()
     {
         let newList = courseList.toSpliced(index,1);
         setCourseList(newList);
     }
+
+    function removeHourFunction()
+    {
+        trashFunction(index);
+    }
+
 
     return(
         <>
@@ -20,7 +26,7 @@ export function CourseList({courseName, courseCredits,courseList,index,setCourse
                 </div>
                 <div className="div-course-list-btn">
                     <button className="btn-course-list">
-                        <TrashImage color="white" size="30" onClick={removeCourse}/>
+                        <TrashImage color="white" size="30" onClick={trashFunction?removeHourFunction:removeCourseFunction}/>
                     </button>
                 </div>
             </div>
