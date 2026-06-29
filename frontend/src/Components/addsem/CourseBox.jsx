@@ -3,12 +3,17 @@ import { Input } from "../login/Input.jsx"
 import {ButtonLogin} from "../login/ButtonLogin.jsx"
 import { Tooltip } from "../ToolTip.jsx"
 import { useState } from "react"
-export function CourseBox({toggleShowCourseBox, courseList, setCourseList})
+import CustomDropdown from "./DropDown.jsx"
+export function CourseBox({toggleShowCourseBox, 
+        courseList, setCourseList,
+        dropdown1=false,dropdown2=false})
 {
     const [courseName, setCourseName] = useState('');
     const [courseCredits, setCourseCredits]= useState('');
     const [toolTipName, showToolTipName] = useState(false);
     const [toolTipCredits, showToolTipCredits] = useState(false);
+    const [selectedOption1, setSelectedOption1] = useState(null);
+    const [selectedOption2, setSelectedOption2] = useState('x 1');
 
     function trackCourseName(event)
     {
@@ -31,18 +36,21 @@ export function CourseBox({toggleShowCourseBox, courseList, setCourseList})
 
     function addCourseBtn()
     {
-        if(courseName && courseCredits)
+        const name = dropdown1?selectedOption1:courseName;
+        const credits = dropdown2?selectedOption2:courseCredits;
+
+        if(name && credits)
         {
-            const obj = {courseName,courseCredits};
+            const obj = {name,credits};
             const newList = [...courseList,obj];
             setCourseList(newList);
             toggleShowCourseBox();
         }
-        else if (!courseName)
+        else if (!name)
         {
             showToolTipName(true);
         }
-        else if(!courseCredits)
+        else if(!credits)
         {
             showToolTipCredits(true);
         }
@@ -53,15 +61,31 @@ export function CourseBox({toggleShowCourseBox, courseList, setCourseList})
         <>
         <div className="div-course-box">
             <div className="div-course-attributes">
-                <div className="div-course-attributes-name">
-                   <Input placeholder="Course Name" size="40" onChange={trackCourseName}/>
+                <div className="div-course-attributes-name" onClick={()=>{showToolTipName(false)}}>
+                   {!dropdown1?
+                   <Input placeholder="Course Name" 
+                        size="40" onChange={trackCourseName}/>
+                        :<CustomDropdown options={dropdown1} name="Course Name"
+                        selectedOption={selectedOption1} 
+                        setSelectedOption={setSelectedOption1}
+                        />
+                    }
+
                    {toolTipName&&<div className="div-course-attributes-tooltip">
                     <Tooltip message="Enter Name"/>
                     </div>
                     } 
                 </div>
                 <div className="div-course-attributes-credits">
-                    <Input placeholder="Credits" size="3" onChange={trackCourseCredits} type="number"/>
+                    {!dropdown2?
+                    <Input placeholder="Credits" 
+                        size="3" 
+                        onChange={trackCourseCredits} type="number"/>
+                        :<CustomDropdown options={dropdown2} name="x 1"
+                        selectedOption={selectedOption2} 
+                        setSelectedOption={setSelectedOption2}
+                        />
+                    }
                     {toolTipCredits&&<div className="div-course-attributes-tooltip">
                     <Tooltip message="Enter Credits"/>
                     </div>
