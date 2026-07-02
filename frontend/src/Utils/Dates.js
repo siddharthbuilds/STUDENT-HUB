@@ -1,9 +1,9 @@
 export default function getSatDates (Date1, Date2)
 {
-    const [startDay,startMonth,startYear] = Date1.split('-').map(Number);
+    const [startYear,startMonth,startDay] = Date1.split('-').map(Number);
     const startDate = new Date (startYear,startMonth-1,startDay);
 
-    const [endDay,endMonth,endYear] = Date2.split('-').map(Number);
+    const [endYear,endMonth,endDay] = Date2.split('-').map(Number);
     const endDate = new Date (endYear,endMonth-1,endDay);
 
     let saturdayList = [];

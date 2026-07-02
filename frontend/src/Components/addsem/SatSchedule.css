@@ -10,5 +10,6 @@
     width:40lh;
     flex-wrap: wrap;
     row-gap: 10px;
+    justify-content: center;
 }
 

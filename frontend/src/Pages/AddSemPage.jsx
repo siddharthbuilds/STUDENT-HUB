@@ -11,6 +11,14 @@ export function AddSemPage()
     const [courseList,setCourseList] = useState([]);
     const [semStartDate,setSemStartDate]=useState(null);
     const [semEndDate,setSemEndDate]=useState(null);
+    function clickStartDate(event)
+    {
+        setSemStartDate(event.target.value);
+    }
+    function clickEndDate(event)
+    {
+        setSemEndDate(event.target.value);
+    }
     const satDates = semStartDate&&semEndDate&&getSatDates(semStartDate,semEndDate);
     return(
         <>
@@ -34,7 +42,7 @@ export function AddSemPage()
                         type="date"
                         fontSize="23"
                         backgroundColor="#12193A"
-                        onChange={(event)=>{setSemStartDate(event.target.value)}}
+                        onChange={clickStartDate}
                         />
                         <div>Semester Start Date </div>
                     </div>
@@ -43,7 +51,7 @@ export function AddSemPage()
                         type="date"
                         fontSize="23"
                         backgroundColor="#12193A"
-                        onChange={(event)=>{setSemEndDate(event.target.value)}}
+                        onChange={clickEndDate}
                         />
                         <div>Semester End Date </div>
                     </div>
