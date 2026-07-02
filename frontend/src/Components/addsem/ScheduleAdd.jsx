@@ -2,10 +2,9 @@ import "./ScheduleAdd.css"
 import { ButtonAddCourse } from "./ButtonAddCourse"
 import { CourseBox } from "./CourseBox";
 import { CourseListContainer } from "./CourseListContainer";
-import { useState } from "react"
 
 
-export function ScheduleAdd({courseList,setCourseList,day})
+export function ScheduleAdd({courseList,setCourseList,day,showCourseBox,setShowCourseBox})
 {
     function trashFunction(index)
     {
@@ -14,7 +13,6 @@ export function ScheduleAdd({courseList,setCourseList,day})
         setCourseList(newList);
     }
   
-    const [showCourseBox, setShowCourseBox] = useState(false);
     const dropdown2=["x 1","x 2","x 3"];
     function toggleShowCourseBox()
     {
@@ -22,21 +20,30 @@ export function ScheduleAdd({courseList,setCourseList,day})
     }
     return(
         <>
-        <div className="div-btn-schedule-add">
+            <div style={{position:"relative",display:"flex",justifyContent:"center"}}>
+            {showCourseBox&&
+                    <CourseBox toggleShowCourseBox={toggleShowCourseBox}
+                                courseList={courseList}
+                                setCourseList={setCourseList}
+                                dropdown1={true}
+                                dropdown2={dropdown2}
+                                day={day}
+                                />
+                    }
+            </div>
+
+        <div className={showCourseBox?"div-btn-schedule-add blurred":"div-btn-schedule-add"}>
         <ButtonAddCourse text="+ Add Hours" toggleShowCourseBox={toggleShowCourseBox}/>
         </div>
-        {showCourseBox&&<CourseBox toggleShowCourseBox={toggleShowCourseBox}
-                            courseList={courseList}
-                            setCourseList={setCourseList}
-                            dropdown1={true}
-                            dropdown2={dropdown2}
-                            day={day}
-        />}
-        {courseList.length>0&&<CourseListContainer courseList={courseList} 
+        
+        
+        {courseList.length>0&&<div className={showCourseBox?"blurred":""}>
+                                <CourseListContainer courseList={courseList} 
                                 setCourseList={setCourseList}
                                 property2={day}
                                 trashFunction={trashFunction}
-                                />}
+                                />
+                                </div>}
         </>
     )
 }

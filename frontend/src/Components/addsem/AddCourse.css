@@ -8,11 +8,6 @@
     align-items: center;
 }
 
-.blurred{
-    opacity:0;
-    pointer-events: none;
-}
-
 .div-btn-addcourse{
     display: flex;
     flex-direction: column;

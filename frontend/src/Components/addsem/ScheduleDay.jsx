@@ -6,12 +6,13 @@ export function ScheduleDay({courseList,setCourseList})
     const [daySelected,setDaySelected]=useState('mon');
     const dayList=["Mon","Tue","Wed","Thu","Fri"];
     const [sameChecked, setSameChecked] = useState(false);
+    const [showCourseBox, setShowCourseBox] = useState(false);
     return(
         <>
-            <div className="div-schedule-day-header">
+            <div className={showCourseBox?"div-schedule-day-header blurred":"div-schedule-day-header"}>
                 Add your Schedule
             </div>
-            <div className="div-schedule-day-container">
+            <div className={showCourseBox?"div-schedule-day-container blurred":"div-schedule-day-container"}>
 
                 <div className="div-schedule-day-checker">
                     <input type="checkbox" id="same" name="same" value="yes"
@@ -42,8 +43,13 @@ export function ScheduleDay({courseList,setCourseList})
                 </div>
 
             </div>
-            
-            <ScheduleAdd courseList={courseList} setCourseList={setCourseList} day={sameChecked?"mon":daySelected}/>
+            <div>
+            <ScheduleAdd courseList={courseList} setCourseList={setCourseList} day={sameChecked?"mon":daySelected}
+                    showCourseBox={showCourseBox}
+                    setShowCourseBox={setShowCourseBox}
+                    
+                    />
+            </div>
             
         </>
     )

@@ -10,6 +10,8 @@ import { useState } from "react"
 export function AddSemPage()
 {
     const [courseList,setCourseList] = useState([]);
+    const [examList,setExamList]=useState([]);
+    const [holidayList,setHolidayList]=useState([]);
     const [semStartDate,setSemStartDate]=useState(null);
     const [semEndDate,setSemEndDate]=useState(null);
     function clickStartDate(event)
@@ -67,7 +69,17 @@ export function AddSemPage()
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 <div>
-                    <ExamSection />
+                    <ExamSection headerName="Exams" buttonName="Exam" 
+                        examList={examList}
+                        setExamList={setExamList}
+                        />
+                </div>
+                <hr style={{width:'100%',margin:'0'}}></hr>
+                <div>
+                    <ExamSection headerName="Holidays" buttonName="Holiday"
+                        examList={holidayList}
+                        setExamList={setHolidayList}
+                        />
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 {satDates&&<div>

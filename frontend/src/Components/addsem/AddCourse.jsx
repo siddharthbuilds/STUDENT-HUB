@@ -25,15 +25,18 @@ export function AddCourse({courseList,setCourseList})
                         :"No Courses"} Added 
                     </div>
             </div>
-            {courseList.length>0&&<CourseListContainer courseList={courseList} 
-                setCourseList={setCourseList} keyword="C R E D I T S" 
-                property2="courseCredits"/>}
+            
         </div>
-         {showCourseBox&&<CourseBox toggleShowCourseBox={toggleShowCourseBox} 
+         {showCourseBox&&<div style={{position:"relative"}}><CourseBox toggleShowCourseBox={toggleShowCourseBox} 
                             courseList={courseList}
                             setCourseList={setCourseList}
-                            type2="number" />
+                            type2="number" /></div>
                             }
+          {courseList.length>0&&<div className={showCourseBox?"blurred":""}>
+                    <CourseListContainer courseList={courseList} 
+                setCourseList={setCourseList} keyword="C R E D I T S" 
+                property2="courseCredits"/>
+            </div>}
          
         </>
     )

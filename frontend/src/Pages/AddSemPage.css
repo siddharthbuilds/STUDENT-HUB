@@ -35,3 +35,8 @@
     right:5%;
     top:2%;
 }
+
+.blurred{
+    opacity:0;
+    pointer-events: none;
+}
