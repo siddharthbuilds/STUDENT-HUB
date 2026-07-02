@@ -18,7 +18,7 @@ export function ScheduleDay({courseList,setCourseList})
                     style={{width:'18px',height:'18px'}}
                     onChange={(event)=>{setSameChecked(event.target.checked)}}
                     />
-                    <label htmlFor="same">All days have same timetable. </label>
+                    <label htmlFor="same">All days have same schedule. </label>
                 </div>
 
                 <div className="div-schedule-day">
