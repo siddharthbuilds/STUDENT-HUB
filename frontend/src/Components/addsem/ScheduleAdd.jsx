@@ -15,8 +15,6 @@ export function ScheduleAdd({courseList,setCourseList,day})
     }
   
     const [showCourseBox, setShowCourseBox] = useState(false);
-    // const [hourList,setHourList]=useState([]);
-    // const dropdown1=["a","b","c"];
     const dropdown2=["x 1","x 2","x 3"];
     function toggleShowCourseBox()
     {
