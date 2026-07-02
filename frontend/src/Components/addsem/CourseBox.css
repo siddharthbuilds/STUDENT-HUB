@@ -27,3 +27,8 @@
     top:50%;
     left:50%;
 }
+
+.div-type-date-plchdr{
+    margin-top: 3px;
+    text-align: center;
+}

@@ -31,7 +31,8 @@ export function AddCourse({courseList,setCourseList})
         </div>
          {showCourseBox&&<CourseBox toggleShowCourseBox={toggleShowCourseBox} 
                             courseList={courseList}
-                            setCourseList={setCourseList} />
+                            setCourseList={setCourseList}
+                            type2="number" />
                             }
          
         </>

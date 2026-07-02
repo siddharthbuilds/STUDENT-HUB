@@ -7,7 +7,8 @@ import CustomDropdown from "./DropDown.jsx"
 import getObj from "../../Utils/Course.js"
 export function CourseBox({toggleShowCourseBox, 
         courseList, setCourseList,
-        dropdown1=false,dropdown2=false,day})
+        dropdown1=false,dropdown2=false,day,type1="text",type2="text"
+    })
 {
     const [courseName, setCourseName] = useState('');
     const [courseCredits, setCourseCredits]= useState('');
@@ -15,6 +16,7 @@ export function CourseBox({toggleShowCourseBox,
     const [toolTipCredits, showToolTipCredits] = useState(false);
     const [selectedOption1, setSelectedOption1] = useState(null);
     const [selectedOption2, setSelectedOption2] = useState('x 1');
+    const [descriptionText,setDescriptionText]=useState('');
 
     function trackCourseName(event)
     {
@@ -34,6 +36,11 @@ export function CourseBox({toggleShowCourseBox,
         }
     }
 
+    function trackDescription(event)
+    {
+        setDescriptionText(event.target.value);
+    }
+
 
     function addCourseBtn()
     {
@@ -50,16 +57,24 @@ export function CourseBox({toggleShowCourseBox,
         }
 
         
-        if(!dropdown1&&!dropdown2&&name&&credits)
+        if(!dropdown1&&!dropdown2&&type1!="date"&&type2!="date"&&name&&credits)
         {
             const obj = getObj(name,credits);
             const newList = [...courseList,obj];
             setCourseList(newList);
             toggleShowCourseBox();
         }
-        else if (name&&credits){
+        else if (type1!="date"&&type2!="date"&&name&&credits){
             const course = courseList.find(course=>{return course.courseName==name});
             course[day]=credits;
+            toggleShowCourseBox();
+        }
+
+        else if(type1=="date"&&type2=="date"&&name&&credits)
+        {
+            const obj = getObj(name,credits,descriptionText);
+            const newList = [...courseList,obj];
+            setCourseList(newList);
             toggleShowCourseBox();
         }
         
@@ -72,16 +87,19 @@ export function CourseBox({toggleShowCourseBox,
                 <div className="div-course-attributes-name" onClick={()=>{showToolTipName(false)}}>
                    {!dropdown1?
                    <Input placeholder="Course Name" 
-                        size="40" onChange={trackCourseName}/>
+                        size="40" onChange={trackCourseName} type={type1}/>
                         :<CustomDropdown options={courseList} name="Course Name"
                         property="courseName"
                         selectedOption={selectedOption1} 
                         setSelectedOption={setSelectedOption1}
                         />
+                        
                     }
 
+                    {type1=="date"&&<div className="div-type-date-plchdr">From </div>}
+
                    {toolTipName&&<div className="div-course-attributes-tooltip">
-                    <Tooltip message="Enter Name"/>
+                    <Tooltip message={type1=="date"?"Enter Date":"Enter Name"}/>
                     </div>
                     } 
                 </div>
@@ -89,17 +107,22 @@ export function CourseBox({toggleShowCourseBox,
                     {!dropdown2?
                     <Input placeholder="Credits" 
                         size="3" 
-                        onChange={trackCourseCredits} type="number"/>
+                        onChange={trackCourseCredits} type={type2}/>
                         :<CustomDropdown options={dropdown2} name="x 1"
                         selectedOption={selectedOption2} 
                         setSelectedOption={setSelectedOption2}
                         />
                     }
+
+                    {type2=="date"&&<div className="div-type-date-plchdr">To </div>}
                     {toolTipCredits&&<div className="div-course-attributes-tooltip">
-                    <Tooltip message="Enter Credits"/>
+                    <Tooltip message={type2=="date"?"Enter Date":"Enter Credits"}/>
                     </div>
                     } 
                 </div>
+                {type1=="date"&&type2=="date"&&<div className="div-course-attributes-desc">
+                    <Input placeholder="Description" type="text" onChange={trackDescription}/>
+                </div>}
             </div>
             <div className="div-course-buttons">
                 <ButtonLogin text="Add" onClick={addCourseBtn}/>
