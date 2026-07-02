@@ -3,6 +3,7 @@ import "./AddSemPage.css"
 import { AddCourse } from "../Components/addsem/AddCourse.jsx"
 import { ButtonLogin } from "../Components/login/ButtonLogin.jsx"
 import { ScheduleDay } from "../Components/addsem/ScheduleDay.jsx"
+import {SatSchedule} from "../Components/addsem/SatSchedule.jsx"
 import { useState } from "react"
 export function AddSemPage()
 {
@@ -48,6 +49,10 @@ export function AddSemPage()
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 <div>
                     <ScheduleDay courseList={courseList} setCourseList={setCourseList}/>
+                </div>
+                <hr style={{width:'100%',margin:'0'}}></hr>
+                <div>
+                    <SatSchedule />
                 </div>
             </div>
             
