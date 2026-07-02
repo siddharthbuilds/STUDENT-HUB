@@ -50,14 +50,14 @@ export function CourseBox({toggleShowCourseBox,
         }
 
         
-        if(!dropdown1&&!dropdown2)
+        if(!dropdown1&&!dropdown2&&name&&credits)
         {
             const obj = getObj(name,credits);
             const newList = [...courseList,obj];
             setCourseList(newList);
             toggleShowCourseBox();
         }
-        else{
+        else if (name&&credits){
             const course = courseList.find(course=>{return course.courseName==name});
             course[day]=credits;
             toggleShowCourseBox();
