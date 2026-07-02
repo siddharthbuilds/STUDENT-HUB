@@ -4,10 +4,14 @@ import { AddCourse } from "../Components/addsem/AddCourse.jsx"
 import { ButtonLogin } from "../Components/login/ButtonLogin.jsx"
 import { ScheduleDay } from "../Components/addsem/ScheduleDay.jsx"
 import {SatSchedule} from "../Components/addsem/SatSchedule.jsx"
+import getSatDates from "../Utils/Dates.js"
 import { useState } from "react"
 export function AddSemPage()
 {
     const [courseList,setCourseList] = useState([]);
+    const [semStartDate,setSemStartDate]=useState(null);
+    const [semEndDate,setSemEndDate]=useState(null);
+    const satDates = semStartDate&&semEndDate&&getSatDates(semStartDate,semEndDate);
     return(
         <>
             <div className="div-addsem-page">
@@ -30,6 +34,7 @@ export function AddSemPage()
                         type="date"
                         fontSize="23"
                         backgroundColor="#12193A"
+                        onChange={(event)=>{setSemStartDate(event.target.value)}}
                         />
                         <div>Semester Start Date </div>
                     </div>
@@ -38,6 +43,7 @@ export function AddSemPage()
                         type="date"
                         fontSize="23"
                         backgroundColor="#12193A"
+                        onChange={(event)=>{setSemEndDate(event.target.value)}}
                         />
                         <div>Semester End Date </div>
                     </div>
@@ -51,9 +57,9 @@ export function AddSemPage()
                     <ScheduleDay courseList={courseList} setCourseList={setCourseList}/>
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
-                <div>
-                    <SatSchedule />
-                </div>
+                {satDates&&<div>
+                    <SatSchedule satDates={satDates}/>
+                </div>}
             </div>
             
             

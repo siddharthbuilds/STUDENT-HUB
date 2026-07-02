@@ -4,7 +4,7 @@ import {ButtonLogin} from "../login/ButtonLogin.jsx"
 import { Tooltip } from "../ToolTip.jsx"
 import { useState } from "react"
 import CustomDropdown from "./DropDown.jsx"
-import getObj from "../../Models/Course.js"
+import getObj from "../../Utils/Course.js"
 export function CourseBox({toggleShowCourseBox, 
         courseList, setCourseList,
         dropdown1=false,dropdown2=false,day})

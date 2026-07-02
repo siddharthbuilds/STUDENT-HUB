@@ -1,7 +1,6 @@
 import "./SatSchedule.css"
 import { SatBox } from "./SatBox"
-const satDates=['12-12-12'];
-export function SatSchedule()
+export function SatSchedule({satDates})
 {
     
     return(
@@ -11,9 +10,9 @@ export function SatSchedule()
         </div>
 
         <div className="div-sat-body-container">
-            {satDates.map(date=>{return(<>
+            {satDates.map(date=>{return(<div key={date}>
                 <SatBox date={date} />
-            </>)})}
+            </div>)})}
         </div>
         </>
     )
