@@ -21,8 +21,8 @@ export function SatBox({date})
                 name="Options"
                 />
                 {selectedOption=="Class"&&<div className="div-sat-body-opt">
-                    {buttons.map(button=>{return(
-                        <>
+                    {buttons.map((button,index)=>{return(
+                        <div key={index}>
                     <button className={button==buttonSelected?"btn-sat-body-opt btn-sat-clicked":
                         "btn-sat-body-opt"
                     }
@@ -30,7 +30,7 @@ export function SatBox({date})
                     >
                         {button} 
                         </button>
-                        </>
+                        </div>
                     )})}
                 </div>}
                 
