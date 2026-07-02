@@ -3,9 +3,9 @@
     flex-direction: column;
     row-gap: 15px;
     position:absolute;
-    top:0%;
-    /* left:50%;
-    transform: translate3d(-50%,-50%,0); */
+    top:-50px;
+    left:50%;
+    transform: translate3d(-50%,0%,0);
     /* transform: translateY(-50%); */
     border: 5px solid whitesmoke;
     border-radius: 18px;

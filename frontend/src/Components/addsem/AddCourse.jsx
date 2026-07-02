@@ -14,6 +14,11 @@ export function AddCourse({courseList,setCourseList})
     }
     return (
         <>
+        {showCourseBox&&<div style={{position:"relative"}}><CourseBox toggleShowCourseBox={toggleShowCourseBox} 
+                            courseList={courseList}
+                            setCourseList={setCourseList}
+                            type2="number" /></div>
+                            }
         <div className={showCourseBox?"div-addcourse blurred":"div-addcourse"}>
             <div className="div-addcourse-text"> Add Your Courses</div>
             <div className="div-btn-addcourse">
@@ -27,11 +32,7 @@ export function AddCourse({courseList,setCourseList})
             </div>
             
         </div>
-         {showCourseBox&&<div style={{position:"relative"}}><CourseBox toggleShowCourseBox={toggleShowCourseBox} 
-                            courseList={courseList}
-                            setCourseList={setCourseList}
-                            type2="number" /></div>
-                            }
+         
           {courseList.length>0&&<div className={showCourseBox?"blurred":""}>
                     <CourseListContainer courseList={courseList} 
                 setCourseList={setCourseList} keyword="C R E D I T S" 
