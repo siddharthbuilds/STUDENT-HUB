@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./DropDown.css"
-export default function CustomDropdown({options,name,selectedOption,setSelectedOption,property}) {
+export default function CustomDropdown({options,name,selectedOption,setSelectedOption,property,
+                                      fontSize,backgroundColor}) {
   const [isOpen, setIsOpen] = useState(false);
   
 
@@ -14,7 +15,12 @@ export default function CustomDropdown({options,name,selectedOption,setSelectedO
   return (
     <div style={{ position: "relative", display: "inline-block", margin: "20px" }}>
       {/* Dropdown Trigger Button */}
-      <button className="btn-dropdown" onClick={toggleDropdown} style={{ padding: "10px 20px" }}>
+      <button className="btn-dropdown" 
+      onClick={toggleDropdown} 
+      style={{ padding: "10px 20px",
+              backgroundColor: backgroundColor?backgroundColor:"#00073d",
+              fontSize: fontSize?fontSize:"30px"
+       }}>
         {selectedOption||name} {isOpen ? "▲" : "▼"}
       </button>
 
@@ -24,7 +30,7 @@ export default function CustomDropdown({options,name,selectedOption,setSelectedO
           position: "absolute",
           top: "100%",
           left: 0,
-          backgroundColor: "#00073d",
+          backgroundColor:"#00073d",
           border: "1px solid #ccc",
           listStyle: "none",
           padding: "15px 0",
