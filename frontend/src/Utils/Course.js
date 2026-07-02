@@ -5,6 +5,10 @@ export default function getObj(arg1,arg2,arg3)
             mon:0,tue:0,wed:0,thu:0,fri:0
     })
     else{
-        return ({from:arg1,to:arg2,des:arg3})
+        const [fromYear, fromMonth, fromDay]= arg1.split('-');
+        const fromDate = `${fromDay}-${fromMonth}-${fromYear}`;
+        const [toYear, toMonth, toDay]= arg2.split('-');
+        const toDate = `${toDay}-${toMonth}-${toYear}`;
+        return ({from:fromDate,to:toDate,des:arg3})
     }
 }
