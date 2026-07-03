@@ -10,8 +10,8 @@ export function SatSchedule({satDates})
         </div>
 
         <div className="div-sat-body-container">
-            {satDates.map((date)=>{return(<div key={date.day}>
-                <SatBox date={`${date.day}-${date.month}-${date.year}`} />
+            {satDates.map((date)=>{return(<div key={date}>
+                <SatBox date={date} />
             </div>)})}
         </div>
         </>

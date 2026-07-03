@@ -7,6 +7,7 @@ import { ExamSection } from "../Components/addsem/ExamSection.jsx"
 import {SatSchedule} from "../Components/addsem/SatSchedule.jsx"
 import getSatDates from "../Utils/Dates.js"
 import { useState } from "react"
+import { useEffect } from "react"
 export function AddSemPage()
 {
     const [courseList,setCourseList] = useState([]);
@@ -14,15 +15,37 @@ export function AddSemPage()
     const [holidayList,setHolidayList]=useState([]);
     const [semStartDate,setSemStartDate]=useState(null);
     const [semEndDate,setSemEndDate]=useState(null);
+    const [satDates,setSatDates] = useState([]);
+    useEffect(() => {
+    if (semStartDate && semEndDate) {
+        setSatDates(getSatDates(semStartDate, semEndDate));
+    }
+    }, [semStartDate, semEndDate]);
+
+        const filteredList = satDates.filter(saturday =>
+        {const isHoliday = holidayList.some(holiday =>
+            saturday >= holiday.from &&
+            saturday <= holiday.to
+        );
+        const isExam = examList.some(exam =>
+            saturday >= exam.from &&
+            saturday <= exam.to
+        );
+        return !isExam && !isHoliday;
+        }
+    );
+
     function clickStartDate(event)
     {
         setSemStartDate(event.target.value);
+         
     }
     function clickEndDate(event)
     {
         setSemEndDate(event.target.value);
     }
-    const satDates = semStartDate&&semEndDate&&getSatDates(semStartDate,semEndDate);
+    
+   
     return(
         <>
             <div className="div-addsem-page">
@@ -83,7 +106,7 @@ export function AddSemPage()
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 {satDates&&<div>
-                    <SatSchedule satDates={satDates}/>
+                    <SatSchedule satDates={filteredList}/>
                 </div>}
             </div>
             
