@@ -31,6 +31,6 @@ export default function getSatDates (Date1, Date2)
     const y = dayObj.getFullYear();
     const m = String(dayObj.getMonth() + 1).padStart(2, '0');
     const d = String(dayObj.getDate()).padStart(2, '0');
-    return `${d}-${m}-${y}`;
+    return {year:y,month:m,day:d};
   });
 }
