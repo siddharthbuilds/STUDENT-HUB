@@ -1,29 +1,29 @@
 import "./ExamSection.css"
 import { ButtonAddCourse } from "./ButtonAddCourse"
-import { CourseBox } from "./CourseBox"
+import { EntryForm } from "./EntryForm"
 import { CourseListContainer } from "./CourseListContainer"
 import { useState } from "react"
 export function ExamSection({headerName, buttonName,examList,setExamList})
 {
-    const [showCourseBox,setShowCourseBox] = useState(false);
-    function toggleShowCourseBox()
+    const [showEntryForm,setShowEntryForm] = useState(false);
+    function toggleShowEntryForm()
     {
-        setShowCourseBox(!showCourseBox);
+        setShowEntryForm(!showEntryForm);
     }
     return(<>
         <div className="div-exam-section">
-            <div className={showCourseBox?"div-exam-section-header blurred":"div-exam-section-header"}>
+            <div className={showEntryForm?"div-exam-section-header blurred":"div-exam-section-header"}>
                 {headerName}
             </div>
             <div className="div-exam-section-body" style={{position:"relative"}}>
-                <ButtonAddCourse text={`+ Add ${buttonName}`} toggleShowCourseBox={toggleShowCourseBox}/>
-                {showCourseBox&&
-                    <CourseBox type1="date" type2="date" toggleShowCourseBox={toggleShowCourseBox}
+                <ButtonAddCourse text={`+ Add ${buttonName}`} toggleShowEntryForm={toggleShowEntryForm}/>
+                {showEntryForm&&
+                    <EntryForm type1="date" type2="date" toggleShowEntryForm={toggleShowEntryForm}
                     courseList={examList}
                     setCourseList={setExamList}
-                ></CourseBox>}
+                ></EntryForm>}
             </div>
-            <div className={showCourseBox?"blurred":""}>
+            <div className={showEntryForm?"blurred":""}>
                 <CourseListContainer courseList={examList} setCourseList={setExamList}
                 type="date" property2="des"
                 />

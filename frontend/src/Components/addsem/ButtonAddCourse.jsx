@@ -1,12 +1,12 @@
 import "./ButtonAddCourse.css"
 
-export function ButtonAddCourse({toggleShowCourseBox,text})
+export function ButtonAddCourse({toggleShowEntryForm,text})
 {
     return(
         <>
         <div>
             <button className="btn-addcourse" 
-                onClick={toggleShowCourseBox}> {text}
+                onClick={toggleShowEntryForm}> {text}
             </button>
         </div>
         </>

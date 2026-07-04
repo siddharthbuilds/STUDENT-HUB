@@ -5,7 +5,7 @@ export function Input({placeholder, type, setCapsCheck,size=25,onChange,fontSize
     return(
     <div className="div-input">
         <input placeholder={placeholder}
-            size={size} 
+            size={Number(size)} 
             className="input-login" 
             name="id"
             onClick={()=>{setCapsCheck?setCapsCheck(false):()=>{}}}

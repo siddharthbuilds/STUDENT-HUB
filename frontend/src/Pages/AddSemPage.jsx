@@ -50,10 +50,10 @@ export function AddSemPage()
         <>
             <div className="div-addsem-page">
                 <div className="div-option-cancel-addsem">
-                    <ButtonLogin text="Cancel" bad={true} />
+                    <ButtonLogin text="Cancel" alert={true} />
                 </div>
                 <div className="div-option-save-addsem">
-                    <ButtonLogin text="Save" bad={false} />
+                    <ButtonLogin text="Save" alert={false} />
                 </div>
                 <div>
                    <Input placeholder="Semester Label (eg: Semester 1)" 

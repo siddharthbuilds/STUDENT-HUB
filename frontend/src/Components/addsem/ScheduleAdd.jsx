@@ -1,10 +1,10 @@
 import "./ScheduleAdd.css"
 import { ButtonAddCourse } from "./ButtonAddCourse"
-import { CourseBox } from "./CourseBox";
+import { EntryForm } from "./EntryForm";
 import { CourseListContainer } from "./CourseListContainer";
 
 
-export function ScheduleAdd({courseList,setCourseList,day,showCourseBox,setShowCourseBox})
+export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowEntryForm})
 {
     function trashFunction(index)
     {
@@ -14,15 +14,15 @@ export function ScheduleAdd({courseList,setCourseList,day,showCourseBox,setShowC
     }
   
     const dropdown2=["x 1","x 2","x 3"];
-    function toggleShowCourseBox()
+    function toggleShowEntryForm()
     {
-        setShowCourseBox(!showCourseBox);
+        setShowEntryForm(!showEntryForm);
     }
     return(
         <>
             <div style={{position:"relative",display:"flex",justifyContent:"center"}}>
-            {showCourseBox&&
-                    <CourseBox toggleShowCourseBox={toggleShowCourseBox}
+            {showEntryForm&&
+                    <EntryForm toggleShowEntryForm={toggleShowEntryForm}
                                 courseList={courseList}
                                 setCourseList={setCourseList}
                                 dropdown1={true}
@@ -32,12 +32,12 @@ export function ScheduleAdd({courseList,setCourseList,day,showCourseBox,setShowC
                     }
             </div>
 
-        <div className={showCourseBox?"div-btn-schedule-add blurred":"div-btn-schedule-add"}>
-        <ButtonAddCourse text="+ Add Hours" toggleShowCourseBox={toggleShowCourseBox}/>
+        <div className={showEntryForm?"div-btn-schedule-add blurred":"div-btn-schedule-add"}>
+        <ButtonAddCourse text="+ Add Hours" toggleShowEntryForm={toggleShowEntryForm}/>
         </div>
         
         
-        {courseList.length>0&&<div className={showCourseBox?"blurred":""}>
+        {courseList.length>0&&<div className={showEntryForm?"blurred":""}>
                                 <CourseListContainer courseList={courseList} 
                                 setCourseList={setCourseList}
                                 property2={day}
