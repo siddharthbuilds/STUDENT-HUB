@@ -2,7 +2,6 @@ import { useState } from "react"
 import "./AddCourse.css"
 import {EntryForm} from "./EntryForm.jsx"
 import { CourseListContainer } from "./CourseListContainer.jsx";
-import { CourseList } from "./CourseList.jsx";
 import { ButtonAddCourse } from "./ButtonAddCourse.jsx";
 import getObj from "../../Utils/Course.js";
 export function AddCourse({courseList,setCourseList})
@@ -11,11 +10,15 @@ export function AddCourse({courseList,setCourseList})
     const [showEntryForm,setShowEntryForm] = useState(false);
     const [courseName, setCourseName] = useState('');
     const [courseCredits, setCourseCredits]= useState('');
-    const [toolTipName, showToolTipName] = useState(false);
-    const [toolTipCredits, showToolTipCredits] = useState(false);
+    const [toolTipName, setToolTipName] = useState(false);
+    const [toolTipCredits, setToolTipCredits] = useState(false);
     function toggleShowEntryForm()
     {
         setShowEntryForm(!showEntryForm);
+        setCourseCredits(null);
+        setCourseName(null);
+        setToolTipName(false);
+        setToolTipCredits(false);
     }
     
     function trackCourseName(event)
@@ -23,7 +26,7 @@ export function AddCourse({courseList,setCourseList})
         setCourseName(event.target.value);
         if(event.target.value)
         {
-            showToolTipName(false);
+            setToolTipName(false);
         }
     }
 
@@ -32,7 +35,7 @@ export function AddCourse({courseList,setCourseList})
         setCourseCredits(event.target.value);
         if(event.target.value)
         {
-            showToolTipCredits(false);
+            setToolTipCredits(false);
         }
     }
 
@@ -47,11 +50,11 @@ export function AddCourse({courseList,setCourseList})
         }
         else if (!courseName)
         {
-            showToolTipName(true);
+            setToolTipName(true);
         }
         else if (!courseCredits)
         {
-            showToolTipCredits(true);
+            setToolTipCredits(true);
         }
     }
 

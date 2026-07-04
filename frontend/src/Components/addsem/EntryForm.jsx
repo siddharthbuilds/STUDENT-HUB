@@ -2,77 +2,26 @@ import "./EntryForm.css"
 import { Input } from "../login/Input.jsx"
 import {ButtonLogin} from "../login/ButtonLogin.jsx"
 import { Tooltip } from "../ToolTip.jsx"
-import { useState } from "react"
 import CustomDropdown from "./DropDown.jsx"
+
 export function EntryForm({input1,input2,input3,
     input1Fn,input2Fn,input3Fn,button1,button2,button1Fn,button2Fn
     })
 {
  
-    const [selectedOption1, setSelectedOption1] = useState(null);
-    const [selectedOption2, setSelectedOption2] = useState('x 1');
-    // const [descriptionText,setDescriptionText]=useState('');
-
-    
-
-    // function trackDescription(event)
-    // {
-    //     setDescriptionText(event.target.value);
-    // }
-
-
-    // function addCourseBtn()
-    // {
-    //     const name = dropdown1?selectedOption1:courseName;
-    //     const credits = dropdown2?selectedOption2:courseCredits;
-
-    //     if (!name)
-    //     {
-    //         showToolTipName(true);
-    //     }
-    //     else if(!credits)
-    //     {
-    //         showToolTipCredits(true);
-    //     }
-
-        
-    //     if(!dropdown1&&!dropdown2&&type1!="date"&&type2!="date"&&name&&credits)
-    //     {
-    //         const obj = getObj(name,credits);
-    //         const newList = [...courseList,obj];
-    //         setCourseList(newList);
-    //         toggleShowEntryForm();
-    //     }
-    //     else if (type1!="date"&&type2!="date"&&name&&credits){
-    //         const course = courseList.find(course=>{return course.courseName==name});
-    //         course[day]=credits;
-    //         toggleShowEntryForm();
-    //     }
-
-    //     else if(type1=="date"&&type2=="date"&&name&&credits)
-    //     {
-    //         const obj = getObj(name,credits,descriptionText);
-    //         const newList = [...courseList,obj];
-    //         setCourseList(newList);
-    //         toggleShowEntryForm();
-    //     }
-        
-    // }
-
     return(
         <>
         <div className="div-course-box">
             <div className="div-course-attributes">
-                <div className="div-course-attributes-name" onClick={()=>{}}>
+                {input1&&<div className="div-course-attributes-input" onClick={input1.type=="dropdown"?input1Fn:()=>{}}>
                    {input1.type!="dropdown"?
                    <Input placeholder={input1.placeholder} 
                         onChange={input1Fn} type={input1.type}/>
-                        :<CustomDropdown options={input1.list} name={input1.dropdownName}
+                        :<CustomDropdown options={input1.list} name={input1.placeholder}
                         property={input1.property}
-                        selectedOption={selectedOption1} 
-                        setSelectedOption={setSelectedOption1}
+                        selectedOption={input1.dropdownOption} 
+                        setSelectedOption={input1.dropdownFn}
                         />
-                        
                     }
 
                     {input1.type=="date"&&<div className="div-type-date-plchdr">{input1.placeholder} </div>}
@@ -81,15 +30,16 @@ export function EntryForm({input1,input2,input3,
                     <Tooltip message={`Enter ${input1.placeholder}`}/>
                     </div>
                     } 
-                </div>
+                </div>}
                 {/* Second Input */}
-                <div className="div-course-attributes-credits">
+                {input2&&<div className="div-course-attributes-input">
                     {input2.type!="dropdown"?
                     <Input placeholder={input2.placeholder}
                         onChange={input2Fn} type={input2.type}/>
-                        :<CustomDropdown options={input2.list} name={input2.dropdownName}
-                        selectedOption={selectedOption2} 
-                        setSelectedOption={setSelectedOption2}
+                        :<CustomDropdown options={input2.list} name={input2.placeholder}
+                        property={input2.property}
+                        selectedOption={input2.dropdownOption} 
+                        setSelectedOption={input2.dropdownFn}
                         />
                     }
 
@@ -98,16 +48,30 @@ export function EntryForm({input1,input2,input3,
                     <Tooltip message={`Enter ${input2.placeholder}`}/>
                     </div>
                     } 
-                </div>
+                </div>}
 
                 {/* Third Input */}
-                {input3&&<div className="div-course-attributes-desc">
-                    <Input placeholder={input3.placeholder} type={input3.type} size={input3.size} 
-                        onChange={input3Fn}/>
-                </div>}
+                {input3&&<div className="div-course-attributes-input">
+                    {input3.type!="dropdown"?
+                    <Input placeholder={input3.placeholder}
+                        onChange={input3Fn} type={input3.type}/>
+                        :<CustomDropdown options={input3.list} name={input3.placeholder}
+                        property={input3.property}
+                        selectedOption={input3.dropdownOption} 
+                        setSelectedOption={input3.dropdownFn}
+                        />
+                    }
+
+                    {input3.type=="date"&&<div className="div-type-date-plchdr">{input3.placeholder} </div>}
+                    {input3.toolTip&&<div className="div-course-attributes-tooltip">
+                    <Tooltip message={`Enter ${input3.placeholder}`}/>
+                    </div>
+                    } 
+                </div>
+}
             </div>
             <div className="div-course-buttons">
-                <ButtonLogin text={button1.text} onClick={button1Fn}/>
+                <ButtonLogin text={button1.text} onClick={button1Fn} alert={button1.alert}/>
                 <ButtonLogin text={button2.text} onClick={button2Fn} alert={button2.alert}/>
             </div>
         </div>
