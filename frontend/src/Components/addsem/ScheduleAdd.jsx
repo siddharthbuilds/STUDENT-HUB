@@ -1,16 +1,16 @@
 import "./ScheduleAdd.css"
 import { ButtonAddCourse } from "./ButtonAddCourse"
 import { EntryForm } from "./EntryForm";
-import { CourseListContainer } from "./CourseListContainer";
+import { CourseListContainer } from "./EntryCardContainer";
 import { useState } from "react";
 
 
 export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowEntryForm})
 {
-    function trashFunction(index)
+    function trashFunction(courseName)
     {
-        setCourseList(courseList.map((course,ind)=>{
-                if (index === ind)
+        setCourseList(courseList.map((course)=>{
+                if (course.courseName===courseName)
                 {
                     return {...course,[day]:0}
                 }
@@ -72,6 +72,12 @@ export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowE
     {
         toggleShowEntryForm();
     }
+
+    const filteredList = courseList.filter((course)=>{
+
+        if(course[day]!=0){return true};
+        return false;
+    })
     return(
         <>
             <div style={{position:"relative",display:"flex",justifyContent:"center"}}>
@@ -84,10 +90,10 @@ export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowE
         </div>
         
         
-        {courseList.length>0&&<div style={{display:"flex",justifyContent:"center"}}className={showEntryForm?"blurred":""}>
-                                <CourseListContainer courseList={courseList} 
-                                setCourseList={setCourseList}
-                                property2={day}
+        {filteredList.length>0&&<div style={{display:"flex",justifyContent:"center"}}className={showEntryForm?"blurred":""}>
+                                <CourseListContainer items={filteredList} 
+                                heading1="courseName"
+                                body1={day}
                                 trashFunction={trashFunction}
                                 />
                                 </div>}

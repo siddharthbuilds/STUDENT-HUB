@@ -1,7 +1,7 @@
 import { useState } from "react"
 import "./AddCourse.css"
 import {EntryForm} from "./EntryForm.jsx"
-import { CourseListContainer } from "./CourseListContainer.jsx";
+import { CourseListContainer } from "./EntryCardContainer.jsx";
 import { ButtonAddCourse } from "./ButtonAddCourse.jsx";
 import getObj from "../../Utils/Course.js";
 export function AddCourse({courseList,setCourseList})
@@ -63,6 +63,15 @@ export function AddCourse({courseList,setCourseList})
         toggleShowEntryForm();
     }
 
+    function removeCourse(courseName)
+    {
+        const newList = courseList.filter((course)=>{
+            if(course.courseName!==courseName){return true}
+            return false;
+        })
+        setCourseList(newList);
+    }
+
     const input1={type:"text",placeholder:"Course Name",toolTip:toolTipName,fn:trackCourseName};
     const input2={type:"number",placeholder:"Credits",toolTip:toolTipCredits,fn:trackCourseCredits};
     const button1={text: "Add", alert:false,fn:addCourseBtn}
@@ -76,7 +85,7 @@ export function AddCourse({courseList,setCourseList})
         <div style={{position:"relative"}}>
             <EntryForm inputs={inputs} buttons={buttons}/>
         </div>}
-        
+
         <div className={showEntryForm?"div-addcourse blurred":"div-addcourse"}>
             <div className="div-addcourse-text"> Add Your Courses</div>
             <div className="div-btn-addcourse">
@@ -92,9 +101,13 @@ export function AddCourse({courseList,setCourseList})
         </div>
          
           {courseList.length>0&&<div className={showEntryForm?"blurred":""}>
-                    <CourseListContainer courseList={courseList} 
-                setCourseList={setCourseList} keyword="C R E D I T S" 
-                property2="courseCredits"/>
+                    <CourseListContainer 
+                        items={courseList}
+                        heading1="courseName"
+                        body1="courseCredits"
+                        body2="C R E D I T S"
+                        trashFunction={removeCourse}
+                    />
             </div>}
          
         </>

@@ -1,7 +1,7 @@
 import "./ExamSection.css"
 import { ButtonAddCourse } from "./ButtonAddCourse"
 import { EntryForm } from "./EntryForm"
-import { CourseListContainer } from "./CourseListContainer"
+import { CourseListContainer } from "./EntryCardContainer"
 import { useState } from "react"
 import getObj from "../../Utils/Course"
 export function ExamSection({headerName, buttonName,examList,setExamList})
@@ -75,6 +75,15 @@ export function ExamSection({headerName, buttonName,examList,setExamList})
         setToDate(null);
         setDescription(null);
     }
+
+    function removeExam(fromDate)
+    {
+        setExamList(examList.filter((exam)=>{
+            if(exam.from===fromDate) {return false}
+            return true;
+        })
+        )
+    }
     return(<>
         <div className="div-exam-section">
             <div className={showEntryForm?"div-exam-section-header blurred":"div-exam-section-header"}>
@@ -86,8 +95,13 @@ export function ExamSection({headerName, buttonName,examList,setExamList})
                     <EntryForm inputs={inputs} buttons={buttons} />}
             </div>
             <div className={showEntryForm?"blurred":""}>
-                <CourseListContainer courseList={examList} setCourseList={setExamList}
-                type="date" property2="des"
+                <CourseListContainer 
+                    items={examList}
+                    heading1="from"
+                    heading2="To"
+                    heading3="to"
+                    body1="description"
+                    trashFunction={removeExam}
                 />
             </div>
              

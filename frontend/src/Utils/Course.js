@@ -9,6 +9,6 @@ export default function getObj(arg1,arg2,arg3)
         const fromDate = `${fromYear}-${fromMonth}-${fromDay}`;
         const [toYear, toMonth, toDay]= arg2.split('-');
         const toDate = `${toYear}-${toMonth}-${toDay}`;
-        return ({from:fromDate,to:toDate,des:arg3})
+        return ({from:fromDate,to:toDate,description:arg3})
     }
 }

@@ -12,7 +12,7 @@ export function EntryForm({inputs,buttons})
         <div className="div-course-box">
             <div className="div-course-attributes">
                 {inputs.map((input)=>{
-                    return(<>
+                    return(<div key={input.placeholder}>
                     <div className="div-course-attributes-input" 
                         onClick={input.type=="dropdown"?input.fn:()=>{}}>
                     {input.type!="dropdown"?
@@ -32,16 +32,16 @@ export function EntryForm({inputs,buttons})
                         </div>
                         } 
                     </div>
-                    </>)
+                    </div>)
                 })}
                 </div>
                 <div className="div-course-buttons">
                 {buttons.map((button)=>{return(
-                    <>
+                    <div key={button.text}>
                     <ButtonLogin text={button.text} 
                     onClick={button.fn} 
                     alert={button.alert}/>
-                    </>
+                    </div>
                 )})}
                 </div>
         </div>
