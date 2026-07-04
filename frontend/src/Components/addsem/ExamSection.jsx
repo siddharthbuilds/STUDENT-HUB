@@ -57,11 +57,14 @@ export function ExamSection({headerName, buttonName,examList,setExamList})
         
     }
 
-    const input1={type:"date",placeholder:"From",toolTip:toolTipFrom}
-    const input2={type:"date",placeholder:"To",toolTip:toolTipTo}
-    const input3={type:"text",placeholder:"Description",toolTip:false}
-    const button1={text: "Add", alert:false}
-    const button2={text:"Cancel", alert:true}
+    const input1={type:"date",placeholder:"From",toolTip:toolTipFrom,fn:trackFromDate}
+    const input2={type:"date",placeholder:"To",toolTip:toolTipTo,fn:trackToDate}
+    const input3={type:"text",placeholder:"Description",toolTip:false,fn:trackDescription}
+    const button1={text: "Add", alert:false,fn:addExamBtn}
+    const button2={text:"Cancel", alert:true,fn:toggleShowEntryForm}
+
+    const inputs=[input1,input2,input3];
+    const buttons=[button1,button2];
 
     function toggleShowEntryForm()
     {
@@ -80,12 +83,7 @@ export function ExamSection({headerName, buttonName,examList,setExamList})
             <div className="div-exam-section-body" style={{position:"relative"}}>
                 <ButtonAddCourse text={`+ Add ${buttonName}`} toggleShowEntryForm={toggleShowEntryForm}/>
                 {showEntryForm&&
-                    <EntryForm input1={input1} input2={input2} input3={input3} 
-                    input1Fn={trackFromDate} input2Fn={trackToDate} 
-                    input3Fn={trackDescription}
-                    button1={button1} button2={button2}
-                    button1Fn={addExamBtn} button2Fn={toggleShowEntryForm}
-                    />}
+                    <EntryForm inputs={inputs} buttons={buttons} />}
             </div>
             <div className={showEntryForm?"blurred":""}>
                 <CourseListContainer courseList={examList} setCourseList={setExamList}

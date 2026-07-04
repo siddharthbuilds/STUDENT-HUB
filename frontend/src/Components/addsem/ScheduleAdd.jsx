@@ -25,15 +25,17 @@ export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowE
     const input1={type:"dropdown",placeholder:"Course",
             dropdownOption: selectedCourse, dropdownFn: setSelectedCourse,
             property: "courseName",
-            list:courseList,toolTip:toolTip};
+            list:courseList,toolTip:toolTip,
+            fn:toggleToolTip}
     const input2={type:"dropdown",placeholder:"x 1",
             dropdownOption:multiplier, dropdownFn:setMultiplier,
             property:null,
             list:dropdown2, toolTip:false};
-    const button1={text:"Add",alert:false};
-    const button2={text:"Cancel",alert:true};
+    const button1={text:"Add",alert:false,fn:addScheduleBtn};
+    const button2={text:"Cancel",alert:true,fn:cancelScheduleBtn};
     
-    
+    const inputs=[input1,input2];
+    const buttons=[button1,button2];
 
     function toggleShowEntryForm()
     {
@@ -74,12 +76,7 @@ export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowE
         <>
             <div style={{position:"relative",display:"flex",justifyContent:"center"}}>
             {showEntryForm&&
-                    <EntryForm input1={input1} input2={input2}
-                            input1Fn={toggleToolTip}
-                            button1={button1} button2={button2}
-                            button1Fn={addScheduleBtn} button2Fn={cancelScheduleBtn}
-                            />
-                    }
+                <EntryForm inputs={inputs} buttons={buttons}/> }
             </div>
 
         <div className={showEntryForm?"div-btn-schedule-add blurred":"div-btn-schedule-add"}>

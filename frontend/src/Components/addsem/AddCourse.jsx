@@ -63,21 +63,20 @@ export function AddCourse({courseList,setCourseList})
         toggleShowEntryForm();
     }
 
-    const input1={type:"text",placeholder:"Course Name",toolTip:toolTipName};
-    const input2={type:"number",placeholder:"Credits",toolTip:toolTipCredits};
-    const button1={text: "Add", alert:false}
-    const button2={text: "Cancel", alert:true}
+    const input1={type:"text",placeholder:"Course Name",toolTip:toolTipName,fn:trackCourseName};
+    const input2={type:"number",placeholder:"Credits",toolTip:toolTipCredits,fn:trackCourseCredits};
+    const button1={text: "Add", alert:false,fn:addCourseBtn}
+    const button2={text: "Cancel", alert:true,fn:cancelCourseBtn}
 
+    const inputs=[input1,input2];
+    const buttons=[button1,button2];
     return (
         <>
-        {showEntryForm&&<div style={{position:"relative"}}>
-
-            <EntryForm input1={input1} input2={input2} input1Fn={trackCourseName}
-                    input2Fn={trackCourseCredits} button1={button1} button2={button2}
-                    button1Fn={addCourseBtn} button2Fn={cancelCourseBtn}
-                />
-        </div>
-                            }
+        {showEntryForm&&
+        <div style={{position:"relative"}}>
+            <EntryForm inputs={inputs} buttons={buttons}/>
+        </div>}
+        
         <div className={showEntryForm?"div-addcourse blurred":"div-addcourse"}>
             <div className="div-addcourse-text"> Add Your Courses</div>
             <div className="div-btn-addcourse">
