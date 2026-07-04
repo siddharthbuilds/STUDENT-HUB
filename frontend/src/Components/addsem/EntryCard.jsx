@@ -1,6 +1,6 @@
-import "./CourseList.css"
+import "./EntryCard.css"
 import {TrashImage} from "../home/TrashImage.jsx"
-export function CourseList(
+export function EntryCard(
     {
         item, heading1,heading2,heading3, body1,body2, trashFunction
     })

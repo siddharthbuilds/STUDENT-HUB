@@ -1,7 +1,7 @@
 import "./ExamSection.css"
 import { ButtonAddCourse } from "./ButtonAddCourse"
 import { EntryForm } from "./EntryForm"
-import { CourseListContainer } from "./EntryCardContainer"
+import { EntryCardContainer } from "./EntryCardContainer"
 import { useState } from "react"
 import getObj from "../../Utils/Course"
 export function ExamSection({headerName, buttonName,examList,setExamList})
@@ -95,7 +95,7 @@ export function ExamSection({headerName, buttonName,examList,setExamList})
                     <EntryForm inputs={inputs} buttons={buttons} />}
             </div>
             <div className={showEntryForm?"blurred":""}>
-                <CourseListContainer 
+                <EntryCardContainer 
                     items={examList}
                     heading1="from"
                     heading2="To"

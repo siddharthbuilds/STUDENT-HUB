@@ -1,6 +1,6 @@
-import "./CourseListContainer.css"
-import { CourseList } from "./EntryCard.jsx"
-export function CourseListContainer(
+import "./EntryCardContainer.css"
+import { EntryCard } from "./EntryCard.jsx"
+export function EntryCardContainer(
     {items, heading1,heading2,heading3, body1,body2, trashFunction}
     )
 {
@@ -11,7 +11,7 @@ export function CourseListContainer(
             {items&&items.map((item)=>{
                 return(
                     <div key={item.courseName}>
-                    <CourseList 
+                    <EntryCard 
                         item={item}
                         heading1={heading1}
                         heading2={heading2}

@@ -1,15 +1,15 @@
 import "./ScheduleAdd.css"
 import { ButtonAddCourse } from "./ButtonAddCourse"
 import { EntryForm } from "./EntryForm";
-import { CourseListContainer } from "./EntryCardContainer";
+import { EntryCardContainer } from "./EntryCardContainer";
 import { useState } from "react";
 
 
-export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowEntryForm})
+export function ScheduleAdd({EntryCard,setEntryCard,day,showEntryForm,setShowEntryForm})
 {
     function trashFunction(courseName)
     {
-        setCourseList(courseList.map((course)=>{
+        setEntryCard(EntryCard.map((course)=>{
                 if (course.courseName===courseName)
                 {
                     return {...course,[day]:0}
@@ -25,7 +25,7 @@ export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowE
     const input1={type:"dropdown",placeholder:"Course",
             dropdownOption: selectedCourse, dropdownFn: setSelectedCourse,
             property: "courseName",
-            list:courseList,toolTip:toolTip,
+            list:EntryCard,toolTip:toolTip,
             fn:toggleToolTip}
     const input2={type:"dropdown",placeholder:"x 1",
             dropdownOption:multiplier, dropdownFn:setMultiplier,
@@ -57,7 +57,7 @@ export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowE
         }
         else{
             
-            setCourseList(courseList.map((course)=>{
+            setEntryCard(EntryCard.map((course)=>{
                 if(course.courseName==selectedCourse)
                 {
                         return {...course,[day]: multiplier};
@@ -73,7 +73,7 @@ export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowE
         toggleShowEntryForm();
     }
 
-    const filteredList = courseList.filter((course)=>{
+    const filteredList = EntryCard.filter((course)=>{
 
         if(course[day]!=0){return true};
         return false;
@@ -91,7 +91,7 @@ export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowE
         
         
         {filteredList.length>0&&<div style={{display:"flex",justifyContent:"center"}}className={showEntryForm?"blurred":""}>
-                                <CourseListContainer items={filteredList} 
+                                <EntryCardContainer items={filteredList} 
                                 heading1="courseName"
                                 body1={day}
                                 trashFunction={trashFunction}

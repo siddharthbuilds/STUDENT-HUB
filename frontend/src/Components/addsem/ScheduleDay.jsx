@@ -1,7 +1,7 @@
 import "./ScheduleDay.css"
 import { ScheduleAdd } from "./ScheduleAdd";
 import { useState } from "react";
-export function ScheduleDay({courseList,setCourseList})
+export function ScheduleDay({EntryCard,setEntryCard})
 {
     const [daySelected,setDaySelected]=useState('mon');
     const dayList=["Mon","Tue","Wed","Thu","Fri"];
@@ -44,7 +44,7 @@ export function ScheduleDay({courseList,setCourseList})
 
             </div>
             <div>
-            <ScheduleAdd courseList={courseList} setCourseList={setCourseList} day={sameChecked?"mon":daySelected}
+            <ScheduleAdd EntryCard={EntryCard} setEntryCard={setEntryCard} day={sameChecked?"mon":daySelected}
                     showEntryForm={showEntryForm}
                     setShowEntryForm={setShowEntryForm}
                     

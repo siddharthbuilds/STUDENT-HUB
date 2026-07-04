@@ -1,10 +1,10 @@
 import { useState } from "react"
 import "./AddCourse.css"
 import {EntryForm} from "./EntryForm.jsx"
-import { CourseListContainer } from "./EntryCardContainer.jsx";
+import { EntryCardContainer } from "./EntryCardContainer.jsx";
 import { ButtonAddCourse } from "./ButtonAddCourse.jsx";
 import getObj from "../../Utils/Course.js";
-export function AddCourse({courseList,setCourseList})
+export function AddCourse({EntryCard,setEntryCard})
 {
     
     const [showEntryForm,setShowEntryForm] = useState(false);
@@ -44,8 +44,8 @@ export function AddCourse({courseList,setCourseList})
         if(courseName&&courseCredits)
         {
             const obj = getObj(courseName,courseCredits);
-            const newList = [...courseList,obj];
-            setCourseList(newList);
+            const newList = [...EntryCard,obj];
+            setEntryCard(newList);
             toggleShowEntryForm();
         }
         else if (!courseName)
@@ -65,11 +65,11 @@ export function AddCourse({courseList,setCourseList})
 
     function removeCourse(courseName)
     {
-        const newList = courseList.filter((course)=>{
+        const newList = EntryCard.filter((course)=>{
             if(course.courseName!==courseName){return true}
             return false;
         })
-        setCourseList(newList);
+        setEntryCard(newList);
     }
 
     const input1={type:"text",placeholder:"Course Name",toolTip:toolTipName,fn:trackCourseName};
@@ -92,17 +92,17 @@ export function AddCourse({courseList,setCourseList})
                 <ButtonAddCourse toggleShowEntryForm={toggleShowEntryForm}
                     text="+ Add" />
                 <div className="div-btn-addcourse-count">
-                    {courseList.length>1?`${courseList.length} Courses`
-                        :courseList.length==1?"1 Course"
+                    {EntryCard.length>1?`${EntryCard.length} Courses`
+                        :EntryCard.length==1?"1 Course"
                         :"No Courses"} Added 
                     </div>
             </div>
             
         </div>
          
-          {courseList.length>0&&<div className={showEntryForm?"blurred":""}>
-                    <CourseListContainer 
-                        items={courseList}
+          {EntryCard.length>0&&<div className={showEntryForm?"blurred":""}>
+                    <EntryCardContainer 
+                        items={EntryCard}
                         heading1="courseName"
                         body1="courseCredits"
                         body2="C R E D I T S"
