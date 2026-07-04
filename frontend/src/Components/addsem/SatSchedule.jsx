@@ -1,7 +1,34 @@
 import "./SatSchedule.css"
 import { SatBox } from "./SatBox"
-export function SatSchedule({satDates})
+export function SatSchedule({satDates,setSatDates})
 {
+
+    function addStatus(uuid,option,order)
+    {
+        setSatDates(satDates.map((saturday)=>{
+                if(saturday.uuid===uuid)
+                {
+                    if(option=='Class')
+                    {
+                        return {
+                            uuid: uuid,
+                            status:1,
+                            order:order
+                        }
+                    }
+                    else (option=="Holiday")
+                    {
+                        return{
+                            uuid: uuid,
+                            status:0,
+                            order:null
+                        }
+                    }
+                }
+                return saturday
+            })
+        )
+    }
     
     return(
         <>
@@ -10,8 +37,9 @@ export function SatSchedule({satDates})
         </div>
 
         <div className="div-sat-body-container">
-            {satDates.map((date)=>{return(<div key={date}>
-                <SatBox date={date} />
+            {satDates.map((saturday)=>{return(<div key={saturday.uuid}>
+                <SatBox date={saturday.displayDate} uuid={saturday.uuid} 
+                    addStatus={addStatus}/>
             </div>)})}
         </div>
         </>

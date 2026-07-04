@@ -1,12 +1,14 @@
 import "./SatBox.css"
 import CustomDropdown from "./DropDown";
 import { useState } from "react";
-export function SatBox({date})
+export function SatBox({date,uuid,addStatus})
 {
     const buttons=['M','Tu','W','Th','F'];
     const options=['Class','Holiday'];
     const [selectedOption,setSelectedOption] = useState(null);
     const [buttonSelected,setButtonSelected] = useState(null);
+    selectedOption&&buttonSelected&&addStatus(uuid,selectedOption,buttonSelected)
+
     return(<>
          <div className="div-sat-body">
                 <div className="div-sat-body-date">

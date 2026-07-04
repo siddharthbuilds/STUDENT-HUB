@@ -24,12 +24,12 @@ export function AddSemPage()
 
         const filteredList = satDates.filter(saturday =>
         {const isHoliday = holidayList.some(holiday =>
-            saturday >= holiday.from &&
-            saturday <= holiday.to
+            saturday.date >= holiday.from &&
+            saturday.date <= holiday.to
         );
         const isExam = examList.some(exam =>
-            saturday >= exam.from &&
-            saturday <= exam.to
+            saturday.date >= exam.from &&
+            saturday.date <= exam.to
         );
         return !isExam && !isHoliday;
         }
@@ -106,7 +106,7 @@ export function AddSemPage()
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 {satDates&&<div>
-                    <SatSchedule satDates={filteredList}/>
+                    <SatSchedule satDates={filteredList} setSatDates={setSatDates}/>
                 </div>}
             </div>
             
