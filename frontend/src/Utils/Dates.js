@@ -34,7 +34,7 @@ export default function getSatDates (Date1, Date2)
     return {uuid: crypto.randomUUID(),
             date:`${y}-${m}-${d}`,
             displayDate:`${d}-${m}-${y}`,
-            status:-1,
+            status:0,
             order:null
             };
   });
