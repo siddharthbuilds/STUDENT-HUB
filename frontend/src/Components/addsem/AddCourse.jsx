@@ -64,10 +64,10 @@ export function AddCourse({courseList,setCourseList})
         toggleShowEntryForm();
     }
 
-    function removeCourse(courseName)
+    function removeCourse(uuid)
     {
         const newList = courseList.filter((course)=>{
-            if(course.courseName!==courseName){return true}
+            if(course.uuid!==uuid){return true}
             return false;
         })
         setCourseList(newList);

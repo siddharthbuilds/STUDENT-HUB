@@ -7,10 +7,10 @@ import { useState } from "react";
 
 export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowEntryForm})
 {
-    function trashFunction(courseName)
+    function trashFunction(uuid)
     {
         setCourseList(courseList.map((course)=>{
-                if (course.courseName===courseName)
+                if (course.uuid===uuid)
                 {
                     return {...course,[day]:0}
                 }

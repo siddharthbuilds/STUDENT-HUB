@@ -76,10 +76,10 @@ export function ExamSection({headerName, buttonName,examList,setExamList})
         setDescription(null);
     }
 
-    function removeExam(fromDate)
+    function removeExam(uuid)
     {
         setExamList(examList.filter((exam)=>{
-            if(exam.from===fromDate) {return false}
+            if(exam.uuid===uuid) {return false}
             return true;
         })
         )
