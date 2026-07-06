@@ -10,6 +10,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 export function AddSemPage()
 {
+    const [semName,setSemName] = useState('');
     const [courseList,setCourseList] = useState([]);
     const [examList,setExamList]=useState([]);
     const [holidayList,setHolidayList]=useState([]);
@@ -44,7 +45,23 @@ export function AddSemPage()
     {
         setSemEndDate(event.target.value);
     }
+
+    function trackSemName(event)
+    {
+        setSemName(event.target.value);
+    }
     
+    const semDetails =[
+        {
+            semName: semName,
+            startDate: semStartDate,
+            endDate: semEndDate,
+            courses: courseList,
+            exams: examList,
+            holidays: holidayList,
+            saturdays: filteredList
+        }
+    ]
    
     return(
         <>
@@ -55,11 +72,7 @@ export function AddSemPage()
                 <div className="div-option-save-addsem">
                     <ButtonLogin text="Save" alert={false} 
                     onClick={()=>{
-                        console.log(semStartDate,semEndDate);
-                        console.log(courseList);
-                        console.log(examList);
-                        console.log(holidayList);
-                        console.log(filteredList);
+                        console.log(semDetails);
                     }}
                     />
                 </div>
@@ -68,6 +81,7 @@ export function AddSemPage()
                     type="text"
                     fontSize="30"
                     backgroundColor="#12193A"
+                    onChange={trackSemName}
                     /> 
                 </div>
                 <div className="div-addsem-dates">

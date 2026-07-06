@@ -33,7 +33,6 @@ export default function getSatDates (Date1, Date2)
     const d = String(dayObj.getDate()).padStart(2, '0');
     return {uuid: crypto.randomUUID(),
             date:`${y}-${m}-${d}`,
-            displayDate:`${d}-${m}-${y}`,
             status:0,
             order:null
             };
