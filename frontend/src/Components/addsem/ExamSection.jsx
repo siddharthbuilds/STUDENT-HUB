@@ -96,11 +96,13 @@ export function ExamSection({headerName, buttonName,examList,setExamList})
             </div>
             <div className={showEntryForm?"blurred":""}>
                 <EntryCardContainer 
-                    items={examList}
-                    heading1="from"
-                    heading2="To"
-                    heading3="to"
-                    body1="description"
+                    data={examList}
+                    items={[
+                            {content:'from',type:'date'},
+                            {content:'',type:'text',description:'To'},
+                            {content:'to',type:'date'},
+                            {content:'description',type:'text'},
+                        ]}
                     trashFunction={removeExam}
                 />
             </div>

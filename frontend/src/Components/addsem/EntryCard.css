@@ -1,4 +1,4 @@
-.div-course{
+.div-entry-card{
     display:flex;
     flex-direction: column;
     row-gap:20px;
@@ -13,16 +13,16 @@
     width:7lh;
 }
 
-.btn-course-list{
+.btn-entry-card{
     background-color: transparent;
     border:none;
 }
 
-.btn-course-list:hover{
+.btn-entry-card:hover{
     cursor: pointer;
 }
 
-.div-course-list-credits{
+.div-entry-card-content{
     display:flex;
     flex-direction: column;
     row-gap:3px;
@@ -30,12 +30,12 @@
     align-items: center;
 }
 
-.div-course-list-credits-txt{
+.div-entry-card-content-description{
     font-size: 18px;
     color: gray;
 }
 
-.div-course-list-name{
+.div-entry-card-content{
     flex:1;
     min-width: 0;
     overflow-wrap: break-word;

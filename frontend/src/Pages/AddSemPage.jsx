@@ -10,7 +10,7 @@ import { useState } from "react"
 import { useEffect } from "react"
 export function AddSemPage()
 {
-    const [EntryCard,setEntryCard] = useState([]);
+    const [courseList,setCourseList] = useState([]);
     const [examList,setExamList]=useState([]);
     const [holidayList,setHolidayList]=useState([]);
     const [semStartDate,setSemStartDate]=useState(null);
@@ -84,11 +84,11 @@ export function AddSemPage()
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 <div>
-                    <AddCourse EntryCard={EntryCard} setEntryCard={setEntryCard}/>
+                    <AddCourse courseList={courseList} setCourseList={setCourseList}/>
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 <div>
-                    <ScheduleDay EntryCard={EntryCard} setEntryCard={setEntryCard}/>
+                    <ScheduleDay courseList={courseList} setCourseList={setCourseList}/>
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 <div>

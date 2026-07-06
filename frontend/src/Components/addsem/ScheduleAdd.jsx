@@ -5,11 +5,11 @@ import { EntryCardContainer } from "./EntryCardContainer";
 import { useState } from "react";
 
 
-export function ScheduleAdd({EntryCard,setEntryCard,day,showEntryForm,setShowEntryForm})
+export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowEntryForm})
 {
     function trashFunction(courseName)
     {
-        setEntryCard(EntryCard.map((course)=>{
+        setCourseList(courseList.map((course)=>{
                 if (course.courseName===courseName)
                 {
                     return {...course,[day]:0}
@@ -25,7 +25,7 @@ export function ScheduleAdd({EntryCard,setEntryCard,day,showEntryForm,setShowEnt
     const input1={type:"dropdown",placeholder:"Course",
             dropdownOption: selectedCourse, dropdownFn: setSelectedCourse,
             property: "courseName",
-            list:EntryCard,toolTip:toolTip,
+            list:courseList,toolTip:toolTip,
             fn:toggleToolTip}
     const input2={type:"dropdown",placeholder:"x 1",
             dropdownOption:multiplier, dropdownFn:setMultiplier,
@@ -57,7 +57,7 @@ export function ScheduleAdd({EntryCard,setEntryCard,day,showEntryForm,setShowEnt
         }
         else{
             
-            setEntryCard(EntryCard.map((course)=>{
+            setCourseList(courseList.map((course)=>{
                 if(course.courseName==selectedCourse)
                 {
                         return {...course,[day]: multiplier};
@@ -73,7 +73,7 @@ export function ScheduleAdd({EntryCard,setEntryCard,day,showEntryForm,setShowEnt
         toggleShowEntryForm();
     }
 
-    const filteredList = EntryCard.filter((course)=>{
+    const filteredList = courseList.filter((course)=>{
 
         if(course[day]!=0){return true};
         return false;
@@ -91,12 +91,14 @@ export function ScheduleAdd({EntryCard,setEntryCard,day,showEntryForm,setShowEnt
         
         
         {filteredList.length>0&&<div style={{display:"flex",justifyContent:"center"}}className={showEntryForm?"blurred":""}>
-                                <EntryCardContainer items={filteredList} 
-                                heading1="courseName"
-                                body1={day}
+                            <EntryCardContainer 
+                                data={filteredList} 
+                                items={[{content:'courseName',type:'text'},
+                                        {content:day,type:'text'}
+                                        ]}
                                 trashFunction={trashFunction}
-                                />
-                                </div>}
+                            />
+                            </div>}
         </>
     )
 }

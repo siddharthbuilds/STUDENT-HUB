@@ -1,36 +1,40 @@
 import "./EntryCard.css"
 import {TrashImage} from "../home/TrashImage.jsx"
+import formatDate from "../../Utils/FormatDate.js"
 export function EntryCard(
     {
-        item, heading1,heading2,heading3, body1,body2, trashFunction
+        data,items,trashFunction
     })
 {
     return(
         <>
-            <div className="div-course">
-                <div className="div-course-list-name">
-                    {item[heading1]||heading1}
-                </div>
+        <div className="div-entry-card">
+            {items.length>0&&items.map(item=>{
+                return(
+                    <>
+                        <div className="div-entry-card-content">
+                        {
+                            item.type!='date'?
+                            data[item.content]||item.content
+                            :formatDate(data[item.content])||item.content
+                        }
+                        
+                        {item.description&&<div className="div-entry-card-content-description">
+                            {item.description}
+                            </div>}
+                        </div>
+                    </>
+                )
+            })}
 
-                {heading2&&<div className="div-course-list-name">
-                    {item[heading2]||heading2}
-                </div>}
-
-                {heading3&&<div className="div-course-list-name">
-                    {item[heading3]||heading3}
-                </div>}
-
-                <div className="div-course-list-credits">
-                    <div>{item[body1]||body1}</div>
-                    {body2&&<div className="div-course-list-credits-txt"> {item[body2]||body2}</div>}
-                </div>
-
-                <div className="div-course-list-btn">
-                    <button className="btn-course-list">
-                        <TrashImage color="white" size="30" onClick={()=>{trashFunction(item[heading1]||item.courseName)}}/>
-                    </button>
-                </div>
+              
+            <div className="div-entry-card-btn">
+                <button className="btn-entry-card">
+                    <TrashImage color="white" size="30" onClick={()=>{trashFunction(data.uuid)}}/>
+                </button>
             </div>
+
+        </div>
         </>
     )
 }
