@@ -22,7 +22,7 @@ export function AddSemPage()
     }
     }, [semStartDate, semEndDate]);
 
-        const filteredList = satDates.filter(saturday =>
+    const filteredList = satDates.filter(saturday =>
         {const isHoliday = holidayList.some(holiday =>
             saturday.date >= holiday.from &&
             saturday.date <= holiday.to
@@ -53,7 +53,15 @@ export function AddSemPage()
                     <ButtonLogin text="Cancel" alert={true} />
                 </div>
                 <div className="div-option-save-addsem">
-                    <ButtonLogin text="Save" alert={false} />
+                    <ButtonLogin text="Save" alert={false} 
+                    onClick={()=>{
+                        console.log(semStartDate,semEndDate);
+                        console.log(courseList);
+                        console.log(examList);
+                        console.log(holidayList);
+                        console.log(filteredList);
+                    }}
+                    />
                 </div>
                 <div>
                    <Input placeholder="Semester Label (eg: Semester 1)" 

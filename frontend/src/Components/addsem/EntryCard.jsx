@@ -9,9 +9,9 @@ export function EntryCard(
     return(
         <>
         <div className="div-entry-card">
-            {items.length>0&&items.map(item=>{
+            {items.length>0&&items.map((item,index)=>{
                 return(
-                    <>
+                    <div key={index}>
                         <div className="div-entry-card-content">
                         {
                             item.type!='date'?
@@ -23,7 +23,7 @@ export function EntryCard(
                             {item.description}
                             </div>}
                         </div>
-                    </>
+                    </div>
                 )
             })}
 
