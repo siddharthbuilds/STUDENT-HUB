@@ -5,7 +5,7 @@ import { ButtonLogin } from "../Components/login/ButtonLogin.jsx"
 import { ScheduleDay } from "../Components/addsem/ScheduleDay.jsx"
 import { ExamSection } from "../Components/addsem/ExamSection.jsx"
 import {SatSchedule} from "../Components/addsem/SatSchedule.jsx"
-import getSatDates from "../Utils/Dates.js"
+import getSatDates from "../Utils/SatDates.js"
 import { useState } from "react"
 import { useEffect } from "react"
 export function AddSemPage()

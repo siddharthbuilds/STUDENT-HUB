@@ -30,7 +30,7 @@ export function SatBox({date,uuid,addStatus})
     return(<>
          <div className="div-sat-body">
                 <div className="div-sat-body-date">
-                Sat, {date}
+                {date}
                 </div>
                 <div onChange={onOptionChange}>
                     <CustomDropdown 

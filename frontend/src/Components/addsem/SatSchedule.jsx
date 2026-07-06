@@ -1,5 +1,6 @@
 import "./SatSchedule.css"
 import { SatBox } from "./SatBox"
+import formatDate from "../../Utils/FormatDate.js"
 export function SatSchedule({satDates,setSatDates})
 {
 
@@ -24,7 +25,7 @@ export function SatSchedule({satDates,setSatDates})
 
         <div className="div-sat-body-container">
             {satDates.map((saturday)=>{return(<div key={saturday.uuid}>
-                <SatBox date={saturday.displayDate} uuid={saturday.uuid}
+                <SatBox date={formatDate(saturday.date,true)} uuid={saturday.uuid}
                     addStatus={addStatus} 
                     />
             </div>)})}
