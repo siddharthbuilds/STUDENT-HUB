@@ -1,11 +1,10 @@
 import "./ScheduleDay.css"
 import { ScheduleAdd } from "./ScheduleAdd";
 import { useState } from "react";
-export function ScheduleDay({courseList,setCourseList})
+export function ScheduleDay({courseList,setCourseList,sameSchedule,setSameSchedule})
 {
     const [daySelected,setDaySelected]=useState('mon');
     const dayList=["Mon","Tue","Wed","Thu","Fri"];
-    const [sameChecked, setSameChecked] = useState(false);
     const [showEntryForm, setShowEntryForm] = useState(false);
     return(
         <>
@@ -17,7 +16,7 @@ export function ScheduleDay({courseList,setCourseList})
                 <div className="div-schedule-day-checker">
                     <input type="checkbox" id="same" name="same" value="yes"
                     style={{width:'18px',height:'18px'}}
-                    onChange={(event)=>{setSameChecked(event.target.checked)}}
+                    onChange={(event)=>{setSameSchedule(event.target.checked)}}
                     />
                     <label htmlFor="same">All days have same schedule. </label>
                 </div>
@@ -26,10 +25,10 @@ export function ScheduleDay({courseList,setCourseList})
                 {dayList.map(day=>{
                     return(
                         <div key={day}>
-                            <button className={sameChecked?"btn-schedule-day btn-clicked":daySelected==day.toLowerCase()?"btn-schedule-day btn-clicked"
+                            <button className={sameSchedule?"btn-schedule-day btn-clicked":daySelected==day.toLowerCase()?"btn-schedule-day btn-clicked"
                                 :"btn-schedule-day"
                             } 
-                                onClick={()=>{!sameChecked&&setDaySelected(day.toLowerCase())}}
+                                onClick={()=>{!sameSchedule&&setDaySelected(day.toLowerCase())}}
                             >
                                 {day}
                             </button>
@@ -44,7 +43,7 @@ export function ScheduleDay({courseList,setCourseList})
 
             </div>
             <div>
-            <ScheduleAdd courseList={courseList} setCourseList={setCourseList} day={sameChecked?"mon":daySelected}
+            <ScheduleAdd courseList={courseList} setCourseList={setCourseList} day={sameSchedule?"mon":daySelected}
                     showEntryForm={showEntryForm}
                     setShowEntryForm={setShowEntryForm}
                     

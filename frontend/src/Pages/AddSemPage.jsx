@@ -17,6 +17,7 @@ export function AddSemPage()
     const [semStartDate,setSemStartDate]=useState(null);
     const [semEndDate,setSemEndDate]=useState(null);
     const [satDates,setSatDates] = useState([]);
+    const [sameSchedule, setSameSchedule] = useState(false);
     useEffect(() => {
     if (semStartDate && semEndDate) {
         setSatDates(getSatDates(semStartDate, semEndDate));
@@ -59,7 +60,8 @@ export function AddSemPage()
             courses: courseList,
             exams: examList,
             holidays: holidayList,
-            saturdays: filteredList
+            saturdays: filteredList,
+            sameSchedule: sameSchedule
         }
     ]
    
@@ -110,7 +112,11 @@ export function AddSemPage()
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 <div>
-                    <ScheduleDay courseList={courseList} setCourseList={setCourseList}/>
+                    <ScheduleDay courseList={courseList} 
+                        setCourseList={setCourseList}
+                        sameSchedule={sameSchedule}
+                        setSameSchedule={setSameSchedule}
+                        />
                 </div>
                 <hr style={{width:'100%',margin:'0'}}></hr>
                 <div>
