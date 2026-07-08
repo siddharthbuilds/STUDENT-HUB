@@ -9,9 +9,11 @@ export function SatSchedule({satDates,setSatDates})
         setSatDates(satDates.map(saturday=>{
             if(saturday.uuid===uuid)
             {
-                saturday.status = status=='Class'?1:0;
-                saturday.order = status=='Class'?order:null;
-                return saturday;
+                return {
+                    ...saturday,
+                    status: status=='Class'?1:0,
+                    order: status=='Class'?order:null
+                }
             
             }
             else return saturday;
