@@ -1,10 +1,10 @@
-import User from "../models/userModel.js"
+import Semester from "../models/userModel.js"
 
 async function getSemestersController(req,res)
 {
     const userId = req.body.userId.replaceAll(" ","").toLowerCase();
     try{
-        const semesters = await User.getSemesters(userId);
+        const semesters = await Semester.getSemesters(userId);
         return res.status(200).json({semesters: semesters});    
     }
     catch(err){

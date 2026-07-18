@@ -1,9 +1,10 @@
-import mydb from "../config/database.js"
-import bcrypt from "bcrypt"
+import mydb from "../config/database.js";
+import bcrypt from "bcrypt";
 class User{
     static async existsId(id){
+        const userId = id.replaceAll(" ","").toLowerCase();
         const query = 'SELECT EXISTS (SELECT 1 FROM users WHERE user_id=?) AS row_exists;'
-        const [rows] = await mydb.query(query,[id])
+        const [rows] = await mydb.query(query,[userId])
         const exist = rows[0].row_exists===1;
         return exist;
     }
@@ -31,16 +32,6 @@ class User{
         {
             throw err;
         }
-    }
-
-    static async getSemesters(userId)
-    {
-        const getSemQuery = `SELECT * from semesters WHERE user_id=?`;
-        const params = userId;
-        const queryResult = await mydb.query(getSemQuery,params);
-        const semesters = queryResult[0];
-        console.log(semesters);
-        return semesters;
     }
 }
 export default User
