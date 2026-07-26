@@ -33,5 +33,13 @@ class User{
             throw err;
         }
     }
+    
+
+    static async verifyPassword({email, password})
+    {
+        const query = `SELECT password_hash from users where email=?`
+        const userPassword = await mydb.query(query,[email])
+        return await bcrypt.compare(password,userPassword); 
+    }
 }
 export default User
