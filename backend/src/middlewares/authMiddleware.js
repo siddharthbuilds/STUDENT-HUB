@@ -1,5 +1,5 @@
 import User from "../models/userModel.js"
-async function uniqueUserMiddleware(req,res,next)
+export async function registerMiddleware(req,res,next)
 {
     if(!req.body.userId||!req.body.userName||!req.body.password||!req.body.email)
     {
@@ -17,4 +17,17 @@ async function uniqueUserMiddleware(req,res,next)
     next();
 }
 
-export default uniqueUserMiddleware
+export async function loginMiddleware(req,res,next)
+{
+    const body = req.body;
+    if(!body.userId || !body.password)
+    {
+        return res.status(400).json({message: 'All fields are mandatory'});
+    }
+    const exists = await User.existsId(body.userId);
+    if(!exists) 
+    {
+        return res.status(400).json({message: 'User ID not exists'});
+    }
+    next();
+}
