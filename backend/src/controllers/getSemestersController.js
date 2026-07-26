@@ -1,4 +1,4 @@
-import Semester from "../models/userModel.js"
+import Semester from "../models/semesterModel.js"
 
 async function getSemestersController(req,res)
 {
