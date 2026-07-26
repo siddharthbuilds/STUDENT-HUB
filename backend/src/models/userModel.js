@@ -33,12 +33,13 @@ class User{
             throw err;
         }
     }
-    
 
-    static async verifyPassword({email, password})
+    static async verifyPassword({userId, password})
     {
-        const query = `SELECT password_hash from users where email=?`
-        const userPassword = await mydb.query(query,[email])
+        const id = userId.replaceAll(" ","").toLowerCase();
+        const query = `SELECT password_hash from users where user_id=?`
+        const [queryResult] = await mydb.query(query,[id]);
+        const userPassword = queryResult[0].password_hash;
         return await bcrypt.compare(password,userPassword); 
     }
 }
