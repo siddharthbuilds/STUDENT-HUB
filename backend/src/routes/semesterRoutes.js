@@ -1,8 +1,8 @@
-import {Router} from "express"
-import getSemestersController from "../controllers/getSemestersController.js";
-import removeSemestersController from "../controllers/removeSemesterController.js";
+import {Router} from "express";
+import { authenticateToken } from "../middlewares/authMiddleware.js";
 const router = Router()
 
-router.post('/get-all-semesters',getSemestersController);
-router.post('/remove-semester',removeSemestersController);
+router.use(authenticateToken);
+
+router.post('/add-semester')
 export default router;
