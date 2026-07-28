@@ -11,12 +11,23 @@ class Semester{
         return result.insertId;
     }
 
-    static async addCourses({semId, courseName, courseCredits})
+    static async addCourses({semId, courses})
     {
         const query = `INSERT INTO courses
                         (sem_id, course_name, course_credits)
                         VALUES (?, ?, ?)`;
         const params = [semId, courseName, courseCredits];
+        const promises = courses.map(course => 
+            mydb.query(query,[semId,course.courseName,course.courseCredits])
+        );
+        const result = await Promise.all(promises);
+
+        const courseMap = {};
+        courses.forEach((course, index) => {
+            courseMap[course.courseName] = result[index][0].insertId;
+        });
+
+        return courseMap;
     }
 
 }
