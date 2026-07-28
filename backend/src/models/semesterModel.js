@@ -24,7 +24,9 @@ class Semester{
 
         const courseMap = {};
         courses.forEach((course, index) => {
-            courseMap[course.courseName] = result[index][0].insertId;
+            courseMap[course.courseName] = {courseId: result[index][0].insertId,
+                course
+            };
         });
 
         return courseMap;
