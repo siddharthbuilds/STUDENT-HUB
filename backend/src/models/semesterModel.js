@@ -1,33 +1,24 @@
 import mydb from "../config/database.js";
 
 class Semester{
-    static async getSemesters(userId)
+    static async addSemester({semName,startDate,endDate,userId})
     {
-        const getSemQuery = `SELECT * from semesters WHERE user_id=?`;
-        const params = [userId];
-        const queryResult = await mydb.query(getSemQuery,params);
-        const semesters = queryResult[0];
-        return semesters;
+        const query = `INSERT INTO semesters
+                        (user_id, sem_name, start_date, end_date)
+                        VALUES (?, ?, ?, ?)`;
+        const params = [userId, semName, startDate, endDate];
+        const [result] = await mydb.query(query, params);
+        return result.insertId;
     }
 
-    static async addSemester({})
+    static async addCourses({semId, courseName, courseCredits})
     {
-
+        const query = `INSERT INTO courses
+                        (sem_id, course_name, course_credits)
+                        VALUES (?, ?, ?)`;
+        const params = [semId, courseName, courseCredits];
     }
 
-    static async removeSemester(semId)
-    {
-     const removeSemQuery = `DELETE from semesters WHERE sem_id=?`;
-     const params = [semId];
-     try{
-        await mydb.query(removeSemQuery,params);
-     }
-     catch(err)
-     {
-        throw err;
-     }
-
-    }
 }
 
 export default Semester
