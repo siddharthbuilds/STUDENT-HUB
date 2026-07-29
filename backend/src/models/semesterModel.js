@@ -103,6 +103,31 @@ class Semester{
 
     }
 
+    static async addSaturdays(semId, saturdays)
+    {
+        const dayMap = {
+            mon: 1,
+            tue: 2,
+            wed: 3,
+            thu: 4,
+            fri: 5
+        };
+        const query = `INSERT INTO calendar (sem_id, event_date, code, description)
+                        VALUES ?`;
+        const rows = [];
+        saturdays.forEach(saturday=>{
+            if(saturday.status == 1)
+            {
+                rows.push([semId,saturday.date,3,dayMap[saturday.order]]);
+            }
+            else
+            {
+                rows.push([semId,saturday.date,1,"Saturday"]);
+            }
+        })
+        rows && rows.length>0 && await mydb.query(query,[rows]); 
+    }
+
 }
 
 export default Semester
