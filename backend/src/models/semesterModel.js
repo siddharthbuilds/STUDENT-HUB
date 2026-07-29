@@ -71,6 +71,38 @@ class Semester{
         rows && rows.length>0 && await mydb.query(query,[rows]);
     }
 
+    static getDatesBetween(fromDate, toDate)
+    {
+        const dates = [];
+        let currentDate = new Date(fromDate);
+        const endDate = new Date (toDate);
+
+        while (currentDate <= endDate) {
+            
+            const formattedDate = currentDate.toISOString().split('T')[0];
+            dates.push(formattedDate);
+            
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+    
+        return dates;
+    }
+
+    static async addCalendar(semId,list,code)
+    {
+        const query = `INSERT INTO calendar (sem_id, event_date, code, description)
+                        VALUES ?`;
+        const rows = [];
+        list.forEach(element =>{
+            const dates = Semester.getDatesBetween(element.from, element.to);
+            dates.forEach(date=>{
+                rows.push([semId, date, code, element.description]);
+            })
+        });
+        rows && rows.length>0 && await mydb.query(query,[rows]); 
+
+    }
+
 }
 
 export default Semester

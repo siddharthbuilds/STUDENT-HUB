@@ -9,8 +9,9 @@ export async function addSemesterController(req,res)
         const semId = await Semester.addSemester(params);
         const courses = req.body.courses;
         const courseMap = await Semester.addCourses(semId,courses);
-        
-
+        await Semester.addSchedule(semId,courseMap);
+        await Semester.addCalendar(semId,req.body.holidays,1);
+        await Semester.addCalendar(semId,req.body.exams,2);
         return res.status(201).json({message: 'Semester Added successfully'});
     }
     catch(err){
