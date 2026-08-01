@@ -75,6 +75,7 @@ export function AddSemPage()
                     <ButtonLogin text="Save" alert={false} 
                     onClick={()=>{
                         console.log(semDetails);
+                        localStorage.setItem('data',JSON.stringify(semDetails));
                     }}
                     />
                 </div>

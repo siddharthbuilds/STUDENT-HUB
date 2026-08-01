@@ -16,7 +16,7 @@ class Semester{
         const query = `INSERT INTO courses
                         (sem_id, course_name, course_credits)
                         VALUES (?, ?, ?)`;
-        const params = [semId, courseName, courseCredits];
+        const params = [semId, courses.courseName, courses.courseCredits];
         const promises = courses.map(course => 
             connection.query(query,[semId,course.courseName,course.courseCredits])
         );
