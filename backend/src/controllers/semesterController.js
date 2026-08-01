@@ -1,5 +1,5 @@
 import Semester from "../models/semesterModel.js";
-
+import mydb from "../config/database.js";
 export async function addSemesterController(req,res)
 {
     const connection = await mydb.getConnection();
