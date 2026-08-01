@@ -149,7 +149,7 @@ class Semester{
 
         const calendarMap = new Map();
         calendarData.forEach(calendar=>{
-            calendarMap.set(calendar.event_date.toISOString().split('T')[0], calendar);
+            calendarMap.set(this.formatDate(calendar.event_date), calendar);
         });
 
         const scheduleMap = new Map();
@@ -197,7 +197,7 @@ class Semester{
             const effectiveDay = checkEffectiveDay(event);
             if(effectiveDay)
             {
-                const day = event?event.description:currentDate.getDay();
+                const day = event?parseInt(event.description):currentDate.getDay();
                 getInsertData(day, formattedDate);
             }
 
@@ -207,7 +207,7 @@ class Semester{
         const insertQuery = `INSERT INTO attendance (sem_id, attendance_date, 
                             schedule_id, status)
                             VALUES ?`;
-
+        console.log(scheduleMap.get(5));
         rows && rows.length>0 && await connection.query(insertQuery,[rows]);
         
     }
