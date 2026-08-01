@@ -22,7 +22,7 @@ class Attendance
 
         const calendarMap = new Map();
         calendarData.forEach(calendar=>{
-            calendarMap.set(this.formatDate(calendar.event_date), calendar);
+            calendarMap.set(Attendance.formatDate(calendar.event_date), calendar);
         });
 
         const scheduleMap = new Map();
@@ -80,9 +80,30 @@ class Attendance
         const insertQuery = `INSERT INTO attendance (sem_id, attendance_date, 
                             schedule_id, status)
                             VALUES ?`;
-        console.log(scheduleMap.get(5));
         rows && rows.length>0 && await connection.query(insertQuery,[rows]);
         
+    }
+
+    static async getAttendance({semId})
+    {
+        const attendanceRows = [];
+        const attendanceQuery = `SELECT attendance_id, schedule_id, status 
+                                FROM attendance WHERE sem_id=?`;
+        const params = [semId];
+        const [attendanceResult] = await mydb.query(attendanceQuery,params);
+        attendanceResult.forEach(attendance=>{
+            const courseIdQuery = `SELECT course_id FROM courses 
+                                    WHERE schedule_id=?`;
+            attendance.courseID = await mydb.query(courseIdQuery,attendance.schedule_id);
+            const courseQuery = `SELECT course_name FROM courses
+                                WHERE course_id=?`;
+            attendance.course =  await mydb.query(courseQuery,attendance.courseID);
+            attendanceRows.push({attendanceId: attendance.attendance_id,
+                status: attendance.status,
+                course: attendance.course
+            })
+        });
+        return attendanceRows;
     }
 }
 
