@@ -88,6 +88,15 @@ class Semester{
         return dates;
     }
 
+    static formatDate(date) 
+    {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+    }
+
     static async addCalendar({connection,semId,list,code})
     {
         const query = `INSERT INTO calendar (sem_id, event_date, code, description)
