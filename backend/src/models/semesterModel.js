@@ -128,6 +128,81 @@ class Semester{
         rows && rows.length>0 && await mydb.query(query,[rows]); 
     }
 
+    static async generateAttendance(semId,fromDate,toDate)
+    {
+        const calendarQuery = `SELECT calendar_id, event_date, code, description 
+                               FROM calendar WHERE sem_id=?`;
+        const scheduleQuery = `SELECT schedule_id, course_id, day, hour 
+                               FROM schedules WHERE sem_id=?`;
+        const params = [semId];
+        const [calendarData] = await mydb.query(calendarQuery,params);
+        const [scheduleData] = await mydb.query(scheduleQuery,params);
+
+        const calendarMap = new Map();
+        calendarData.forEach(calendar=>{
+            calendarMap.set(calendar.event_date.toISOString().split('T')[0], calendar);
+        });
+
+        const scheduleMap = new Map();
+        scheduleData.forEach(schedule=>{
+            if(!scheduleMap.has(schedule.day))
+            {
+                scheduleMap.set(schedule.day,[]);
+            }
+            scheduleMap.get(schedule.day).push(schedule);
+        });
+
+        let currentDate = new Date(fromDate);
+        const endDate = new Date(toDate);
+        const rows=[];
+
+        const getInsertData = (day,formattedDate) =>{
+            const schedule = scheduleMap.get(day);
+            if(!schedule) return;
+            schedule.forEach(sch=>{
+                const insertData = [semId, formattedDate, sch.schedule_id, 0];
+                rows.push(insertData);
+            } );
+        }
+
+        const checkEffectiveDay = (event) => {
+            if(!event)
+            {
+                if(currentDate.getDay() === 0) return false;
+                else return true;
+                
+            }
+
+            else
+            {
+                if( event.code === 1 || event.code === 2 ) return false;
+                else return true;
+                
+            }
+        }
+
+        while(currentDate<=endDate)
+        {
+            const formattedDate =currentDate.toISOString().split('T')[0];
+            const event = calendarMap.get(formattedDate);
+            const effectiveDay = checkEffectiveDay(event);
+            if(effectiveDay)
+            {
+                const day = event?event.description:currentDate.getDay();
+                getInsertData(day, formattedDate);
+            }
+
+            currentDate.setDate(currentDate.getDate()+1);
+        }
+
+        const insertQuery = `INSERT INTO attendance (sem_id, attendance_date, 
+                            schedule_id, status)
+                            VALUES ?`;
+
+        rows && rows.length>0 && await mydb.query(insertQuery,[rows]);
+        
+    }
+
 }
 
 export default Semester
