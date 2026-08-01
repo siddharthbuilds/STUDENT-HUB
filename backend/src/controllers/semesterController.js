@@ -1,4 +1,8 @@
 import Semester from "../models/semesterModel.js";
+import Schedule from "../models/scheduleModel.js";
+import Course from "../models/courseModel.js";
+import Calendar from "../models/calendarModel.js";
+import Attendance from "../models/attendanceModel.js";
 import mydb from "../config/database.js";
 export async function addSemesterController(req,res)
 {
@@ -11,12 +15,12 @@ export async function addSemesterController(req,res)
     try{
         const semId = await Semester.addSemester(params);
         const courses = req.body.courses;
-        const courseMap = await Semester.addCourses({connection,semId,courses});
-        await Semester.addSchedule({connection,semId,courseMap});
-        await Semester.addCalendar({connection,semId,list: req.body.holidays,code: 1});
-        await Semester.addCalendar({connection,semId,list: req.body.exams,code: 2});
-        await Semester.addSaturdays({connection,semId,saturdays: req.body.saturdays});
-        await Semester.generateAttendance({connection,semId,fromDate: req.body.startDate,toDate:req.body.endDate});
+        const courseMap = await Course.addCourses({connection,semId,courses});
+        await Schedule.addSchedule({connection,semId,courseMap});
+        await Calendar.addCalendar({connection,semId,list: req.body.holidays,code: 1});
+        await Calendar.addCalendar({connection,semId,list: req.body.exams,code: 2});
+        await Calendar.addSaturdays({connection,semId,saturdays: req.body.saturdays});
+        await Attendance.generateAttendance({connection,semId,fromDate: req.body.startDate,toDate:req.body.endDate});
         await connection.commit();
         return res.status(201).json({message: 'Semester Added successfully'});
     }
