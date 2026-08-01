@@ -1,24 +1,24 @@
 import mydb from "../config/database.js";
 
 class Semester{
-    static async addSemester({semName,startDate,endDate,userId})
+    static async addSemester({connection,semName,startDate,endDate,userId})
     {
         const query = `INSERT INTO semesters
                         (user_id, sem_name, start_date, end_date)
                         VALUES (?, ?, ?, ?)`;
         const params = [userId, semName, startDate, endDate];
-        const [result] = await mydb.query(query, params);
+        const [result] = await connection.query(query, params);
         return result.insertId;
     }
 
-    static async addCourses({semId, courses})
+    static async addCourses({connection,semId, courses})
     {
         const query = `INSERT INTO courses
                         (sem_id, course_name, course_credits)
                         VALUES (?, ?, ?)`;
         const params = [semId, courseName, courseCredits];
         const promises = courses.map(course => 
-            mydb.query(query,[semId,course.courseName,course.courseCredits])
+            connection.query(query,[semId,course.courseName,course.courseCredits])
         );
         const result = await Promise.all(promises);
 
@@ -32,7 +32,7 @@ class Semester{
         return courseMap;
     }
 
-    static async addSchedule(semId, courseMap)
+    static async addSchedule({connection,semId, courseMap})
     {
         const query =  `INSERT INTO schedules (sem_id, course_id, day, hour)
                         VALUES ?`;
@@ -68,7 +68,7 @@ class Semester{
             }
         }
 
-        rows && rows.length>0 && await mydb.query(query,[rows]);
+        rows && rows.length>0 && await connection.query(query,[rows]);
     }
 
     static getDatesBetween(fromDate, toDate)
@@ -88,7 +88,7 @@ class Semester{
         return dates;
     }
 
-    static async addCalendar(semId,list,code)
+    static async addCalendar({connection,semId,list,code})
     {
         const query = `INSERT INTO calendar (sem_id, event_date, code, description)
                         VALUES ?`;
@@ -99,11 +99,11 @@ class Semester{
                 rows.push([semId, date, code, element.description]);
             })
         });
-        rows && rows.length>0 && await mydb.query(query,[rows]); 
+        rows && rows.length>0 && await connection.query(query,[rows]); 
 
     }
 
-    static async addSaturdays(semId, saturdays)
+    static async addSaturdays({connection,semId, saturdays})
     {
         const dayMap = {
             mon: 1,
@@ -125,18 +125,18 @@ class Semester{
                 rows.push([semId,saturday.date,1,"Saturday"]);
             }
         })
-        rows && rows.length>0 && await mydb.query(query,[rows]); 
+        rows && rows.length>0 && await connection.query(query,[rows]); 
     }
 
-    static async generateAttendance(semId,fromDate,toDate)
+    static async generateAttendance({connection,semId,fromDate,toDate})
     {
         const calendarQuery = `SELECT calendar_id, event_date, code, description 
                                FROM calendar WHERE sem_id=?`;
         const scheduleQuery = `SELECT schedule_id, course_id, day, hour 
                                FROM schedules WHERE sem_id=?`;
         const params = [semId];
-        const [calendarData] = await mydb.query(calendarQuery,params);
-        const [scheduleData] = await mydb.query(scheduleQuery,params);
+        const [calendarData] = await connection.query(calendarQuery,params);
+        const [scheduleData] = await connection.query(scheduleQuery,params);
 
         const calendarMap = new Map();
         calendarData.forEach(calendar=>{
@@ -199,7 +199,7 @@ class Semester{
                             schedule_id, status)
                             VALUES ?`;
 
-        rows && rows.length>0 && await mydb.query(insertQuery,[rows]);
+        rows && rows.length>0 && await connection.query(insertQuery,[rows]);
         
     }
 
