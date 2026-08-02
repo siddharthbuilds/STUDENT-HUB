@@ -1,9 +1,10 @@
 import {Router} from "express";
+import { getAttendanceController } from "../controllers/attendanceController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
-import { addSemesterController } from "../controllers/semesterController.js";
+
 const router = Router();
 
 router.use(authenticateToken);
 
-router.post('/add-semester',addSemesterController);
+router.get('/get-attendance/:date',getAttendanceController);
 export default router;
