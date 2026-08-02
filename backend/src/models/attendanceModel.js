@@ -105,6 +105,30 @@ class Attendance
         const [attendanceRows] = await mydb.query(attendanceQuery,params);
         return attendanceRows;
     }
+
+    static async updateAttendance({attendanceId})
+    {
+        let newStatus;
+        const statusQuery=`SELECT status FROM attendance WHERE attendance_id=?`;
+        const newStatusQuery=`UPDATE attendance SET status=? WHERE attendance_id=?`;
+        const [queryResult] = await mydb.query(statusQuery,[attendanceId]);
+        const status = parseInt(queryResult[0].status);
+        switch(status)
+        {
+            case 0:
+                newStatus=1;
+                break;
+
+            case 1:
+                newStatus=-1;
+                break;
+
+            default:
+                newStatus=0;
+        }
+        await mydb.query(newStatusQuery,[newStatus,attendanceId]);
+        return newStatus;
+    }
 }
 
 export default Attendance;

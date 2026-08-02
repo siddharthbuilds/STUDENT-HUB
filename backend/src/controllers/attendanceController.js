@@ -21,3 +21,17 @@ export async function getAttendanceController(req,res)
         return res.status(500).json({message: err.message});
     }
 }
+
+export async function updateAttendanceController(req,res)
+{
+    const attendanceId = parseInt(req.params.attendanceId);
+    try
+    {
+        const status = await Attendance.updateAttendance({attendanceId});
+        return res.status(200).json({status});
+    }
+    catch(err)
+    {
+        return res.status(500).json({message: err.message});
+    }
+}
