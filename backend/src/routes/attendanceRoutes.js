@@ -9,6 +9,6 @@ const router = Router();
 router.use(authenticateToken);
 
 router.get('/get-attendance/:date',getAttendanceController);
-router.patch('/update-attendance/:attendanceId',updateAttendanceController);
+router.patch('/update-attendance',updateAttendanceController);
 router.get('/get-course-summary/:semId',courseSummaryController);
 export default router;

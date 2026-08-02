@@ -65,7 +65,7 @@ class Attendance
 
         while(currentDate<=endDate)
         {
-            const formattedDate =currentDate.toISOString().split('T')[0];
+            const formattedDate = Attendance.formatDate(currentDate);
             const event = calendarMap.get(formattedDate);
             const effectiveDay = checkEffectiveDay(event);
             if(effectiveDay)
@@ -89,49 +89,41 @@ class Attendance
         const attendanceQuery = `SELECT
                         attendance.attendance_id,
                         attendance.status,
-                        courses.course_name
+                        attendance.editable,
+                        courses.course_name,
+                        schedules.hour
 
                         FROM attendance
 
                         JOIN schedules
-                        ON attendance.schedule_id = schedules.schedule_id
+                            ON attendance.schedule_id = schedules.schedule_id
 
                         JOIN courses
-                        ON schedules.course_id = courses.course_id
+                            ON schedules.course_id = courses.course_id
 
                         WHERE attendance.sem_id = ?
-                        AND attendance.attendance_date = ?;` ;
+                            AND attendance.attendance_date = ?
+                        ORDER BY schedules.hour;` ;
         const params = [semId,attendanceDate];
         const [attendanceRows] = await mydb.query(attendanceQuery,params);
         return attendanceRows;
     }
 
-    static async updateAttendance({attendanceId})
+    static async updateAttendance({attendanceChanges,connection})
     {
-        let newStatus;
-        const statusQuery=`SELECT status FROM attendance WHERE attendance_id=?`;
-        const newStatusQuery=`UPDATE attendance SET status=? WHERE attendance_id=?`;
-        const [queryResult] = await mydb.query(statusQuery,[attendanceId]);
-        if(queryResult.length === 0)
-        {
-            throw new Error("Attendance not found");
+        if(attendanceChanges.length===0)
+            {return;}
+        const newStatusQuery=`UPDATE attendance SET status=?, editable = FALSE 
+                            WHERE attendance_id=?`;
+        for (const attendance of attendanceChanges) {
+            if (![1, 0, -1].includes(attendance.status)) {
+                throw new Error("Invalid attendance status");
+            }
+            await connection.query(
+                newStatusQuery,
+                [attendance.status, attendance.attendanceId]
+            );
         }
-        const status = queryResult[0].status;
-        switch(status)
-        {
-            case 0:
-                newStatus=1;
-                break;
-
-            case 1:
-                newStatus=-1;
-                break;
-
-            default:
-                newStatus=0;
-        }
-        await mydb.query(newStatusQuery,[newStatus,attendanceId]);
-        return newStatus;
     }
 
     static async getCourseSummary({semId})

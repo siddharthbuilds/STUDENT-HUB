@@ -1,5 +1,6 @@
 import Attendance from "../models/attendanceModel.js";
 import Calendar from "../models/calendarModel.js";
+import mydb from "../config/database.js";
 export async function getAttendanceController(req,res)
 {
     const semId = req.body.semId;
@@ -24,15 +25,23 @@ export async function getAttendanceController(req,res)
 
 export async function updateAttendanceController(req,res)
 {
-    const attendanceId = parseInt(req.params.attendanceId);
+    const connection = await mydb.getConnection();
+    await connection.beginTransaction();
+    const attendanceChanges = req.body.attendanceChanges;
     try
     {
-        const status = await Attendance.updateAttendance({attendanceId});
-        return res.status(200).json({status});
+        await Attendance.updateAttendance({attendanceChanges,connection});
+        await connection.commit();
+        return res.status(200).json({message: "Attendance Updated!"});
     }
     catch(err)
     {
+        await connection.rollback();
         return res.status(500).json({message: err.message});
+    }
+    finally
+    {
+        await connection.release();
     }
 }
 
