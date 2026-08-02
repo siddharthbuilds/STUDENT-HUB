@@ -112,7 +112,11 @@ class Attendance
         const statusQuery=`SELECT status FROM attendance WHERE attendance_id=?`;
         const newStatusQuery=`UPDATE attendance SET status=? WHERE attendance_id=?`;
         const [queryResult] = await mydb.query(statusQuery,[attendanceId]);
-        const status = parseInt(queryResult[0].status);
+        if(queryResult.length === 0)
+        {
+            throw new Error("Attendance not found");
+        }
+        const status = queryResult[0].status;
         switch(status)
         {
             case 0:
@@ -128,6 +132,50 @@ class Attendance
         }
         await mydb.query(newStatusQuery,[newStatus,attendanceId]);
         return newStatus;
+    }
+
+    static async getCourseSummary({semId})
+    {
+        const query = `SELECT
+                        c.course_id,
+                        c.course_name,
+
+                        COUNT(*) AS total_hours,
+
+                        SUM(
+                            CASE
+                                WHEN a.status = 1 THEN 1
+                                ELSE 0
+                            END
+                        ) AS total_present,
+
+                        SUM(
+                            CASE
+                                WHEN a.status = -1 THEN 1
+                                ELSE 0
+                            END
+                        ) AS total_absent
+
+                    FROM attendance a
+
+                    JOIN schedules s
+                    ON a.schedule_id = s.schedule_id
+
+                    JOIN courses c
+                    ON s.course_id = c.course_id
+
+                    WHERE a.sem_id = ?
+
+                    GROUP BY c.course_id, c.course_name
+
+                    ORDER BY c.course_name;` ;
+        const [rows] = await mydb.query(query,[semId]);
+        rows.forEach(course=>{
+            course.allowedBunks = Math.floor(course.total_hours * 0.25);
+            course.remainingBunks =
+                course.allowedBunks - course.total_absent;
+        });
+        return rows;
     }
 }
 

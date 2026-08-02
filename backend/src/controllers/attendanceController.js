@@ -35,3 +35,16 @@ export async function updateAttendanceController(req,res)
         return res.status(500).json({message: err.message});
     }
 }
+
+export async function courseSummaryController(req,res)
+{
+    const semId = req.params.semId;
+    try{
+        const courseSummary = await Attendance.getCourseSummary({semId});
+        return res.status(200).json({courseSummary});
+    }
+    catch(err)
+    {
+        return res.status(500).json({message: err.message});
+    }
+}
