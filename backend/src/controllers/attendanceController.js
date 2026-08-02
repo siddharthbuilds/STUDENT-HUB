@@ -1,4 +1,23 @@
+import Attendance from "../models/attendanceModel.js";
+import Calendar from "../models/calendarModel.js";
 export async function getAttendanceController(req,res)
 {
-    
+    const semId = req.body.semId;
+    const attendanceDate = req.params.date;
+    try{
+        let attendanceRows = await Calendar.getCalendar({semId, attendanceDate});
+        if(attendanceRows.length>0)
+        {
+            return res.status(200).json({attendanceRows, type: 0});
+        }
+        else
+        {
+            attendanceRows = await Attendance.getAttendance({semId, attendanceDate});
+            return res.status(200).json({attendanceRows, type:1});
+        }
+    }
+    catch(err)
+    {
+        return res.status(500).json({message: err.message});
+    }
 }
