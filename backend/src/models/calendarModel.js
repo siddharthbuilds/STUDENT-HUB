@@ -57,6 +57,16 @@ class Calendar
         })
         rows && rows.length>0 && await connection.query(query,[rows]); 
     }
+
+    static async getCalendar({semId,attendanceDate})
+    {
+        const calendarQuery = `SELECT code,description FROM calendar
+                                WHERE sem_id=? AND event_date=?`;
+        const params = [semId,attendanceDate];
+        const [attendanceRows] = await mydb.query(calendarQuery,params);
+        return attendanceRows;
+        
+    }
 }
 
 export default Calendar;

@@ -84,25 +84,25 @@ class Attendance
         
     }
 
-    static async getAttendance({semId})
+    static async getAttendance({semId,attendanceDate})
     {
-        const attendanceRows = [];
-        const attendanceQuery = `SELECT attendance_id, schedule_id, status 
-                                FROM attendance WHERE sem_id=?`;
-        const params = [semId];
-        const [attendanceResult] = await mydb.query(attendanceQuery,params);
-        attendanceResult.forEach(attendance=>{
-            const courseIdQuery = `SELECT course_id FROM courses 
-                                    WHERE schedule_id=?`;
-            attendance.courseID = await mydb.query(courseIdQuery,attendance.schedule_id);
-            const courseQuery = `SELECT course_name FROM courses
-                                WHERE course_id=?`;
-            attendance.course =  await mydb.query(courseQuery,attendance.courseID);
-            attendanceRows.push({attendanceId: attendance.attendance_id,
-                status: attendance.status,
-                course: attendance.course
-            })
-        });
+        const attendanceQuery = `SELECT
+                        attendance.attendance_id,
+                        attendance.status,
+                        courses.course_name
+
+                        FROM attendance
+
+                        JOIN schedules
+                        ON attendance.schedule_id = schedules.schedule_id
+
+                        JOIN courses
+                        ON schedules.course_id = courses.course_id
+
+                        WHERE attendance.sem_id = ?
+                        AND attendance.attendance_date = ?;` ;
+        const params = [semId,attendanceDate];
+        const [attendanceRows] = await mydb.query(attendanceQuery,params);
         return attendanceRows;
     }
 }
