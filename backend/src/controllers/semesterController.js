@@ -4,6 +4,7 @@ import Course from "../models/courseModel.js";
 import Calendar from "../models/calendarModel.js";
 import Attendance from "../models/attendanceModel.js";
 import mydb from "../config/database.js";
+
 export async function addSemesterController(req,res)
 {
     const connection = await mydb.getConnection();
@@ -30,5 +31,23 @@ export async function addSemesterController(req,res)
     }
     finally{
         connection.release();
+    }
+}
+
+export async function deleteSemesterController(req,res)
+{
+    const userId = req.user.userId;
+    const semId = req.params.semId;
+    try{
+        const result = await Semester.deleteSemester({userId,semId});
+        if(result.affectedRows === 0)
+        {
+            return res.status(403).json({message: 'Action Not allowed!!'});
+        }
+        return res.status(200).json({message: 'Semester Deleted Successfully!'})
+    }
+    catch(err)
+    {
+        return res.status(500).json({message: err.message});
     }
 }

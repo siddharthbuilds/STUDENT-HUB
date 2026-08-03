@@ -9,6 +9,16 @@ class Semester{
         const [result] = await connection.query(query, params);
         return result.insertId;
     }
+
+    static async deleteSemester({userId,semId})
+    {
+        const query = `DELETE FROM semesters
+                        WHERE sem_id = ?
+                        AND user_id = ?;` ;
+        const params = [semId, userId];
+        const [result] = await mydb.query(query,params);
+        return result;
+    }
 }
 
 export default Semester
