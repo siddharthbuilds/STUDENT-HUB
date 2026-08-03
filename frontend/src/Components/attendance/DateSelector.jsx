@@ -1,29 +1,22 @@
 import "./DateSelector.css"
-export function DateSelector()
+export function DateSelector({start,end})
 {
+    const starting = Number(start);
+    const ending = Number(end);
+    const myRange=[];
+    for(let i=starting;i<=ending;i++)
+    {
+        myRange.push(i);
+    }
     return(
         <div className="div-attendance-dates">
-                <div className="div-attendance-day">
-                    <button className="btn-attendance-day">1</button>
-                </div>
-                <div className="div-attendance-day">
-                    <button className="btn-attendance-day">2</button>
-                </div>
-                <div className="div-attendance-day">
-                    <button className="btn-attendance-day">3</button>
-                </div>
-                <div className="div-attendance-day">
-                    <button className="btn-attendance-day">4</button>
-                </div>
-                <div className="div-attendance-day">
-                    <button className="btn-attendance-day">5</button>
-                </div>
-                <div className="div-attendance-day">
-                    <button className="btn-attendance-day">6</button>
-                </div>
-                <div className="div-attendance-day">
-                    <button className="btn-attendance-day">7</button>
-                </div>
+            {myRange.map(number=>{
+                return (
+                    <div className="div-attendance-day">
+                        <button className="btn-attendance-day">{number}</button>
+                    </div>
+                )
+            })}
         </div>
     )
 }

@@ -14,6 +14,8 @@ export function AttendancePage()
     const [courseWise, setCourseWise] = useState(false);
     const [dayWise, setDayWise] = useState(true);
     const [trackConfirmation, setTrackConfirmation] = useState(false);
+    const courses = [{courseName: 'Java', status: 1},
+        {courseName: 'Python', status: -1}];
 
     function styleCourseWise(){
         setCourseWise(true);
@@ -36,9 +38,9 @@ export function AttendancePage()
             styleCourseWise={styleCourseWise}
             />
             {dayWise&&<>
-            <RadioButtons />
-            <DateSelector />
-            <EachHour />
+            <RadioButtons months={['July','August','September','October']}/>
+            <DateSelector start="1" end="15"/>
+            <EachHour courses={courses}/>
             <ButtonLogin text="Save" onClick={onClickSave}/>
             </>}
             {courseWise&&<AttendanceContainer />}

@@ -1,24 +1,23 @@
 import "./EachHour.css"
-export function EachHour()
+export function EachHour({courses})
 {
     return(
         <div className="div-attendace-hours">
-                <div className="div-attendance-eachhour">
-                    <div className="div-attendance-hourname">
-                        Python for Beginners
-                    </div>
-                    <div className="div-attendance-hourstatus">
-                        <button className="btn-attendance-hourstatus"></button>
-                    </div>
-                </div>
-                <div className="div-attendance-eachhour">
-                    <div className="div-attendance-hourname">
-                        React Beginner Course
-                    </div>
-                    <div className="div-attendance-hourstatus">
-                        <button className="btn-attendance-hourstatus1"></button>
-                    </div>
-                </div>
+                {courses.map(course=>{
+                    return (
+                        <div className="div-attendance-eachhour">
+                            <div className="div-attendance-hourname">
+                                {course.courseName}
+                            </div>
+                            <div className="div-attendance-hourstatus">
+                                <button className={course.status==1?"btn-status status-present":
+                                    course.status==-1?"btn-status status-absent":"btn-status status-undefined"
+                                }></button>
+                            </div>
+                        </div>
+                    )
+                })}
+                
             </div>
     )
 }

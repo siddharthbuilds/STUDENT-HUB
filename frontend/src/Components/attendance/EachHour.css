@@ -17,24 +17,25 @@
     font-size: 20px;
 }
 
-.btn-attendance-hourstatus{
+.btn-status{
     width:30px;
     height:30px;
     border-radius:15px;
+    border:2px solid white;
+}
+
+.btn-status:hover{
+    cursor: pointer;
+}
+
+.status-undefined{
     background-color: white;
 }
 
-.btn-attendance-hourstatus:hover{
-    cursor: pointer;
-}
-
-.btn-attendance-hourstatus1{
-    width:30px;
-    height:30px;
-    border-radius:15px;
+.status-present{
     background-color: rgb(0, 255, 55);
 }
 
-.btn-attendance-hourstatus1:hover{
-    cursor: pointer;
+.status-absent{
+    background-color: red;
 }
