@@ -37,7 +37,7 @@ export async function addSemesterController(req,res)
 export async function deleteSemesterController(req,res)
 {
     const userId = req.user.userId;
-    const semId = req.params.semId;
+    const semId = parseInt(req.params.semId);
     try{
         const result = await Semester.deleteSemester({userId,semId});
         if(result.affectedRows === 0)
