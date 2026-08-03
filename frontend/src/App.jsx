@@ -5,18 +5,20 @@ import { AttendancePage } from "./Pages/AttendancePage"
 import { GradesPage } from "./Pages/GradesPage"
 import { HomePage } from "./Pages/HomePage"
 import { AddSemPage } from "./Pages/AddSemPage"
+import { PlanYourBunksPage } from "./Pages/PlanYourBunks"
 function App() {
   
 
   return (
     <>
-    {/* <LoginPage />
+    <LoginPage />
     <DashBoardPage />
     <RegisterPage />
     <AttendancePage />
     <GradesPage />
-    <HomePage />  */}
+    <HomePage /> 
     <AddSemPage />
+    <PlanYourBunksPage />
     </>
   )
 }
