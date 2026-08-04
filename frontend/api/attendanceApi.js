@@ -11,12 +11,12 @@ export function updateAttendance(attendanceChanges)
     return api.patch(`${route}/update`,attendanceChanges);
 }
 
-export function courseSummary(semId)
+export function courseSummary()
 {
-    return api.get(`${route}/get/course-summary/${semId}`);
+    return api.get(`${route}/get/course-summary`);
 }
 
-export function planYourBunks(semId)
+export function planYourBunks()
 {
-    return api.get(`${route}/get/plan-your-bunks/${semId}`);
+    return api.get(`${route}/get/plan-your-bunks/`);
 }
