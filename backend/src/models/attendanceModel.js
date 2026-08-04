@@ -169,6 +169,35 @@ class Attendance
         });
         return rows;
     }
+
+    static async planYourBunks({semId})
+    {
+        const query = `SELECT
+                            a.attendance_id,
+                            a.attendance_date,
+                            a.status,
+
+                            c.course_id,
+                            c.course_name
+
+                        FROM attendance a
+
+                        JOIN schedules s
+                        ON a.schedule_id = s.schedule_id
+
+                        JOIN courses c
+                        ON s.course_id = c.course_id
+
+                        WHERE a.sem_id = ?
+
+                        ORDER BY
+                        a.attendance_date,
+                        s.hour;`  ;
+
+        const [attendanceRows] = await mydb.query(query,[semId]);
+        return attendanceRows;
+
+    }
 }
 
 export default Attendance;

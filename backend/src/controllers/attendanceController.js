@@ -57,3 +57,22 @@ export async function courseSummaryController(req,res)
         return res.status(500).json({message: err.message});
     }
 }
+
+export async function planYourBunksController(req,res)
+{
+    const semId = req.params.semId;
+    try{
+        const attendanceRows = await Attendance.planYourBunks({semId});
+        if(attendanceRows.length>0) 
+        {
+            return res.status(200).json({attendanceRows});
+        }
+        else{
+            return res.status(400).json({message:'Semester Not found'});
+        }
+    }
+    catch(err)
+    {
+        return res.status(500).json({message: err.message});
+    }
+}
