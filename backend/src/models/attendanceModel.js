@@ -175,10 +175,11 @@ class Attendance
         const query = `SELECT
                             a.attendance_id,
                             a.attendance_date,
+                            a.editable,
                             a.status,
 
-                            c.course_id,
-                            c.course_name
+                            c.course_id AS courseId,
+                            c.course_name AS courseName
 
                         FROM attendance a
 
