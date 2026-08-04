@@ -9,13 +9,13 @@ import { ButtonLogin } from "../Components/login/ButtonLogin"
 import { Toast } from "../Components/register/Toast"
 import { ConfirmationBox } from "../Components/attendance/ConfirmationBox"
 import { useState } from "react"
-export function AttendancePage()
+export function AttendancePage({plannerMode=false})
 {
     const [courseWise, setCourseWise] = useState(false);
     const [dayWise, setDayWise] = useState(true);
     const [trackConfirmation, setTrackConfirmation] = useState(false);
-    const courses = [{courseName: 'Java', status: 1},
-        {courseName: 'Python', status: -1}];
+    const [attendanceRows,setAttendanceRows] = useState([]);
+    const [courseSummary,setCourseSummary] = useState([]);
 
     function styleCourseWise(){
         setCourseWise(true);
@@ -29,6 +29,41 @@ export function AttendancePage()
     function onClickSave(){
             setTrackConfirmation(true);
     }
+
+    function calculateSummary(rows)
+    {
+        const grouped = {};
+        rows.forEach(row => {
+            if(!grouped[row.courseId])
+            {
+                grouped[row.courseId] = {
+                    courseId: row.courseId,
+                    course_name: row.courseName,
+                    total_hours: 0,
+                    total_present: 0,
+                    total_absent: 0
+                };
+            }
+            grouped[row.courseId].total_hours++;
+            if(row.status === 1)
+                grouped[row.courseId].total_present++;
+
+            if(row.status === -1)
+                grouped[row.courseId].total_absent++;
+
+        });
+
+        const summary = Object.values(grouped);
+        summary.forEach(course => {
+            course.allowedBunks =
+                Math.floor(course.total_hours * 0.25);
+            course.remainingBunks =
+                course.allowedBunks - course.total_absent;
+
+        });
+
+        setCourseSummary(summary);
+    }   
     return(
         <>
         <div className={trackConfirmation?"div-noblur div-blur":"div-noblur"}>
@@ -40,10 +75,12 @@ export function AttendancePage()
             {dayWise&&<>
             <RadioButtons months={['July','August','September','October']}/>
             <DateSelector start="1" end="15"/>
-            <EachHour courses={courses}/>
-            <ButtonLogin text="Save" onClick={onClickSave}/>
+            <EachHour attendanceRows={attendanceRows}
+                 setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}
+                calculateSummary={calculateSummary}/>
+            {!plannerMode&&<ButtonLogin text="Save" onClick={onClickSave}/>}
             </>}
-            {courseWise&&<AttendanceContainer />}
+            {courseWise&&<AttendanceContainer courseSummary={courseSummary}/>}
         </div>
             
             {trackConfirmation&&<ConfirmationBox 

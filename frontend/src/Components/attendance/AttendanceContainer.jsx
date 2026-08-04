@@ -1,33 +1,24 @@
 import "./AttendanceContainer.css"
 import {AttendanceDetails} from "./AttendanceDetails"
-export function AttendanceContainer(){
+export function AttendanceContainer({courseSummary}){
     return(
         <div className="div-attendance-container">
-            <AttendanceDetails 
-                course="CPP"
-                total="40"
-                present="35"
-                absent="5"
-                bunks="8"
-                percentage="87.5"
-            />
-            <AttendanceDetails 
-                course="Maths"
-                total="59"
-                present="51"
-                absent="8"
-                bunks="4"
-                percentage="72"
-            />
+            {courseSummary.map(course=>
 
-            <AttendanceDetails 
-                course="Java"
-                total="52"
-                present="40"
-                absent="12"
-                bunks="0"
-                percentage="65"
-            />
+                <AttendanceDetails
+                    key={course.courseId}
+                    course={course.course_name}
+                    total={course.total_hours}
+                    present={course.total_present}
+                    absent={course.total_absent}
+                    bunks={course.remainingBunks}
+                    percentage={
+                        (course.total_present/course.total_hours*100).toFixed(1)
+                    }
+
+                />
+
+            )}
         </div>
     )
 }

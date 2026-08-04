@@ -3,7 +3,7 @@ export function PlanYourBunksPage()
 {
     return(
         <>
-        <AttendancePage />
+        <AttendancePage plannerMode={true}/>
         </>
     )
 }
