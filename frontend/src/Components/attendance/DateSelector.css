@@ -1,9 +1,13 @@
 .div-attendance-dates{
     padding-top:12px;
     display:flex;
-    justify-content: center;
     align-items: center;
-    column-gap:3px;
+    column-gap:5px;
+    flex-wrap: wrap;
+    width:640px;
+    row-gap:10px;
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 .btn-attendance-day{

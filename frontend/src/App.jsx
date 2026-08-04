@@ -11,13 +11,13 @@ function App() {
 
   return (
     <>
-    <LoginPage />
+    {/* <LoginPage />
     <DashBoardPage />
     <RegisterPage />
     <AttendancePage />
     <GradesPage />
     <HomePage /> 
-    <AddSemPage />
+    <AddSemPage /> */}
     <PlanYourBunksPage />
     </>
   )
