@@ -7,31 +7,46 @@ import { useState } from "react";
 import "./RegisterPage.css";
 import { register } from "../../api/authApi";
 import { useNavigate } from "react-router";
+import {PageLoader} from "../Components/Loader";
+
 export function RegisterPage()
 {
     const navigate = useNavigate();
-    const [toastView,setToastView] = useState(false);
+    const [toastView,_setToastView] = useState(false);
     const [capsCheck, setCapsCheck] = useState(false);
     const [userName, setUserName] = useState('');
     const [userId,setUserId] = useState('');
-    const[email,setEmail] = useState('');
-    const[password,setPassword] = useState('');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const [showLoader,setShowLoader] = useState(false);
+
+    function wait(ms) 
+    {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
 
     async function onClickRegister()
     {
+        setShowLoader(true);
         try{
-            await register ({userId, userName, email, password});
-            setToastView(true);
-            await setTimeout(()=>{navigate("/login")},2000);
+            await Promise.all([register ({userId, userName, email, password}),
+                wait(5000)
+            ]);
+            navigate("/login");
         }
         
             catch(err){
                 console.log(err.response.data.message);
             }
+            finally{
+                setShowLoader(false);
+            }
     }
     return(
         <>
-        <Headerbox />
+        {showLoader&& <PageLoader/>}
+        {!showLoader&& <>
+            <Headerbox />
         <div className="div-register">
             
             <div className="div-register-txt1">
@@ -55,6 +70,8 @@ export function RegisterPage()
             
         </div>
         <Toast message="Account Registered Successfully!" show={toastView}/>
+            </>
+        }
         </>
     )
 }
