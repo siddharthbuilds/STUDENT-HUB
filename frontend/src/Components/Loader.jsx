@@ -1,3 +1,4 @@
+import React from "react";
 let stylesInjected = false;
 
 function injectStyles() {
@@ -134,7 +135,7 @@ function injectStyles() {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: var(--sh-topbar-height, 3px);
     background: transparent;
     z-index: 9998;
     overflow: hidden;
@@ -147,7 +148,13 @@ function injectStyles() {
     left: 0;
     height: 100%;
     width: 40%;
-    background: linear-gradient(90deg, transparent, var(--sh-cyan), var(--sh-purple), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--sh-topbar-color-start, var(--sh-cyan)),
+      var(--sh-topbar-color-end, var(--sh-purple)),
+      transparent
+    );
     box-shadow: 0 0 8px 1px var(--sh-cyan-dim);
     animation: sh-topbar-sweep 1.1s ease-in-out infinite;
     will-change: transform;
@@ -241,14 +248,32 @@ export function PageLoader({ size = 88, text = "Loading", fullScreen = false }) 
  * Mount once near the app root and toggle `active`.
  *
  * @param {boolean} active - whether to show/animate the bar
+ * @param {number} height - thickness of the bar in px (default 3)
+ * @param {string} colorStart - gradient start color (default theme cyan)
+ * @param {string} colorEnd - gradient end color (default theme purple)
  */
-export function TopBarLoader({ active = false }) {
+export function TopBarLoader({
+  active = false,
+  height = 3,
+  colorStart = "#22d3ee",
+  colorEnd = "#a855f7",
+}) {
   injectStyles();
 
   if (!active) return null;
 
   return (
-    <div className="sh-topbar-track" role="status" aria-live="polite" aria-label="Loading">
+    <div
+      className="sh-topbar-track"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading"
+      style={{
+        "--sh-topbar-height": `${height}px`,
+        "--sh-topbar-color-start": colorStart,
+        "--sh-topbar-color-end": colorEnd,
+      }}
+    >
       <div className="sh-topbar-fill" />
     </div>
   );
