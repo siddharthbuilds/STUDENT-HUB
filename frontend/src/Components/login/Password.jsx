@@ -3,9 +3,9 @@ import "./Password.css"
 import viewImage from "../../images/view.png";
 import hideImage from "../../images/hide.png";
 
-export function Password({capsCheck,setCapsCheck})
+export function Password({capsCheck,setCapsCheck,currentPassword,onChange})
         {
-            const [currentPassword,setCurrentPassword] = useState('');
+            // const [currentPassword,setCurrentPassword] = useState('');
             const [viewPassWord,setViewPassWord] = useState(false);
             // const [capsCheck, setCapsCheck] = useState(false);
             function toggleView()
@@ -30,9 +30,7 @@ export function Password({capsCheck,setCapsCheck})
                         size="25" className="input-login" 
                         type={viewPassWord?"text":"password"} 
                         name="password"
-                        onChange={(event)=>{
-                            setCurrentPassword(event.target.value)
-                        }}
+                        onChange={onChange}
                         value={currentPassword}
                         onKeyDown={(event)=>{
                             checkCapsLock(event);
