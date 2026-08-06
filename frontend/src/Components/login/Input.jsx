@@ -9,7 +9,7 @@ export function Input({placeholder, type, setCapsCheck,size=25,onChange,fontSize
             className="input-login" 
             name="id"
             onClick={()=>{setCapsCheck?setCapsCheck(false):()=>{}}}
-            onChange={onChange?onChange:()=>{}}
+            onChange={onChange?(event)=>{onChange(event.target.value)}:()=>{}}
             type={type}
             style={{
                 fontSize: `${Number(fontSize)}px`,

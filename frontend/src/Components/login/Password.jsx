@@ -30,7 +30,8 @@ export function Password({capsCheck,setCapsCheck,currentPassword,onChange})
                         size="25" className="input-login" 
                         type={viewPassWord?"text":"password"} 
                         name="password"
-                        onChange={onChange}
+                        onChange={onChange?(event)=>{onChange(event.target.value)}
+                                    :()=>{}}
                         value={currentPassword}
                         onKeyDown={(event)=>{
                             checkCapsLock(event);
@@ -40,7 +41,7 @@ export function Password({capsCheck,setCapsCheck,currentPassword,onChange})
                         }}
                         />
                 
-                    {currentPassword.length>0 && 
+                    {currentPassword && currentPassword.length>0 && 
                     <button type="button" className="btn-password-toggle" onClick={toggleView}>
                         <img className="img-btn-password-toggle" 
                         src={viewPassWord? hideImage: viewImage }

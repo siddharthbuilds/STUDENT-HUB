@@ -7,16 +7,6 @@ import { Link } from "react-router";
 export function LoginBox({setLoginId, loginPassword, 
                 setLoginPassword,buttonActivity})
 {
-        function trackLoginId(event)
-        {
-            setLoginId(event.target.value);
-        }
-
-        function trackLoginPassword(event)
-        {
-            setLoginPassword(event.target.value);
-        }
-
         const [capsCheck, setCapsCheck] = useState(false);
         return(
             <div className="div-login">
@@ -26,11 +16,11 @@ export function LoginBox({setLoginId, loginPassword,
 
                 <Input placeholder="Account ID"
                      type="text" setCapsCheck={setCapsCheck} 
-                     onChange={trackLoginId}
+                     onChange={setLoginId}
                     />
 
                 <Password capsCheck={capsCheck} setCapsCheck={setCapsCheck} 
-                        onChange={trackLoginPassword} currentPassword={loginPassword}/>
+                        onChange={setLoginPassword} currentPassword={loginPassword}/>
                 
                 <ButtonLogin text="Log In" onClick={buttonActivity}/>
                 
