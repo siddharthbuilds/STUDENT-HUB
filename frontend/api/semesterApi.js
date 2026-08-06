@@ -6,6 +6,11 @@ export function addSemester(data)
     return api.post(`${route}/add`,data);
 }
 
+export function getSemesters()
+{
+    return api.get(`${route}`);
+}
+
 export function deleteSemester(semId)
 {
     return api.delete(`${route}/delete/${semId}`);

@@ -1,27 +1,50 @@
-import "./HomePage.css"
-import { ButtonLogin } from "../Components/login/ButtonLogin"
-import { SemesterBox } from "../Components/home/SemesterBox"
+import "./HomePage.css";
+import { ButtonLogin } from "../Components/login/ButtonLogin";
+import { SemesterBox } from "../Components/home/SemesterBox";
+import { useState, useEffect } from "react";
+import {getSemesters} from "../../api/semesterApi";
+import PageLoader from "../Components/Loader";
 export function HomePage()
 {
+    const [semesters,setSemesters]=useState();
+    const [error, setError] = useState('');
+    const [showLoader, setShowLoader] = useState(true);
+    useEffect(()=>{
+        async function loadSemesters()
+        {
+            try{
+                const response = await getSemesters();
+                setSemesters(response.data.semesters);
+            }
+
+            catch(err){
+                setError(err.response?.data?.message);
+            }
+
+            finally{
+                setShowLoader(false);
+            }
+    }
+
+    loadSemesters();
+    },[]);
+
     return(
         <>
-        <div className="div-all-semesters">
+        {showLoader&&<PageLoader/>}
+        {!showLoader&& <div className="div-all-semesters">
             <div> Your Semesters</div>
-            <SemesterBox name="Semester 1" 
-                from="August 2025"
-                to="December 2025"
-            />
-            <SemesterBox name="Semester 2" 
-                from="January 2026"
-                to="May 2026"
-            />
-            <SemesterBox name="Semester 3" 
-                from="July 2026"
-                to="December 2026"
-            />
-
+            {semesters&&semesters.map(semester=>{
+                return(<>
+                <SemesterBox name={semester.semName}
+                    from={semester.startDate}
+                    to={semester.toDate}
+                    />
+                </>)
+            })}
             <ButtonLogin text="Add Semester" />
-        </div>
+        </div>}
+        {error && <p style={{ color: "#ef4444" }}>{error}</p>}
         </>
     )
 }
