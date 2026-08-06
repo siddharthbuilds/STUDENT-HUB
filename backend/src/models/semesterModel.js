@@ -19,6 +19,15 @@ class Semester{
         const [result] = await mydb.query(query,params);
         return result;
     }
+
+    static async getSemesters({userId})
+    {
+        const query = `SELECT sem_name AS semName, 
+                        start_date AS startDate, end_date AS endDate
+                        FROM semesters WHERE user_id=?`;
+        const [semesters] = await mydb.query(query,[userId]);
+        return semesters;
+    }
 }
 
 export default Semester

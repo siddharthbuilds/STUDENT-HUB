@@ -17,7 +17,7 @@ export function LoginPage()
             
             localStorage.setItem("accessToken",response.data.accessToken);
 
-            navigate("/dashboard");
+            navigate("/semesters");
         }
 
         catch(err){

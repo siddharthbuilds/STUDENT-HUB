@@ -51,3 +51,16 @@ export async function deleteSemesterController(req,res)
         return res.status(500).json({message: err.message});
     }
 }
+
+export async function getSemesterController(req,res)
+{
+    const userId = req.user.userId;
+    try{
+        const semesters = await Semester.getSemesters({userId});
+        return res.status(200).json({semesters});
+    }
+    catch(err)
+    {
+        return res.status(500).json({message:err.message});
+    }
+}
