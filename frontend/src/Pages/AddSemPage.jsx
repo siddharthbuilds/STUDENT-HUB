@@ -1,13 +1,15 @@
-import {Input} from "../Components/login/Input.jsx"
-import "./AddSemPage.css"
-import { AddCourse } from "../Components/addsem/AddCourse.jsx"
-import { ButtonLogin } from "../Components/login/ButtonLogin.jsx"
-import { ScheduleDay } from "../Components/addsem/ScheduleDay.jsx"
-import { ExamSection } from "../Components/addsem/ExamSection.jsx"
-import {SatSchedule} from "../Components/addsem/SatSchedule.jsx"
-import getSatDates from "../Utils/SatDates.js"
-import { useState } from "react"
-import { useEffect } from "react"
+import {Input} from "../Components/login/Input.jsx";
+import "./AddSemPage.css";
+import { AddCourse } from "../Components/addsem/AddCourse.jsx";
+import { ButtonLogin } from "../Components/login/ButtonLogin.jsx";
+import { ScheduleDay } from "../Components/addsem/ScheduleDay.jsx";
+import { ExamSection } from "../Components/addsem/ExamSection.jsx";
+import {SatSchedule} from "../Components/addsem/SatSchedule.jsx";
+import getSatDates from "../Utils/SatDates.js";
+import { useState } from "react";
+import { useEffect } from "react";
+import { addSemester } from "../../api/semesterApi.js";
+import { useNavigate } from "react-router";
 export function AddSemPage()
 {
     const [semName,setSemName] = useState('');
@@ -18,11 +20,25 @@ export function AddSemPage()
     const [semEndDate,setSemEndDate]=useState(null);
     const [satDates,setSatDates] = useState([]);
     const [sameSchedule, setSameSchedule] = useState(false);
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+
     useEffect(() => {
     if (semStartDate && semEndDate) {
         setSatDates(getSatDates(semStartDate, semEndDate));
     }
     }, [semStartDate, semEndDate]);
+
+    async function onClickAddSem()
+    {
+        try{
+            await addSemester(semDetails);
+            navigate("/semesters");
+        }
+        catch(err){
+            setError(err.response?.data?.message || "Login failed");
+        }
+    }
 
     const filteredList = satDates.filter(saturday =>
         {const isHoliday = holidayList.some(holiday =>
@@ -36,23 +52,8 @@ export function AddSemPage()
         return !isExam && !isHoliday;
         }
     );
-
-    function clickStartDate(event)
-    {
-        setSemStartDate(event.target.value);
-         
-    }
-    function clickEndDate(event)
-    {
-        setSemEndDate(event.target.value);
-    }
-
-    function trackSemName(event)
-    {
-        setSemName(event.target.value);
-    }
     
-    const semDetails =[
+    const semDetails =
         {
             semName: semName,
             startDate: semStartDate,
@@ -63,7 +64,7 @@ export function AddSemPage()
             saturdays: filteredList,
             sameSchedule: sameSchedule
         }
-    ]
+    
    
     return(
         <>
@@ -74,8 +75,7 @@ export function AddSemPage()
                 <div className="div-option-save-addsem">
                     <ButtonLogin text="Save" alert={false} 
                     onClick={()=>{
-                        console.log(semDetails);
-                        localStorage.setItem('data',JSON.stringify(semDetails));
+                        onClickAddSem();
                     }}
                     />
                 </div>
@@ -84,7 +84,7 @@ export function AddSemPage()
                     type="text"
                     fontSize="30"
                     backgroundColor="#12193A"
-                    onChange={trackSemName}
+                    onChange={setSemName}
                     /> 
                 </div>
                 <div className="div-addsem-dates">
@@ -93,7 +93,7 @@ export function AddSemPage()
                         type="date"
                         fontSize="23"
                         backgroundColor="#12193A"
-                        onChange={clickStartDate}
+                        onChange={setSemStartDate}
                         />
                         <div>Semester Start Date </div>
                     </div>
@@ -102,7 +102,7 @@ export function AddSemPage()
                         type="date"
                         fontSize="23"
                         backgroundColor="#12193A"
-                        onChange={clickEndDate}
+                        onChange={setSemEndDate}
                         />
                         <div>Semester End Date </div>
                     </div>
@@ -137,7 +137,9 @@ export function AddSemPage()
                 {satDates&&<div>
                     <SatSchedule satDates={filteredList} setSatDates={setSatDates}/>
                 </div>}
+            {error && <p style={{ color: "#ef4444" }}>{error}</p>}
             </div>
+            
             
             
         </>

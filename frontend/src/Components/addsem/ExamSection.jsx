@@ -13,31 +13,7 @@ export function ExamSection({headerName, buttonName,examList,setExamList})
     const [toolTipFrom, setToolTipFrom]=useState(false);
     const [toolTipTo,setToolTipTo]=useState(false);
 
-    function trackFromDate(event)
-    {
-        setFromDate(event.target.value);
-        if(event.target.value)
-        {
-            setToolTipFrom(false);
-        }
-        
-    }
-
-    function trackToDate(event)
-    {
-        setToDate(event.target.value);
-        if(event.target.value)
-        {
-            setToolTipTo(false);
-        }
-    }
-
     
-    function trackDescription(event)
-    {
-        setDescription(event.target.value);
-    }
-
     function addExamBtn()
     {
         if(!fromDate)
@@ -57,9 +33,24 @@ export function ExamSection({headerName, buttonName,examList,setExamList})
         
     }
 
-    const input1={type:"date",placeholder:"From",toolTip:toolTipFrom,fn:trackFromDate}
-    const input2={type:"date",placeholder:"To",toolTip:toolTipTo,fn:trackToDate}
-    const input3={type:"text",placeholder:"Description",toolTip:false,fn:trackDescription}
+    const input1={type:"date",
+        placeholder:"From",
+        toolTip:toolTipFrom,
+        toolTipFn:setToolTipFrom,
+        fn:setFromDate};
+
+    const input2={type:"date",
+        placeholder:"To",
+        toolTip:toolTipTo,
+        toolTipFn:setToolTipTo,
+        fn:setToDate};
+
+    const input3={type:"text",
+        placeholder:"Description",
+        toolTip:false,
+        toolTipFn:()=>{},
+        fn:setDescription};
+
     const button1={text: "Add", alert:false,fn:addExamBtn}
     const button2={text:"Cancel", alert:true,fn:toggleShowEntryForm}
 

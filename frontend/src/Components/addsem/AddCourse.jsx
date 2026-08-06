@@ -22,23 +22,15 @@ export function AddCourse({courseList,setCourseList})
         setToolTipCredits(false);
     }
     
-    function trackCourseName(event)
-    {
-        setCourseName(event.target.value);
-        if(event.target.value)
-        {
-            setToolTipName(false);
-        }
-    }
+    // if(courseName)
+    // {
+    //     setToolTipName(false);
+    // }
 
-    function trackCourseCredits(event)
-    {
-        setCourseCredits(event.target.value);
-        if(event.target.value)
-        {
-            setToolTipCredits(false);
-        }
-    }
+    // if(courseCredits)
+    // {
+    //     setToolTipCredits(false);
+    // }
 
     function addCourseBtn()
     {
@@ -73,8 +65,16 @@ export function AddCourse({courseList,setCourseList})
         setCourseList(newList);
     }
 
-    const input1={type:"text",placeholder:"Course Name",toolTip:toolTipName,fn:trackCourseName};
-    const input2={type:"number",placeholder:"Credits",toolTip:toolTipCredits,fn:trackCourseCredits};
+    const input1={type:"text",
+        placeholder:"Course Name",
+        toolTip:toolTipName,
+        toolTipFn:setToolTipName,
+        fn:setCourseName};
+    const input2={type:"number",
+        placeholder:"Credits",
+        toolTip:toolTipCredits,
+        toolTipFn:setToolTipCredits,
+        fn:setCourseCredits};
     const button1={text: "Add", alert:false,fn:addCourseBtn}
     const button2={text: "Cancel", alert:true,fn:cancelCourseBtn}
 

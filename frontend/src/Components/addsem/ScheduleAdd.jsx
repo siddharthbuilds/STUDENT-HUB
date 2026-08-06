@@ -25,7 +25,8 @@ export function ScheduleAdd({courseList,setCourseList,day,showEntryForm,setShowE
     const input1={type:"dropdown",placeholder:"Course",
             dropdownOption: selectedCourse, dropdownFn: setSelectedCourse,
             property: "courseName",
-            list:courseList,toolTip:toolTip,
+            list:courseList,
+            toolTip:toolTip,
             fn:toggleToolTip}
     const input2={type:"dropdown",placeholder:"x 1",
             dropdownOption:multiplier, dropdownFn:setMultiplier,

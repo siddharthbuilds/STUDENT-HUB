@@ -14,10 +14,11 @@ export function EntryForm({inputs,buttons})
                 {inputs.map((input)=>{
                     return(<div key={input.placeholder}>
                     <div className="div-course-attributes-input" 
-                        onClick={input.type=="dropdown"?input.fn:()=>{}}>
+                        onClick={input.type==="dropdown"?input.fn:()=>{input.toolTipFn(false)}}>
                     {input.type!="dropdown"?
                         <Input placeholder={input.placeholder} 
-                            onChange={input.fn} type={input.type}/>
+                            onChange={input.fn}
+                             type={input.type}/>
                             :<CustomDropdown options={input.list} name={input.placeholder}
                             property={input.property}
                             selectedOption={input.dropdownOption} 
