@@ -1,12 +1,12 @@
 export default function formatDate(date,showDay=false)
 {
     const dateObj = new Date(date);
-    const day = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+    const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
     const month = dateObj.toLocaleDateString('en-US', { month: 'short' });  
+    const dayNum = dateObj.getDate();
+    const year = dateObj.getFullYear();
 
-    const [y,,d] = date.split('-');
-
-    if (showDay) return `${day} - ${month} ${d}, ${y}`;
-    return `${month} ${d}, ${y}`
+    if (showDay) return `${dayName} - ${month} ${dayNum}, ${year}`;
+    return `${month} ${dayNum}, ${year}`;
 
 }
