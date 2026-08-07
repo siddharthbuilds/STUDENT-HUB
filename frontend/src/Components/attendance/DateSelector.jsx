@@ -1,8 +1,8 @@
 import "./DateSelector.css"
-export function DateSelector({start,end})
+export function DateSelector({data})
 {
-    const starting = Number(start);
-    const ending = Number(end);
+    const starting = 1;
+    const ending = Number(data.last);
     const myRange=[];
     for(let i=starting;i<=ending;i++)
     {

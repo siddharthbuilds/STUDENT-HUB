@@ -1,7 +1,6 @@
 import "./AttendancePage.css"
 import {HeaderDashBoard} from "../Components/dashboard/HeaderDashBoard"
 import { RadioButtons } from "../Components/attendance/RadioButtons"
-import { DateSelector } from "../Components/attendance/DateSelector"
 import {EachHour } from "../Components/attendance/EachHour"
 import {AttendanceContainer} from "../Components/attendance/AttendanceContainer"
 import {AttendanceSelector} from "../Components/attendance/AttendanceSelector"
@@ -9,6 +8,8 @@ import { ButtonLogin } from "../Components/login/ButtonLogin"
 import { Toast } from "../Components/register/Toast"
 import { ConfirmationBox } from "../Components/attendance/ConfirmationBox"
 import { useState } from "react"
+import {useSemester} from "../context/useSemester.js";
+import { getMonths } from "../Utils/getMonths.js";
 export function AttendancePage({plannerMode=false})
 {
     const [courseWise, setCourseWise] = useState(false);
@@ -16,6 +17,7 @@ export function AttendancePage({plannerMode=false})
     const [trackConfirmation, setTrackConfirmation] = useState(false);
     const [attendanceRows,setAttendanceRows] = useState([]);
     const [courseSummary,setCourseSummary] = useState([]);
+    const {semesterDetails} = useSemester();
 
     function styleCourseWise(){
         setCourseWise(true);
@@ -63,7 +65,9 @@ export function AttendancePage({plannerMode=false})
         });
 
         setCourseSummary(summary);
-    }   
+    }
+    const months = getMonths(semesterDetails.startDate, semesterDetails.endDate);
+    
     return(
         <>
         <div className={trackConfirmation?"div-noblur div-blur":"div-noblur"}>
@@ -73,8 +77,7 @@ export function AttendancePage({plannerMode=false})
             styleCourseWise={styleCourseWise}
             />
             {dayWise&&<>
-            <RadioButtons months={['July','August','September','October']}/>
-            <DateSelector start="1" end="15"/>
+            <RadioButtons months={months}/>
             <EachHour attendanceRows={attendanceRows}
                  setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}
                 calculateSummary={calculateSummary}/>
