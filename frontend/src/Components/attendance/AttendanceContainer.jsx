@@ -4,7 +4,7 @@ export function AttendanceContainer({courseSummary}){
     return(
         <div className="div-attendance-container">
             {courseSummary.map(course=>
-
+                
                 <AttendanceDetails
                     key={course.courseId}
                     course={course.course_name}
@@ -13,7 +13,9 @@ export function AttendanceContainer({courseSummary}){
                     absent={course.total_absent}
                     bunks={course.remainingBunks}
                     percentage={
-                        (course.total_present/course.total_hours*100).toFixed(1)
+                        ((parseInt(course.total_present)/
+                            (parseInt(course.total_present)+parseInt(course.total_absent)))
+                                *100).toFixed(1)
                     }
 
                 />

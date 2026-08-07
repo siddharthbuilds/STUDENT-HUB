@@ -1,8 +1,11 @@
-import "./EachHour.css"
+import "./EachHour.css";
+import { updateAttendance } from "../../../api/attendanceApi";
+import { useState } from "react";
 export function EachHour({attendanceRows,
                         setAttendanceRows,
-                        plannerMode, calculateSummary})
+                        plannerMode,})
 {
+    const [error, setError] = useState('');
    function toggleStatus(index)
     {
         const updatedRows = [...attendanceRows];
@@ -32,23 +35,38 @@ export function EachHour({attendanceRows,
 
         setAttendanceRows(updatedRows);
 
-        calculateSummary(updatedRows);
+        //calculateSummary(updatedRows);
+    }
+
+    async function onClickAttendanceButton(attendanceRows,index)
+    {
+        try{
+
+            toggleStatus(index);
+            console.log(attendanceRows);
+            await updateAttendance({attendanceChanges: attendanceRows});
+        }
+        catch(err)
+        {
+            setError(err.response?.data?.message);
+        }
+
     }
     return(
         <div className="div-attendace-hours">
-                {attendanceRows&&attendanceRows.length>0&&attendanceRows.map((course,index)=>{
+                {attendanceRows && attendanceRows.length>0 &&attendanceRows.map((attendance,index)=>{
                     return (
                         <div className="div-attendance-eachhour">
                             <div className="div-attendance-hourname">
-                                {course.course_name}
+                                {attendance.course_name}
                             </div>
                             <div className="div-attendance-hourstatus">
                                 <button
-                                    onClick={()=>toggleStatus(index)}
+                                    onClick={()=>{onClickAttendanceButton(attendanceRows,index)}}
                                     className={
-                                    course.status===1
+                                    attendance.status===1
                                     ?"btn-status status-present"
-                                    :course.status===-1
+                                    :attendance.status===-1
                                     ?"btn-status status-absent"
                                     :"btn-status status-undefined"
                                     }
@@ -57,7 +75,7 @@ export function EachHour({attendanceRows,
                         </div>
                     )
                 })}
-                
+            {error && <p style={{ color: "#ef4444" }}>{error}</p>}
             </div>
     )
 }

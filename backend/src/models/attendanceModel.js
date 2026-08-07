@@ -111,8 +111,8 @@ class Attendance
 
     static async updateAttendance({attendanceChanges,connection})
     {
-        if(attendanceChanges.length===0)
-            {return;}
+        // if(attendanceChanges.length===0)
+        //     {return;}
         const newStatusQuery=`UPDATE attendance SET status=?, editable = FALSE 
                             WHERE attendance_id=?`;
         for (const attendance of attendanceChanges) {
@@ -121,7 +121,7 @@ class Attendance
             }
             await connection.query(
                 newStatusQuery,
-                [attendance.status, attendance.attendanceId]
+                [attendance.status, attendance.attendance_id]
             );
         }
     }

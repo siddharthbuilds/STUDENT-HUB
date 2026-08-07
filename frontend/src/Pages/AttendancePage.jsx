@@ -7,9 +7,10 @@ import {AttendanceSelector} from "../Components/attendance/AttendanceSelector"
 import { ButtonLogin } from "../Components/login/ButtonLogin"
 import { Toast } from "../Components/register/Toast"
 import { ConfirmationBox } from "../Components/attendance/ConfirmationBox"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {useSemester} from "../context/useSemester.js";
 import { getMonths } from "../Utils/getMonths.js";
+import { getCourseSummary } from "../../api/attendanceApi.js";
 export function AttendancePage({plannerMode=false})
 {
     const [courseWise, setCourseWise] = useState(false);
@@ -18,10 +19,20 @@ export function AttendancePage({plannerMode=false})
     const [attendanceRows,setAttendanceRows] = useState([]);
     const [courseSummary,setCourseSummary] = useState([]);
     const {semesterDetails} = useSemester();
+    const [error, setError] = useState('');
 
-    function styleCourseWise(){
-        setCourseWise(true);
-        setDayWise(false)
+    async function styleCourseWise(){
+        try{
+                const response = await getCourseSummary();
+                setCourseSummary(response.data.courseSummary);
+                setCourseWise(true);
+                setDayWise(false);
+            }
+
+        catch(err){
+            setError(err.response?.data?.message);
+        }
+        
     }
     function styleDayWise(){
         setDayWise(true);
@@ -66,8 +77,24 @@ export function AttendancePage({plannerMode=false})
 
         setCourseSummary(summary);
     }
-    const months = getMonths(semesterDetails.startDate, semesterDetails.endDate);
-    
+    const months = semesterDetails?
+            getMonths(semesterDetails.startDate, semesterDetails.endDate)
+            :[];
+    useEffect(()=>{
+        async function fetchCourseSummary()
+        {
+            try{
+                const response = await getCourseSummary();
+                setCourseSummary(response.data.courseSummary);
+            }
+
+            catch(err){
+                setError(err.response?.data?.message);
+            }
+        }
+        fetchCourseSummary();
+    },[]);
+
     return(
         <>
         <div className={trackConfirmation?"div-noblur div-blur":"div-noblur"}>
@@ -93,6 +120,7 @@ export function AttendancePage({plannerMode=false})
             option2="Cancel"
             toastmessage="All Changes Saved"
             setTrackConfirmation={setTrackConfirmation}/>}
+            {error && <p style={{ color: "#ef4444" }}>{error}</p>}
         </>
     )
 }

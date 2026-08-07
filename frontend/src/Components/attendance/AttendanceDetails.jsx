@@ -1,13 +1,13 @@
 import "./AttendanceDetails.css"
 import { ProgressBar } from "./ProgressBar"
-export function AttendanceDetails({course,total,present,absent,bunks,percentage}){
+export function AttendanceDetails({course,total=0,present,absent,bunks,percentage=0.0}){
     return(
         <div className="div-attendance-overall">
                             <div className="div-attendance-course">
                                 <div> {course} </div>
-                                <div> {`${percentage}%`} </div>
+                                <div> {`${isNaN(percentage)?0:percentage}%`} </div>
                             </div>
-                            <ProgressBar width={percentage} />
+                            <ProgressBar width={isNaN(percentage)?0:percentage} />
                             <div className="div-attendance-details">
                                 <div className="div-attendance-subdetails">
                                     <div> Total Hours </div>
