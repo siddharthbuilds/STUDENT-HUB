@@ -26,6 +26,7 @@ export function HomePage()
 
     function selectSemester(semester)
     {
+        localStorage.setItem('semId',semester.semId);
         setSemesterDetails(semester);
         navigate("/dashboard");
     }

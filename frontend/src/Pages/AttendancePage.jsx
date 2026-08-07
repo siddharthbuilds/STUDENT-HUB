@@ -77,7 +77,7 @@ export function AttendancePage({plannerMode=false})
             styleCourseWise={styleCourseWise}
             />
             {dayWise&&<>
-            <RadioButtons months={months}/>
+            <RadioButtons months={months} setAttendanceRows={setAttendanceRows}/>
             <EachHour attendanceRows={attendanceRows}
                  setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}
                 calculateSummary={calculateSummary}/>

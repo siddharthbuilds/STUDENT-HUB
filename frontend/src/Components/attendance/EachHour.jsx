@@ -36,11 +36,11 @@ export function EachHour({attendanceRows,
     }
     return(
         <div className="div-attendace-hours">
-                {attendanceRows.map((course,index)=>{
+                {attendanceRows&&attendanceRows.length>0&&attendanceRows.map((course,index)=>{
                     return (
                         <div className="div-attendance-eachhour">
                             <div className="div-attendance-hourname">
-                                {course.courseName}
+                                {course.course_name}
                             </div>
                             <div className="div-attendance-hourstatus">
                                 <button
