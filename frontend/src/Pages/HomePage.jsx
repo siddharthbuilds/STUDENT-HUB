@@ -6,12 +6,14 @@ import {getSemesters, deleteSemester} from "../../api/semesterApi";
 import PageLoader from "../Components/Loader";
 import {useNavigate} from "react-router";
 import formatDate from "../Utils/FormatDate";
+import {useSemester} from "../context/useSemester.js"; 
 export function HomePage()
 {
     const [semesters,setSemesters]=useState();
     const [error, setError] = useState('');
     const [showLoader, setShowLoader] = useState(true);
     const navigate = useNavigate();
+    const {setSemesterDetails} = useSemester();
 
     async function onClickTrash(semId)
     {
@@ -22,10 +24,11 @@ export function HomePage()
         }));
     }
 
-    // function selectSemester(semId)
-    // {
-
-    // }
+    function selectSemester(semester)
+    {
+        setSemesterDetails(semester);
+        navigate("/dashboard");
+    }
 
     useEffect(()=>{
         async function loadSemesters()
@@ -52,7 +55,7 @@ export function HomePage()
         {!showLoader&& <div className="div-all-semesters">
             <div> Your Semesters</div>
             {semesters&&semesters.map(semester=>{
-                return(<div key={semester.semId} onClick={()=>{navigate("/dashboard")}}>
+                return(<div key={semester.semId} onClick={()=>{selectSemester(semester)}}>
                 <SemesterBox name={semester.semName}
                     from={formatDate(semester.startDate)}
                     to={formatDate(semester.endDate)}
