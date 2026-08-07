@@ -22,6 +22,11 @@ export function HomePage()
         }));
     }
 
+    // function selectSemester(semId)
+    // {
+
+    // }
+
     useEffect(()=>{
         async function loadSemesters()
         {
@@ -47,7 +52,7 @@ export function HomePage()
         {!showLoader&& <div className="div-all-semesters">
             <div> Your Semesters</div>
             {semesters&&semesters.map(semester=>{
-                return(<div key={semester.semId}>
+                return(<div key={semester.semId} onClick={()=>{navigate("/dashboard")}}>
                 <SemesterBox name={semester.semName}
                     from={formatDate(semester.startDate)}
                     to={formatDate(semester.endDate)}
