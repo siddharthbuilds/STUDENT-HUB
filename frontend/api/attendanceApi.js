@@ -11,7 +11,7 @@ export function updateAttendance(attendanceChanges)
     return api.patch(`${route}/update`,attendanceChanges);
 }
 
-export function courseSummary()
+export function getCourseSummary()
 {
     return api.get(`${route}/get/course-summary`);
 }
