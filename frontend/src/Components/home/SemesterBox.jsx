@@ -1,6 +1,6 @@
 import "./SemesterBox.css"
 import { TrashImage } from "./TrashImage.jsx"
-export function SemesterBox({name, from, to})
+export function SemesterBox({name, from, to,onClick})
 {
     return(
         <>
@@ -10,7 +10,9 @@ export function SemesterBox({name, from, to})
                 <div className="div-text-each-semester-date">{from} - {to}</div>
             </div>
             <div className="div-options-each-semester">
-                <button className="btn-options-each-semester"><TrashImage color="white" size="25"/></button>
+                <button className="btn-options-each-semester">
+                    <TrashImage color="white" size="25" onClick={onClick}/>
+                </button>
             </div>
         </div>
         </>

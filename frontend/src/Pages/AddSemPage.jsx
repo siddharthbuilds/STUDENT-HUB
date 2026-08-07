@@ -70,7 +70,11 @@ export function AddSemPage()
         <>
             <div className="div-addsem-page">
                 <div className="div-option-cancel-addsem">
-                    <ButtonLogin text="Cancel" alert={true} />
+                    <ButtonLogin text="Cancel" alert={true} 
+                        onClick={()=>{
+                            navigate("/semesters")
+                        }}
+                    />
                 </div>
                 <div className="div-option-save-addsem">
                     <ButtonLogin text="Save" alert={false} 
