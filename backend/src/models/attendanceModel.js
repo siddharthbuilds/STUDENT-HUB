@@ -114,7 +114,7 @@ class Attendance
         // if(attendanceChanges.length===0)
         //     {return;}
         const newStatusQuery=`UPDATE attendance SET status=?, editable = FALSE 
-                            WHERE attendance_id=?`;
+                            WHERE attendance_id=? AND editable=TRUE`;
         for (const attendance of attendanceChanges) {
             if (![1, 0, -1].includes(attendance.status)) {
                 throw new Error("Invalid attendance status");

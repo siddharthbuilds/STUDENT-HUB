@@ -1,12 +1,13 @@
 import "./ConfirmationBox.css"
 import {useState} from "react"
 import { Toast } from "../register/Toast";
-export function ConfirmationBox({message1,message2,option1, option2, toastmessage,setTrackConfirmation})
+export function ConfirmationBox({message1,message2,option1, option2, toastmessage,setTrackConfirmation,saveFunction})
 {
     const [trackSave,setTrackSave] = useState(false);
     function onClickConfirmSave()
     {
         setTrackSave(true);
+        saveFunction();
         setTimeout(()=>{
             setTrackSave(false);
             setTrackConfirmation(false);

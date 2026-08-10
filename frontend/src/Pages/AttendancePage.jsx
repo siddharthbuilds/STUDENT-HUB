@@ -11,12 +11,14 @@ import { useEffect, useState } from "react"
 import {useSemester} from "../context/useSemester.js";
 import { getMonths } from "../Utils/getMonths.js";
 import { getCourseSummary } from "../../api/attendanceApi.js";
+import { updateAttendance } from "../../api/attendanceApi.js";
 export function AttendancePage({plannerMode=false})
 {
     const [courseWise, setCourseWise] = useState(false);
     const [dayWise, setDayWise] = useState(true);
     const [trackConfirmation, setTrackConfirmation] = useState(false);
     const [attendanceRows,setAttendanceRows] = useState([]);
+    const [changedAttendance, setChangedAttendance] = useState([]);
     const [courseSummary,setCourseSummary] = useState([]);
     const {semesterDetails} = useSemester();
     const [error, setError] = useState('');
@@ -43,40 +45,54 @@ export function AttendancePage({plannerMode=false})
             setTrackConfirmation(true);
     }
 
-    function calculateSummary(rows)
+    async function saveAttendance() 
     {
-        const grouped = {};
-        rows.forEach(row => {
-            if(!grouped[row.courseId])
-            {
-                grouped[row.courseId] = {
-                    courseId: row.courseId,
-                    course_name: row.courseName,
-                    total_hours: 0,
-                    total_present: 0,
-                    total_absent: 0
-                };
+        try {
+
+            if (changedAttendance.length === 0) {
+                setTrackConfirmation(false);
+                return;
             }
-            grouped[row.courseId].total_hours++;
-            if(row.status === 1)
-                grouped[row.courseId].total_present++;
 
-            if(row.status === -1)
-                grouped[row.courseId].total_absent++;
+            await updateAttendance({
+                attendanceChanges: changedAttendance
+            });
 
-        });
+            setAttendanceRows(prev =>
+                prev.map(row => {
 
-        const summary = Object.values(grouped);
-        summary.forEach(course => {
-            course.allowedBunks =
-                Math.floor(course.total_hours * 0.25);
-            course.remainingBunks =
-                course.allowedBunks - course.total_absent;
+                    const changed = changedAttendance.find(
+                        change =>
+                            change.attendance_id ===
+                            row.attendance_id
+                    );
 
-        });
+                    if (!changed)
+                        return row;
 
-        setCourseSummary(summary);
+                    return {
+                        ...row,
+                        status: changed.status,
+                        editable: false
+                    };
+                })
+            );
+
+            setChangedAttendance([]);
+
+            setTrackConfirmation(false);
+
+        }
+        catch (err) {
+
+            setError(
+                err.response?.data?.message ||
+                "Failed to update attendance"
+            );
+
+        }
     }
+
     const months = semesterDetails?
             getMonths(semesterDetails.startDate, semesterDetails.endDate)
             :[];
@@ -107,7 +123,7 @@ export function AttendancePage({plannerMode=false})
             <RadioButtons months={months} setAttendanceRows={setAttendanceRows}/>
             <EachHour attendanceRows={attendanceRows}
                  setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}
-                calculateSummary={calculateSummary}/>
+                 setChangedAttendance={setChangedAttendance}/>
             {!plannerMode&&<ButtonLogin text="Save" onClick={onClickSave}/>}
             </>}
             {courseWise&&<AttendanceContainer courseSummary={courseSummary}/>}
@@ -119,7 +135,9 @@ export function AttendancePage({plannerMode=false})
             option1="Save"
             option2="Cancel"
             toastmessage="All Changes Saved"
-            setTrackConfirmation={setTrackConfirmation}/>}
+            setTrackConfirmation={setTrackConfirmation}
+            saveFunction={saveAttendance}
+            />}
             {error && <p style={{ color: "#ef4444" }}>{error}</p>}
         </>
     )
