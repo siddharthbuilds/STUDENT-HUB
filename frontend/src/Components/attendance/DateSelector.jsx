@@ -1,6 +1,6 @@
 import "./DateSelector.css";
 import { getAttendanceRows } from "../../../api/attendanceApi";
-export function DateSelector({data,setAttendanceRows})
+export function DateSelector({data,setAttendanceRows,setAttendanceType})
 {
     const starting = 1;
     const ending = Number(data.last);
@@ -12,10 +12,9 @@ export function DateSelector({data,setAttendanceRows})
     async function onSelectDate(num)
     {
         const date = `${data.year}-${data.monthNum}-${num}`;
-        console.log(date);
         const attendanceData = await getAttendanceRows(date);
-        console.log(attendanceData);
         setAttendanceRows(attendanceData.data.attendanceRows);
+        setAttendanceType(attendanceData.data.type);
     }
     return(
         <div className="div-attendance-dates">

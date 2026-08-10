@@ -18,6 +18,7 @@ export function AttendancePage({plannerMode=false})
     const [dayWise, setDayWise] = useState(true);
     const [trackConfirmation, setTrackConfirmation] = useState(false);
     const [attendanceRows,setAttendanceRows] = useState([]);
+    const [attendanceType,setAttendanceType] = useState(null);
     const [changedAttendance, setChangedAttendance] = useState([]);
     const [courseSummary,setCourseSummary] = useState([]);
     const {semesterDetails} = useSemester();
@@ -120,8 +121,11 @@ export function AttendancePage({plannerMode=false})
             styleCourseWise={styleCourseWise}
             />
             {dayWise&&<>
-            <RadioButtons months={months} setAttendanceRows={setAttendanceRows}/>
-            <EachHour attendanceRows={attendanceRows}
+            <RadioButtons months={months} 
+                        setAttendanceRows={setAttendanceRows}
+                        setAttendanceType={setAttendanceType}
+                        />
+            <EachHour attendanceRows={attendanceRows} attendanceType={attendanceType}
                  setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}
                  setChangedAttendance={setChangedAttendance}/>
             {!plannerMode&&<ButtonLogin text="Save" onClick={onClickSave}/>}

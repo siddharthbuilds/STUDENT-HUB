@@ -1,7 +1,7 @@
 import "./RadioButtons.css";
 import { DateSelector } from "./DateSelector";
 import { useState } from "react";
-export function RadioButtons({months, setAttendanceRows})
+export function RadioButtons({months, setAttendanceRows, setAttendanceType})
 {
     const [selectedMonth, setSelectedMonth] = useState(0);
     return(
@@ -23,7 +23,10 @@ export function RadioButtons({months, setAttendanceRows})
                 </div>)
             })}
         </div>
-        <DateSelector data={months[selectedMonth]} setAttendanceRows={setAttendanceRows} />
+        <DateSelector data={months[selectedMonth]} 
+                setAttendanceRows={setAttendanceRows} 
+                setAttendanceType={setAttendanceType}
+                />
         </>
     )
 }

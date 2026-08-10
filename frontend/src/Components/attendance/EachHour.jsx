@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export function EachHour({
     attendanceRows,
+    attendanceType,
     setAttendanceRows,
     plannerMode,
     setChangedAttendance
@@ -13,8 +14,6 @@ export function EachHour({
 
         const updatedRows = [...attendanceRows];
 
-        // In normal attendance page,
-        // already-saved rows cannot be edited.
         if (
             !plannerMode &&
             !updatedRows[index].editable
@@ -36,11 +35,10 @@ export function EachHour({
                 updatedRows[index].status = 0;
         }
 
-        // Update UI only
+        
         setAttendanceRows(updatedRows);
 
-        // Normal Attendance page:
-        // remember this row as changed.
+
         if (!plannerMode) {
 
             setChangedAttendance(prev => {
@@ -84,10 +82,10 @@ export function EachHour({
         <div className="div-attendance-hours">
 
             {
+                attendanceType==1&&
                 attendanceRows &&
                 attendanceRows.length > 0 &&
                 attendanceRows.map((attendance, index) => {
-
                     return (
                         <div
                             key={attendance.attendance_id}
