@@ -13,6 +13,6 @@ router.use(authenticateToken);
 
 router.patch('/update',updateAttendanceController);
 router.get('/get/course-summary',courseSummaryController);
-router.get('/get/:date',getAttendanceController);
 router.get('/get/plan-your-bunks',planYourBunksController);
+router.get('/get/:date',getAttendanceController);
 export default router;

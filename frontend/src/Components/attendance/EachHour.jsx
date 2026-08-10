@@ -86,6 +86,7 @@ export function EachHour({
                 attendanceRows &&
                 attendanceRows.length > 0 &&
                 attendanceRows.map((attendance, index) => {
+                    console.log(attendanceRows);
                     return (
                         <div
                             key={attendance.attendance_id}

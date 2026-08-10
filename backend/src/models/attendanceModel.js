@@ -178,8 +178,8 @@ class Attendance
                             a.editable,
                             a.status,
 
-                            c.course_id AS courseId,
-                            c.course_name AS courseName
+                            c.course_id ,
+                            c.course_name
 
                         FROM attendance a
 

@@ -23,7 +23,7 @@ export function AttendanceDetails({course,total=0,present,absent,bunks,percentag
                                 </div>
                                 <div className="div-attendance-subdetails">
                                     <div> Bunks Left </div>
-                                    <div className={Number(bunks)>5? "style-safe-bunk"
+                                    <div className={(Number(bunks)>5)? "style-safe-bunk"
                                     :Number(bunks)<=5 && Number(bunks)>0? "style-risk-bunk"
                                     :"style-bad-bunk"}>
                                     {bunks}</div>
