@@ -7,7 +7,7 @@ export async function getAttendanceController(req,res)
     const attendanceDate = req.params.date;
     try{
         let attendanceRows = await Calendar.getCalendar({semId, attendanceDate});
-        if(attendanceRows.length>0)
+        if(attendanceRows.length>0 && attendanceRows[0].code !=3)
         {
             return res.status(200).json({attendanceRows, type: 0});
         }

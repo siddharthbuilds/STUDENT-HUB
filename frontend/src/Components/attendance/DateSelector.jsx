@@ -12,14 +12,16 @@ export function DateSelector({data,setAttendanceRows})
     async function onSelectDate(num)
     {
         const date = `${data.year}-${data.monthNum}-${num}`;
+        console.log(date);
         const attendanceData = await getAttendanceRows(date);
+        console.log(attendanceData);
         setAttendanceRows(attendanceData.data.attendanceRows);
     }
     return(
         <div className="div-attendance-dates">
             {myRange.map(number=>{
                 return (
-                    <div className="div-attendance-day">
+                    <div key = {number} className="div-attendance-day">
                         <button 
                         className="btn-attendance-day"
                         onClick={()=>{onSelectDate(number)}}

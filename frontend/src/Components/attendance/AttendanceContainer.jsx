@@ -4,9 +4,8 @@ export function AttendanceContainer({courseSummary}){
     return(
         <div className="div-attendance-container">
             {courseSummary.map(course=>
-                
+                <div key ={course.course_name}>
                 <AttendanceDetails
-                    key={course.courseId}
                     course={course.course_name}
                     total={course.total_hours}
                     present={course.total_present}
@@ -19,6 +18,8 @@ export function AttendanceContainer({courseSummary}){
                     }
 
                 />
+
+                </div>
 
             )}
         </div>

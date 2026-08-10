@@ -81,7 +81,7 @@ export function EachHour({
     }
 
     return (
-        <div className="div-attendace-hours">
+        <div className="div-attendance-hours">
 
             {
                 attendanceRows &&

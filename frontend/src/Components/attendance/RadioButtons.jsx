@@ -8,7 +8,8 @@ export function RadioButtons({months, setAttendanceRows})
         <>
         <div className="div-attendance-months">
             {months.map((month,index)=>{
-                return <button className="btn-attendance-months">
+                return (<div key={`${month.month}`}>
+                    <button className="btn-attendance-months">
                     <input type="radio"
                     name="input-month" 
                     className="input-month-radio" 
@@ -19,6 +20,7 @@ export function RadioButtons({months, setAttendanceRows})
                     />
                     <label htmlFor={`month-${month.month}`}> {`${month.month}`} </label>
                 </button>
+                </div>)
             })}
         </div>
         <DateSelector data={months[selectedMonth]} setAttendanceRows={setAttendanceRows} />

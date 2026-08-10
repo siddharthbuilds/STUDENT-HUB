@@ -9,7 +9,7 @@ export function DashBoard({options})
                     <div className="div-option">
                         {options&&options.map(option=>{
                             return(
-                                <>
+                                <div key={`${option.text}`}>
                                     <button 
                                         className="btn-dashboard"
                                         onClick={()=>{navigate(option.navigate)}}
@@ -23,7 +23,7 @@ export function DashBoard({options})
                                         </div>
                                             
                                     </button>
-                                </>
+                                </div>
                             )
                         })}
                     </div>
