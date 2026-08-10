@@ -5,76 +5,34 @@ export function EachHour({
     attendanceRows,
     attendanceType,
     setAttendanceRows,
-    plannerMode,
-    setChangedAttendance
+    plannerMode,setIsDirty
 }) {
     const [error, _setError] = useState("");
 
-    function toggleStatus(index) {
-
-        const updatedRows = [...attendanceRows];
-
-        if (
-            !plannerMode &&
-            !updatedRows[index].editable
-        ) {
-            return;
-        }
-
-        switch (updatedRows[index].status) {
-
-            case 0:
-                updatedRows[index].status = 1;
-                break;
-
-            case 1:
-                updatedRows[index].status = -1;
-                break;
-
-            default:
-                updatedRows[index].status = 0;
-        }
-
-        
-        setAttendanceRows(updatedRows);
-
-
-        if (!plannerMode) {
-
-            setChangedAttendance(prev => {
-
-                const existingIndex = prev.findIndex(
-                    row =>
-                        row.attendance_id ===
-                        updatedRows[index].attendance_id
-                );
-
-                if (existingIndex !== -1) {
-
-                    const copy = [...prev];
-
-                    copy[existingIndex] = {
-                        attendance_id:
-                            updatedRows[index].attendance_id,
-
-                        status:
-                            updatedRows[index].status
-                    };
-
-                    return copy;
+    function toggleStatus(attendanceId)
+    {
+        if(!plannerMode)
+        {
+            const current = attendanceRows.find(row=>row.attendance_id === attendanceId);
+            if(!current || current.editable===0) return;
+            else{
+                const oldStatus = current.status;
+                let newStatus;
+                switch(oldStatus)
+                {
+                    case 0: newStatus=1; break;
+                    case 1: newStatus=-1; break;
+                    default: newStatus=0; break;
                 }
+                const editedRows = attendanceRows.map(row =>
+                                    row.attendance_id === attendanceId
+                                        ? { ...row, status: newStatus }
+                                        : row
+                                );
 
-                return [
-                    ...prev,
-                    {
-                        attendance_id:
-                            updatedRows[index].attendance_id,
-
-                        status:
-                            updatedRows[index].status
-                    }
-                ];
-            });
+                setAttendanceRows(editedRows);
+                setIsDirty(false);
+        }
         }
     }
 
@@ -85,7 +43,7 @@ export function EachHour({
                 attendanceType==1&&
                 attendanceRows &&
                 attendanceRows.length > 0 &&
-                attendanceRows.map((attendance, index) => {
+                attendanceRows.map((attendance) => {
                     console.log(attendanceRows);
                     return (
                         <div
@@ -101,7 +59,7 @@ export function EachHour({
 
                                 <button
                                     onClick={() =>
-                                        toggleStatus(index)
+                                        toggleStatus(attendance.attendance_id)
                                     }
 
                                     className={

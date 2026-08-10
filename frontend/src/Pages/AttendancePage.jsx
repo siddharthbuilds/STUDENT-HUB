@@ -20,10 +20,22 @@ export function AttendancePage({plannerMode=false})
     const [trackConfirmation, setTrackConfirmation] = useState(false);
     const [attendanceRows,setAttendanceRows] = useState([]);
     const [attendanceType,setAttendanceType] = useState(null);
-    const [changedAttendance, setChangedAttendance] = useState([]);
+    const [originalRows, setOriginalRows] = useState([]);
+    const [isDirty,setIsDirty] = useState(false);
     const [courseSummary,setCourseSummary] = useState([]);
     const {semesterDetails} = useSemester();
     const [error, setError] = useState('');
+    // const [plannerRows, setPlannerRows] = useState([]);
+
+    // useEffect(()=>{
+    //     async function getPlannerRows()
+    //     {
+    //         const response = await planYourBunks();
+    //         setPlannerRows(response.data.attendanceRows);
+            
+    //     }
+    //     getPlannerRows();
+    // },[])
 
     async function styleCourseWise()
     {
@@ -31,10 +43,7 @@ export function AttendancePage({plannerMode=false})
         {
             if(plannerMode)
             {
-                const response = await planYourBunks();
-                const plannerRows = response.data.attendanceRows;
-                console.log(plannerRows);
-                calculatePlannerSummary(plannerRows);
+                //calculatePlannerSummary(plannerRows);
             }
             else
             {
@@ -66,112 +75,77 @@ export function AttendancePage({plannerMode=false})
             setTrackConfirmation(true);
     }
 
-    async function saveAttendance() 
+    async function saveAttendance()
     {
-        try {
-
-            if (changedAttendance.length === 0) {
-                setTrackConfirmation(false);
-                return;
-            }
-
-            await updateAttendance({
-                attendanceChanges: changedAttendance
-            });
-
-            setAttendanceRows(prev =>
-                prev.map(row => {
-
-                    const changed = changedAttendance.find(
-                        change =>
-                            change.attendance_id ===
-                            row.attendance_id
-                    );
-
-                    if (!changed)
-                        return row;
-
-                    return {
-                        ...row,
-                        status: changed.status,
-                        editable: false
-                    };
-                })
-            );
-
-            setChangedAttendance([]);
-
-            setTrackConfirmation(false);
-
+        try{
+            await updateAttendance(attendanceRows);
+            setIsDirty(false);
         }
-        catch (err) {
-
-            setError(
-                err.response?.data?.message ||
-                "Failed to update attendance"
-            );
-
+        catch(err)
+        {
+            setError(err.message);
         }
     }
+ 
+    
+    // function calculatePlannerSummary(rows)
+    // {
+    //     const grouped = {};
 
-    function calculatePlannerSummary(rows)
-    {
-        const grouped = {};
+    //     rows.forEach(row => {
 
-        rows.forEach(row => {
+    //         if(!grouped[row.course_id])
+    //         {
+    //             grouped[row.course_id] = {
+    //                 courseId: row.course_id,
+    //                 course_name: row.course_name,
+    //                 total_hours: 0,
+    //                 total_present: 0,
+    //                 total_absent: 0
+    //             };
+    //         }
 
-            if(!grouped[row.course_id])
-            {
-                grouped[row.course_id] = {
-                    courseId: row.course_id,
-                    course_name: row.course_name,
-                    total_hours: 0,
-                    total_present: 0,
-                    total_absent: 0
-                };
-            }
+    //         grouped[row.course_id].total_hours++;
 
-            grouped[row.course_id].total_hours++;
+    //         if(row.status === 1)
+    //             grouped[row.course_id].total_present++;
 
-            if(row.status === 1)
-                grouped[row.course_id].total_present++;
+    //         if(row.status === -1)
+    //             grouped[row.course_id].total_absent++;
+    //     });
 
-            if(row.status === -1)
-                grouped[row.course_id].total_absent++;
-        });
+    //     const summary = Object.values(grouped);
 
-        const summary = Object.values(grouped);
+    //     summary.forEach(course => {
 
-        summary.forEach(course => {
+    //         course.allowedBunks =
+    //             Math.floor(course.total_hours * 0.25);
 
-            course.allowedBunks =
-                Math.floor(course.total_hours * 0.25);
+    //         course.remainingBunks =
+    //             course.allowedBunks - course.total_absent;
 
-            course.remainingBunks =
-                course.allowedBunks - course.total_absent;
+    //     });
 
-        });
-
-        setCourseSummary(summary);
-    }
+    //     setCourseSummary(summary);
+    // }
 
     const months = semesterDetails?
             getMonths(semesterDetails.startDate, semesterDetails.endDate)
             :[];
-    useEffect(()=>{
-        async function fetchCourseSummary()
-        {
-            try{
-                const response = await getCourseSummary();
-                setCourseSummary(response.data.courseSummary);
-            }
+    // useEffect(()=>{
+    //     async function fetchCourseSummary()
+    //     {
+    //         try{
+    //             const response = await getCourseSummary();
+    //             setCourseSummary(response.data.courseSummary);
+    //         }
 
-            catch(err){
-                setError(err.response?.data?.message);
-            }
-        }
-        fetchCourseSummary();
-    },[]);
+    //         catch(err){
+    //             setError(err.response?.data?.message);
+    //         }
+    //     }
+    //     fetchCourseSummary();
+    // },[]);
 
     return(
         <>
@@ -188,7 +162,8 @@ export function AttendancePage({plannerMode=false})
                         />
             <EachHour attendanceRows={attendanceRows} attendanceType={attendanceType}
                  setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}
-                 setChangedAttendance={setChangedAttendance}/>
+                 originalRows={originalRows} setIsDirty={setIsDirty}
+                 />
             {!plannerMode&&<ButtonLogin text="Save" onClick={onClickSave}/>}
             </>}
             {courseWise&&<AttendanceContainer courseSummary={courseSummary}/>}
