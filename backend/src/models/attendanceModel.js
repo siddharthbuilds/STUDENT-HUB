@@ -113,15 +113,21 @@ class Attendance
     {
         // if(attendanceChanges.length===0)
         //     {return;}
-        const newStatusQuery=`UPDATE attendance SET status=?, editable = FALSE 
-                            WHERE attendance_id=? AND editable=TRUE`;
+        const newStatusQuery=`UPDATE attendance SET status=?, editable = ?
+                            WHERE attendance_id=? AND editable=1`;
+        let editable;
         for (const attendance of attendanceChanges) {
             if (![1, 0, -1].includes(attendance.status)) {
                 throw new Error("Invalid attendance status");
             }
+            if(attendance.status === 1 || attendance.status===-1)
+            {
+                editable = 0;
+            }
+            else {editable = 1;}
             await connection.query(
                 newStatusQuery,
-                [attendance.status, attendance.attendance_id]
+                [attendance.status, editable, attendance.attendance_id]
             );
         }
     }

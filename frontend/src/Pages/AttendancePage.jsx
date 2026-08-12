@@ -78,7 +78,7 @@ export function AttendancePage({plannerMode=false})
     async function saveAttendance()
     {
         try{
-            await updateAttendance(attendanceRows);
+            await updateAttendance({attendanceChanges: attendanceRows});
             setIsDirty(false);
         }
         catch(err)
@@ -154,11 +154,14 @@ export function AttendancePage({plannerMode=false})
             <AttendanceSelector dayWise={dayWise} 
             styleDayWise={styleDayWise}
             styleCourseWise={styleCourseWise}
+
             />
             {dayWise&&<>
             <RadioButtons months={months} 
                         setAttendanceRows={setAttendanceRows}
                         setAttendanceType={setAttendanceType}
+                        isDirty={isDirty}
+                        setTrackConfirmation={setTrackConfirmation}
                         />
             <EachHour attendanceRows={attendanceRows} attendanceType={attendanceType}
                  setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}

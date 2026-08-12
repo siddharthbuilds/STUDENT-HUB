@@ -26,12 +26,15 @@ export function EachHour({
                 }
                 const editedRows = attendanceRows.map(row =>
                                     row.attendance_id === attendanceId
-                                        ? { ...row, status: newStatus }
+                                        ? { ...row, status: newStatus, isModified:true}
                                         : row
                                 );
 
                 setAttendanceRows(editedRows);
-                setIsDirty(false);
+                const filteredRows = editedRows.filter(row=> row.isModified=== true)
+                if(filteredRows.find(row=> row.status === 1 || row.status === -1))
+                    {setIsDirty(true);}
+                else {setIsDirty(false);}
         }
         }
     }
@@ -44,7 +47,6 @@ export function EachHour({
                 attendanceRows &&
                 attendanceRows.length > 0 &&
                 attendanceRows.map((attendance) => {
-                    console.log(attendanceRows);
                     return (
                         <div
                             key={attendance.attendance_id}

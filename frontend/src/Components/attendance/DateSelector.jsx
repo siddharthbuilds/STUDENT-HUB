@@ -1,6 +1,7 @@
 import "./DateSelector.css";
 import { getAttendanceRows } from "../../../api/attendanceApi";
-export function DateSelector({data,setAttendanceRows,setAttendanceType})
+export function DateSelector({
+        data,setAttendanceRows,setAttendanceType,isDirty,setTrackConfirmation})
 {
     const starting = 1;
     const ending = Number(data.last);
@@ -16,6 +17,16 @@ export function DateSelector({data,setAttendanceRows,setAttendanceType})
         setAttendanceRows(attendanceData.data.attendanceRows);
         setAttendanceType(attendanceData.data.type);
     }
+    function confirmationFunction(number)
+    {
+        if(isDirty)
+        {
+            setTrackConfirmation(true);
+        }
+        else{
+            onSelectDate(number);
+        }
+    }
     return(
         <div className="div-attendance-dates">
             {myRange.map(number=>{
@@ -23,7 +34,7 @@ export function DateSelector({data,setAttendanceRows,setAttendanceType})
                     <div key = {number} className="div-attendance-day">
                         <button 
                         className="btn-attendance-day"
-                        onClick={()=>{onSelectDate(number)}}
+                        onClick={()=>{confirmationFunction(number)}}
                         >
                             {number}
                         </button>
