@@ -6,7 +6,7 @@ export function DateSelector({
     })
 {
     const starting = 1;
-    const ending = Number(data.last);
+    const ending = data&&Number(data.last);
     const myRange=[];
     for(let i=starting;i<=ending;i++)
     {
