@@ -20,23 +20,23 @@ export function AttendancePage({plannerMode=false})
     const [trackConfirmation, setTrackConfirmation] = useState(false);
     const [attendanceRows,setAttendanceRows] = useState([]);
     const [attendanceType,setAttendanceType] = useState(null);
-    const [originalRows, setOriginalRows] = useState([]);
+    const [originalRows, _setOriginalRows] = useState([]);
     const [isDirty,setIsDirty] = useState(false);
     const [courseSummary,setCourseSummary] = useState([]);
     const {semesterDetails} = useSemester();
     const [error, setError] = useState('');
     const [trackDirty, setTrackDirty] = useState(false);
-    // const [plannerRows, setPlannerRows] = useState([]);
+    const [plannerRows, setPlannerRows] = useState([]);
 
-    // useEffect(()=>{
-    //     async function getPlannerRows()
-    //     {
-    //         const response = await planYourBunks();
-    //         setPlannerRows(response.data.attendanceRows);
+    useEffect(()=>{
+        async function getPlannerRows()
+        {
+            const response = await planYourBunks();
+            setPlannerRows(response.data.attendanceRows);
             
-    //     }
-    //     getPlannerRows();
-    // },[])
+        }
+        getPlannerRows();
+    },[])
 
     async function styleCourseWise()
     {
@@ -44,7 +44,7 @@ export function AttendancePage({plannerMode=false})
         {
             if(plannerMode)
             {
-                //calculatePlannerSummary(plannerRows);
+                calculatePlannerSummary(plannerRows);
             }
             else
             {
@@ -95,65 +95,51 @@ export function AttendancePage({plannerMode=false})
     }
  
     
-    // function calculatePlannerSummary(rows)
-    // {
-    //     const grouped = {};
+    function calculatePlannerSummary(rows)
+    {
+        const grouped = {};
 
-    //     rows.forEach(row => {
+        rows.forEach(row => {
 
-    //         if(!grouped[row.course_id])
-    //         {
-    //             grouped[row.course_id] = {
-    //                 courseId: row.course_id,
-    //                 course_name: row.course_name,
-    //                 total_hours: 0,
-    //                 total_present: 0,
-    //                 total_absent: 0
-    //             };
-    //         }
+            if(!grouped[row.course_id])
+            {
+                grouped[row.course_id] = {
+                    courseId: row.course_id,
+                    course_name: row.course_name,
+                    total_hours: 0,
+                    total_present: 0,
+                    total_absent: 0
+                };
+            }
 
-    //         grouped[row.course_id].total_hours++;
+            grouped[row.course_id].total_hours++;
 
-    //         if(row.status === 1)
-    //             grouped[row.course_id].total_present++;
+            if(row.status === 1)
+                grouped[row.course_id].total_present++;
 
-    //         if(row.status === -1)
-    //             grouped[row.course_id].total_absent++;
-    //     });
+            if(row.status === -1)
+                grouped[row.course_id].total_absent++;
+        });
 
-    //     const summary = Object.values(grouped);
+        const summary = Object.values(grouped);
 
-    //     summary.forEach(course => {
+        summary.forEach(course => {
 
-    //         course.allowedBunks =
-    //             Math.floor(course.total_hours * 0.25);
+            course.allowedBunks =
+                Math.floor(course.total_hours * 0.25);
 
-    //         course.remainingBunks =
-    //             course.allowedBunks - course.total_absent;
+            course.remainingBunks =
+                course.allowedBunks - course.total_absent;
 
-    //     });
+        });
 
-    //     setCourseSummary(summary);
-    // }
+        setCourseSummary(summary);
+    }
 
     const months = semesterDetails?
             getMonths(semesterDetails.startDate, semesterDetails.endDate)
             :[];
-    // useEffect(()=>{
-    //     async function fetchCourseSummary()
-    //     {
-    //         try{
-    //             const response = await getCourseSummary();
-    //             setCourseSummary(response.data.courseSummary);
-    //         }
-
-    //         catch(err){
-    //             setError(err.response?.data?.message);
-    //         }
-    //     }
-    //     fetchCourseSummary();
-    // },[]);
-
+    
     return(
         <>
         <div className={trackConfirmation?"div-noblur div-blur":"div-noblur"}>
@@ -170,10 +156,13 @@ export function AttendancePage({plannerMode=false})
                         isDirty={isDirty}
                         setTrackConfirmation={setTrackConfirmation}
                         setTrackDirty={setTrackDirty}
+                        plannerMode={plannerMode}
+                        plannerRows={plannerRows}
                         />
             <EachHour attendanceRows={attendanceRows} attendanceType={attendanceType}
                  setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}
                  originalRows={originalRows} setIsDirty={setIsDirty} 
+                 setPlannerRows={setPlannerRows} plannerRows={plannerRows}
                  
                  />
             {!plannerMode&&<ButtonLogin text="Save" onClick={onClickSave}/>}

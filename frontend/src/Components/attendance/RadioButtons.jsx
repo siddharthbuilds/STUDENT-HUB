@@ -5,7 +5,8 @@ export function RadioButtons({months,
                 setAttendanceRows, 
                 setAttendanceType,
                 isDirty, setTrackConfirmation,
-                setTrackDirty
+                setTrackDirty,
+                plannerMode,plannerRows
             })
 {
     const [selectedMonth, setSelectedMonth] = useState(0);
@@ -33,6 +34,8 @@ export function RadioButtons({months,
                 setAttendanceType={setAttendanceType}
                 isDirty={isDirty} setTrackConfirmation={setTrackConfirmation}
                 setTrackDirty={setTrackDirty}
+                plannerMode={plannerMode}
+                plannerRows={plannerRows}
                 />
         </>
     )

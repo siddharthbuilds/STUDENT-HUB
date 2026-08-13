@@ -5,38 +5,52 @@ export function EachHour({
     attendanceRows,
     attendanceType,
     setAttendanceRows,
-    plannerMode,setIsDirty
+    plannerMode,setIsDirty,setPlannerRows, plannerRows
 }) {
     const [error, _setError] = useState("");
 
     function toggleStatus(attendanceId)
     {
+        const current = attendanceRows.find(row=>row.attendance_id === attendanceId);
         if(!plannerMode)
-        {
-            const current = attendanceRows.find(row=>row.attendance_id === attendanceId);
-            if(!current || current.editable===0) return;
-            else{
-                const oldStatus = current.status;
-                let newStatus;
-                switch(oldStatus)
-                {
-                    case 0: newStatus=1; break;
-                    case 1: newStatus=-1; break;
-                    default: newStatus=0; break;
-                }
-                const editedRows = attendanceRows.map(row =>
-                                    row.attendance_id === attendanceId
-                                        ? { ...row, status: newStatus, isModified:true}
-                                        : row
-                                );
+            {if(!current || current.editable===0) return;}
+        else
+            {if(!current) return;}
 
-                setAttendanceRows(editedRows);
+            const oldStatus = current.status;
+            let newStatus;
+            switch(oldStatus)
+            {
+                case 0: newStatus=1; break;
+                case 1: newStatus=-1; break;
+                default: newStatus=0; break;
+            }
+            const editedRows = attendanceRows.map(row =>
+                                row.attendance_id === attendanceId
+                                    ? { ...row, status: newStatus, isModified:true}
+                                    : row
+                            );
+
+            setAttendanceRows(editedRows);
+            if(!plannerMode)
+            {
                 const filteredRows = editedRows.filter(row=> row.isModified=== true)
                 if(filteredRows.find(row=> row.status === 1 || row.status === -1))
                     {setIsDirty(true);}
                 else {setIsDirty(false);}
-        }
-        }
+            }
+            else
+            {
+                const newPlannerRows = plannerRows.map(plannerRow => {
+                    const editedRow = editedRows.find(
+                        row => row.attendance_id === plannerRow.attendance_id
+                    );
+                    return editedRow ? editedRow : plannerRow;
+                });
+                setPlannerRows(newPlannerRows);
+            }
+        
+
     }
 
     return (

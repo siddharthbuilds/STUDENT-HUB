@@ -2,7 +2,7 @@ import "./DateSelector.css";
 import { getAttendanceRows } from "../../../api/attendanceApi";
 export function DateSelector({
         data,setAttendanceRows,setAttendanceType,isDirty,
-        setTrackDirty
+        setTrackDirty,plannerMode,plannerRows
     })
 {
     const starting = 1;
@@ -14,10 +14,24 @@ export function DateSelector({
     }
     async function onSelectDate(num)
     {
-        const date = `${data.year}-${data.monthNum}-${num}`;
-        const attendanceData = await getAttendanceRows(date);
-        setAttendanceRows(attendanceData.data.attendanceRows);
-        setAttendanceType(attendanceData.data.type);
+        const date = `${data.year}-${data.monthNum<10?`0${data.monthNum}`:`${data.monthNum}`}-${num<10?`0{num}`:`${num}`}`;
+        if(!plannerMode)
+        {
+            const attendanceData = await getAttendanceRows(date);
+            setAttendanceRows(attendanceData.data.attendanceRows);
+            setAttendanceType(attendanceData.data.type);
+        }
+        else
+        {
+            const attendanceData = plannerRows.filter(row=>{
+                const rowDate = new Date (row.attendance_date);
+                const strDate = rowDate.toLocaleDateString('en-CA');
+                if(strDate == date) return row;
+            }
+            );
+            setAttendanceRows(attendanceData);
+            setAttendanceType(1);
+        }
     }
     function confirmationFunction(number)
     {
