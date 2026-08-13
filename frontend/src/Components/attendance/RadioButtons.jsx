@@ -4,8 +4,8 @@ import { useState } from "react";
 export function RadioButtons({months, 
                 setAttendanceRows, 
                 setAttendanceType,
-                isDirty, setTrackConfirmation
-
+                isDirty, setTrackConfirmation,
+                setTrackDirty
             })
 {
     const [selectedMonth, setSelectedMonth] = useState(0);
@@ -32,6 +32,7 @@ export function RadioButtons({months,
                 setAttendanceRows={setAttendanceRows} 
                 setAttendanceType={setAttendanceType}
                 isDirty={isDirty} setTrackConfirmation={setTrackConfirmation}
+                setTrackDirty={setTrackDirty}
                 />
         </>
     )

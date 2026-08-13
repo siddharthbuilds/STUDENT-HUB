@@ -1,7 +1,9 @@
 import "./DateSelector.css";
 import { getAttendanceRows } from "../../../api/attendanceApi";
 export function DateSelector({
-        data,setAttendanceRows,setAttendanceType,isDirty,setTrackConfirmation})
+        data,setAttendanceRows,setAttendanceType,isDirty,
+        setTrackDirty
+    })
 {
     const starting = 1;
     const ending = Number(data.last);
@@ -21,7 +23,7 @@ export function DateSelector({
     {
         if(isDirty)
         {
-            setTrackConfirmation(true);
+            setTrackDirty(true);
         }
         else{
             onSelectDate(number);

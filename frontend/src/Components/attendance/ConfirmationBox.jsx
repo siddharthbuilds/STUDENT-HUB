@@ -1,7 +1,17 @@
 import "./ConfirmationBox.css"
 import {useState} from "react"
 import { Toast } from "../register/Toast";
-export function ConfirmationBox({message1,message2,option1, option2, toastmessage,setTrackConfirmation,saveFunction})
+export function ConfirmationBox(
+    {   message1,
+        message2,
+        option1, 
+        option2, 
+        toastmessage,
+        setTrackConfirmation,
+        saveFunction,
+        cancelFunction
+    }
+    )
 {
     const [trackSave,setTrackSave] = useState(false);
     function onClickConfirmSave()
@@ -16,6 +26,10 @@ export function ConfirmationBox({message1,message2,option1, option2, toastmessag
 
     function onClickConfirmCancel()
     {
+        if(cancelFunction)
+        {
+            cancelFunction();
+        }
         setTrackConfirmation(false);
     }
     return(
@@ -41,7 +55,7 @@ export function ConfirmationBox({message1,message2,option1, option2, toastmessag
             </div>
             
         </div>}
-        <Toast message={toastmessage} show={trackSave} />
+        {toastmessage&&<Toast message={toastmessage} show={trackSave} />}
         </>
         
     )

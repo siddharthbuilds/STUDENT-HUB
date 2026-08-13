@@ -25,6 +25,7 @@ export function AttendancePage({plannerMode=false})
     const [courseSummary,setCourseSummary] = useState([]);
     const {semesterDetails} = useSemester();
     const [error, setError] = useState('');
+    const [trackDirty, setTrackDirty] = useState(false);
     // const [plannerRows, setPlannerRows] = useState([]);
 
     // useEffect(()=>{
@@ -85,6 +86,12 @@ export function AttendancePage({plannerMode=false})
         {
             setError(err.message);
         }
+    }
+
+    function revertChanges()
+    {
+        setAttendanceRows(originalRows);
+        setIsDirty(false);
     }
  
     
@@ -162,15 +169,26 @@ export function AttendancePage({plannerMode=false})
                         setAttendanceType={setAttendanceType}
                         isDirty={isDirty}
                         setTrackConfirmation={setTrackConfirmation}
+                        setTrackDirty={setTrackDirty}
                         />
             <EachHour attendanceRows={attendanceRows} attendanceType={attendanceType}
                  setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}
-                 originalRows={originalRows} setIsDirty={setIsDirty}
+                 originalRows={originalRows} setIsDirty={setIsDirty} 
+                 
                  />
             {!plannerMode&&<ButtonLogin text="Save" onClick={onClickSave}/>}
             </>}
             {courseWise&&<AttendanceContainer courseSummary={courseSummary}/>}
         </div>
+
+            {trackDirty&&<ConfirmationBox 
+            message1="Save or revert your changes before proceeding.."
+            option1="Save"
+            option2="Revert"
+            setTrackConfirmation={setTrackDirty}
+            saveFunction={()=>{setTrackConfirmation(true)}}
+            cancelFunction={revertChanges}
+            />}
             
             {trackConfirmation&&<ConfirmationBox 
             message1="Are you sure want to save the changes?"
