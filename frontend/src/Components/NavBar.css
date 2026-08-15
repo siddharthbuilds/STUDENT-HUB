@@ -34,8 +34,11 @@
 .links-list:hover{
     background-color: rgb(7, 8, 121);
     cursor: pointer;
+    transition: background-color 0.7s;
 }
 
 .filled{
     background-color: rgb(7, 8, 121);
+    box-shadow: 2px 5px 5px rgb(8, 2, 32);
 }
+

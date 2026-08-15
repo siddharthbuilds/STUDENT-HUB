@@ -52,8 +52,6 @@ export function HomePage()
     loadSemesters();
     },[]);
     return(
-        <div>
-        <NavBar />
         <div className="div-homepage">
         {showLoader&&<PageLoader/>}
         {!showLoader&& <div className="div-all-semesters">
@@ -71,7 +69,6 @@ export function HomePage()
                  onClick={()=>{navigate('/add-semester')}}/>
         </div>}
         {error && <p style={{ color: "#ef4444" }}>{error}</p>}
-        </div>
         </div>
     )
 }

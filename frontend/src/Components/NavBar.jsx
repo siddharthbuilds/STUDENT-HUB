@@ -1,41 +1,61 @@
 import "./NavBar.css";
 import {House,LayoutList,Percent,LogOut} from "lucide-react";
+import {Link} from "react-router";
+import { useState } from "react";
 export function NavBar()
 {
+    const links = [
+                {
+                    path: "user/home",
+                    text: "Home",
+                    icon: House
+                },
+                {
+                    path: "/user/semesters",
+                    text: "Semesters",
+                    icon: LayoutList
+                },
+                {
+                    path: "/user/grades",
+                    text: "Grades",
+                    icon: Percent
+                }
+            ];
+        const [section,setSection] = useState("home");
+        
+        function onClickNav(text)
+        {
+            setSection(text);
+        }
     return(
         <>
-           <nav className="nav">
-                <ul className="links">
-                    <li className="links-list filled">
+        <nav className="nav">
+        <ul className="links">
+        {links.map(({path,text,icon})=>{
+            const Icon = icon;
+            return(<>
+                    <Link to={path}
+                         style={{ color: 'inherit', textDecoration: 'none' }}
+                    >
+                    <li className={section===text?"links-list filled":"links-list"}
+                        onClick={()=>{onClickNav(text)}}
+                    >
                         <div>
-                            <House size="18px"/>
+                            <Icon size="18px"/>
                         </div> 
                         <div>
-                        Home
+                            {text}
                         </div>
                     </li>
+                    </Link>
+            </>)
+        })}
                     <li className="links-list">
                         <div>
-                            <LayoutList size="18px"/>
+                            <LogOut size="18px"/>
                         </div> 
                         <div>
-                        Semesters
-                        </div>
-                    </li>
-                    <li className="links-list">
-                        <div>
-                            <Percent size="18px" />
-                        </div> 
-                        <div>
-                        Grades
-                        </div>
-                    </li>
-                    <li className="links-list">
-                        <div>
-                            <LogOut size="18px" />
-                        </div> 
-                        <div>
-                        Log Out
+                            Logout
                         </div>
                     </li>
                 </ul>
