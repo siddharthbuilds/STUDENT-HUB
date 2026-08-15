@@ -26,9 +26,9 @@ export function HomePage()
 
     function selectSemester(semester)
     {
-        localStorage.setItem('semId',semester.semId);
+        //localStorage.setItem('semId',semester.semId);
         setSemesterDetails(semester);
-        navigate("/dashboard");
+        navigate(`/dashboard/${semester.semId}`);
     }
 
     useEffect(()=>{

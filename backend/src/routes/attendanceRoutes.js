@@ -11,8 +11,8 @@ const router = Router();
 
 router.use(authenticateToken);
 
-router.patch('/update',updateAttendanceController);
-router.get('/get/course-summary',courseSummaryController);
-router.get('/get/plan-your-bunks',planYourBunksController);
-router.get('/get/:date',getAttendanceController);
+router.patch('/update/:semId',updateAttendanceController);
+router.get('/get/course-summary/:semId',courseSummaryController);
+router.get('/get/plan-your-bunks/:semId',planYourBunksController);
+router.get('/get/:semId/:date',getAttendanceController);
 export default router;

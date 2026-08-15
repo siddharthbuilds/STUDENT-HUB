@@ -1,5 +1,6 @@
 import "./DateSelector.css";
 import { getAttendanceRows } from "../../../api/attendanceApi";
+import { useSemester } from "../../context/useSemester";
 export function DateSelector({
         data,setAttendanceRows,setAttendanceType,isDirty,
         setTrackDirty,plannerMode,plannerRows
@@ -12,12 +13,14 @@ export function DateSelector({
     {
         myRange.push(i);
     }
+    const {semesterDetails} = useSemester();
+    const semId = semesterDetails.semId;
     async function onSelectDate(num)
     {
-        const date = `${data.year}-${data.monthNum<10?`0${data.monthNum}`:`${data.monthNum}`}-${num<10?`0{num}`:`${num}`}`;
+        const date = `${data.year}-${data.monthNum<10?`0${data.monthNum}`:`${data.monthNum}`}-${num<10?`0${num}`:`${num}`}`;
         if(!plannerMode)
         {
-            const attendanceData = await getAttendanceRows(date);
+            const attendanceData = await getAttendanceRows(date,semId);
             setAttendanceRows(attendanceData.data.attendanceRows);
             setAttendanceType(attendanceData.data.type);
         }

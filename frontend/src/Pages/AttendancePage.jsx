@@ -28,15 +28,17 @@ export function AttendancePage({plannerMode=false})
     const [trackDirty, setTrackDirty] = useState(false);
     const [plannerRows, setPlannerRows] = useState([]);
 
+    const semId = semesterDetails && semesterDetails.semId;
+
     useEffect(()=>{
         async function getPlannerRows()
         {
-            const response = await planYourBunks();
+            if(!semId) return;
+            const response = await planYourBunks(semId);
             setPlannerRows(response.data.attendanceRows);
-            
         }
         getPlannerRows();
-    },[])
+    },[semId])
 
     async function styleCourseWise()
     {
@@ -48,7 +50,7 @@ export function AttendancePage({plannerMode=false})
             }
             else
             {
-                const response = await getCourseSummary();
+                const response = await getCourseSummary(semId);
 
                 setCourseSummary(
                     response.data.courseSummary
@@ -79,7 +81,7 @@ export function AttendancePage({plannerMode=false})
     async function saveAttendance()
     {
         try{
-            await updateAttendance({attendanceChanges: attendanceRows});
+            await updateAttendance({attendanceChanges: attendanceRows},semId);
             setIsDirty(false);
         }
         catch(err)

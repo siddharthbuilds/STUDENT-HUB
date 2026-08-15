@@ -3,7 +3,7 @@ import Calendar from "../models/calendarModel.js";
 import mydb from "../config/database.js";
 export async function getAttendanceController(req,res)
 {
-    const semId = req.headers["x-sem-id"];
+    const semId = parseInt(req.params.semId);
     const attendanceDate = req.params.date;
     try{
         let attendanceRows = await Calendar.getCalendar({semId, attendanceDate});
@@ -25,6 +25,7 @@ export async function getAttendanceController(req,res)
 
 export async function updateAttendanceController(req,res)
 {
+    const semId = parseInt(req.params.semId);
     const connection = await mydb.getConnection();
     await connection.beginTransaction();
     const attendanceChanges = req.body.attendanceChanges;
@@ -47,7 +48,7 @@ export async function updateAttendanceController(req,res)
 
 export async function courseSummaryController(req,res)
 {
-    const semId = req.headers["x-sem-id"];
+    const semId = parseInt(req.params.semId);
     try{
         const courseSummary = await Attendance.getCourseSummary({semId});
         return res.status(200).json({courseSummary});
@@ -60,7 +61,7 @@ export async function courseSummaryController(req,res)
 
 export async function planYourBunksController(req,res)
 {
-    const semId = req.headers["x-sem-id"];
+    const semId = parseInt(req.params.semId);
     try{
         const attendanceRows = await Attendance.planYourBunks({semId});
         if(attendanceRows.length>0) 
