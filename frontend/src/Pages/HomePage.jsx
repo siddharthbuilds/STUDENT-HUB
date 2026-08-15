@@ -7,6 +7,7 @@ import PageLoader from "../Components/Loader";
 import {useNavigate} from "react-router";
 import formatDate from "../Utils/FormatDate";
 import {useSemester} from "../context/useSemester.js"; 
+import { NavBar } from "../Components/navbar.jsx";
 export function HomePage()
 {
     const [semesters,setSemesters]=useState();
@@ -51,7 +52,9 @@ export function HomePage()
     loadSemesters();
     },[]);
     return(
-        <>
+        <div>
+        <NavBar />
+        <div className="div-homepage">
         {showLoader&&<PageLoader/>}
         {!showLoader&& <div className="div-all-semesters">
             <div> Your Semesters</div>
@@ -68,6 +71,7 @@ export function HomePage()
                  onClick={()=>{navigate('/add-semester')}}/>
         </div>}
         {error && <p style={{ color: "#ef4444" }}>{error}</p>}
-        </>
+        </div>
+        </div>
     )
 }

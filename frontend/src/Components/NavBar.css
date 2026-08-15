@@ -1,0 +1,41 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    color: white;
+    width:150px;
+    height:100vh;
+    position:fixed;
+    top:0;
+    left:0;
+    padding-left:0px;
+    padding-right:8px;
+    border-right: 2px solid white;
+}
+
+.links{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+    flex-direction: column;
+    padding-left:15px;
+}
+
+.links-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:8px;
+    border-radius: 5px;
+}
+
+.links-list:hover{
+    background-color: rgb(7, 8, 121);
+    cursor: pointer;
+}
+
+.filled{
+    background-color: rgb(7, 8, 121);
+}
