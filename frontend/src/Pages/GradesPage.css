@@ -1,0 +1,18 @@
+.grades-page {
+    width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
+.grades-main {
+    width: min(100%, 1000px);
+    margin: 0 auto;
+    padding: 10px 35px 50px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+    .grades-main {
+        padding: 10px 20px 40px;
+    }
+}

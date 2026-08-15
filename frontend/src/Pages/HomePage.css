@@ -1,8 +1,83 @@
-.div-all-semesters{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    row-gap: 15px;
+.div-homepage {
+    width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
 }
 
+.div-all-semesters {
+    width: min(100%, 1100px);
+    margin: 0 auto;
 
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px 35px 50px;
+    box-sizing: border-box;
+}
+
+.semesters-heading {
+    margin-bottom: 24px;
+
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.semester-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+
+    width: 100%;
+}
+
+.semester-item {
+    width: 100%;
+    min-width: 0;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+.semester-item:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+.add-semester-container {
+    margin-top: 28px;
+    align-self: flex-start;
+}
+
+.semester-error {
+    margin: 20px 0 0;
+    text-align: center;
+
+    color: #ef4444;
+    font-size: 15px;
+}
+
+@media (max-width: 850px) {
+    .div-all-semesters {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .semester-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 550px) {
+    .div-all-semesters {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .semesters-heading {
+        font-size: 22px;
+    }
+}

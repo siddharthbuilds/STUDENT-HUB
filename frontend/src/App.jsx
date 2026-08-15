@@ -16,11 +16,14 @@ function App() {
   return (
     <>
     <Routes>
+    <Route path="/login" element={<LoginPage />}></Route>
+    <Route path="/register" element={<RegisterPage />}></Route>
 
     <Route path="/user" element={<MainLayout />}>
 
         <Route path="semesters" element={<HomePage/>} />
         <Route path="grades" element={<GradesPage/>} />
+        <Route path="add-semester" element={<AddSemPage/>} />
 
     </Route>
 

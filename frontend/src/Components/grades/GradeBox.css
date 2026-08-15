@@ -1,34 +1,108 @@
-.div-grades-container, .div-grades-box{
-    display:flex;
-    flex-direction: column;
-    row-gap: 8px;
-    padding:5px;
+.semester-grade-card {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 22px 25px;
+
+    background: rgba(255, 255, 255, 0.02);
+    border: 1.5px solid rgba(255, 255, 255, 0.38);
+    border-radius: 16px;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.div-grades-container{
-    align-items: center;
+.semester-grade-card:hover {
+    background: rgba(255, 255, 255, 0.045);
+    border-color: rgba(255, 255, 255, 0.65);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
 }
 
-.div-grades-box{
-    border: 2px solid white;
-    width: 40lh;
-    padding:12px;
-    border-radius:20px;
-}
-
-.div-grades-sem-sgp{
+.semester-grade-top {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.div-grades-sem-sgp{
-    font-size: xx-large;
+.semester-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.div-grades-sgp{
-    padding:10px;
+.semester-name {
+    font-size: 25px;
+    font-weight: 700;
 }
 
+.semester-label {
+    font-size: 13px;
+    opacity: 0.6;
+}
 
+/* Small SGPA square */
 
+.sgpa-box {
+    width: 82px;
+    height: 82px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    border: 1.5px solid rgba(0, 255, 255, 0.65);
+    border-radius: 14px;
+
+    background: rgba(0, 255, 255, 0.045);
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.semester-grade-card:hover .sgpa-box {
+    background: rgba(0, 255, 255, 0.08);
+    border-color: cyan;
+    transform: scale(1.03);
+}
+
+.sgpa-box span {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.sgpa-box small {
+    margin-top: 3px;
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+@media (max-width: 500px) {
+    .semester-grade-card {
+        padding: 18px;
+    }
+
+    .semester-name {
+        font-size: 21px;
+    }
+
+    .sgpa-box {
+        width: 70px;
+        height: 70px;
+    }
+
+    .sgpa-box span {
+        font-size: 19px;
+    }
+}

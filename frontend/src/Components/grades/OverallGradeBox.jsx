@@ -1,24 +1,39 @@
-import "./GradeBox.css"
-import { CGPACircle } from "./CGPACirle"
-import { ViewButton } from "./ViewButton"
-import {GradeBox} from "./GradeBox"
-export function OverallGradeBox()
-{
-    return(
-        <>
-            <div className="div-grades-container">
-            <div className="div-grades-box">
-                <div className="div-grades-sem-sgp">
-                    <div className="div-grades-sem">
-                        Overall
+import "./OverallGradeBox.css";
+import { CGPACircle } from "./CGPACirle";
+import { GradeBox } from "./GradeBox";
+
+export function OverallGradeBox() {
+    return (
+        <div className="overall-grades-wrapper">
+
+            <section className="overall-grade-card">
+                <div className="overall-grade-content">
+                    <div>
+                        <div className="overall-label">
+                            Overall CGPA
+                        </div>
+
+                        <div className="overall-subtitle">
+                            Your academic performance
+                        </div>
                     </div>
-                    <div className="div-grades-sgp">
-                        <CGPACircle cgpa="9.04" />
-                    </div>
+
+                    <CGPACircle cgpa="9.04" />
                 </div>
-            </div>
-            <ViewButton message="View Semester Wise" component={GradeBox}/>
+            </section>
+
+            <section className="semester-grades-section">
+                <div className="section-heading">
+                    Semester Performance
+                </div>
+
+                <div className="semester-grades-list">
+                    <GradeBox />
+                    <GradeBox />
+                    <GradeBox />
+                </div>
+            </section>
+
         </div>
-        </>
-    )
+    );
 }

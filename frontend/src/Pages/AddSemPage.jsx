@@ -72,7 +72,7 @@ export function AddSemPage()
                 <div className="div-option-cancel-addsem">
                     <ButtonLogin text="Cancel" alert={true} 
                         onClick={()=>{
-                            navigate("/semesters")
+                            navigate("/user/semesters")
                         }}
                     />
                 </div>

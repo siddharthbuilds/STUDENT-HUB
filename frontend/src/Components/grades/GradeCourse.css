@@ -1,23 +1,43 @@
+.div-grades-details {
+    width: 100%;
 
-.div-grades-course{
-    justify-content: space-around;
-    font-size:x-large;
+    padding: 13px 0 2px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.div-grades-course {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 9px 4px;
 }
 
-.div-grades-coursename{
-    color:aqua;
+.div-grades-coursename {
+    color: cyan;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
 }
 
-.div-grades-coursegrade{
-    padding:3px;
-    border: 3px solid wheat;
-}
+.div-grades-coursegrade {
+    min-width: 34px;
+    height: 34px;
 
-.div-grades-details{
-    display:flex;
-    flex-direction: column;
-    row-gap: 8px;
-    padding:5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 9px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    background: rgba(255, 255, 255, 0.035);
 }
