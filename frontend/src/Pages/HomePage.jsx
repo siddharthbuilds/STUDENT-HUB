@@ -1,110 +1,142 @@
 import "./HomePage.css";
-import { ButtonLogin } from "../Components/login/ButtonLogin";
-import { SemesterBox } from "../Components/home/SemesterBox";
-import { useState, useEffect } from "react";
-import { getSemesters, deleteSemester } from "../../api/semesterApi";
-import PageLoader from "../Components/Loader";
-import { useNavigate } from "react-router";
-import formatDate from "../Utils/FormatDate";
-import { useSemester } from "../context/useSemester.js";
-import { NavBar } from "../Components/navbar.jsx";
+import { Pencil } from "lucide-react";
 
 export function HomePage() {
-    const [semesters, setSemesters] = useState();
-    const [error, setError] = useState("");
-    const [showLoader, setShowLoader] = useState(true);
-    const navigate = useNavigate();
-    const { setSemesterDetails } = useSemester();
 
-    async function onClickTrash(semId) {
-        await deleteSemester(semId);
-        const currentSemesters = [...semesters];
-
-        setSemesters(
-            currentSemesters.filter((semester) => {
-                return semester.semId != semId;
-            })
-        );
-    }
-
-    function selectSemester(semester) {
-        //localStorage.setItem('semId',semester.semId);
-        setSemesterDetails(semester);
-        navigate(`/dashboard/${semester.semId}`);
-    }
-
-    useEffect(() => {
-        async function loadSemesters() {
-            try {
-                const response = await getSemesters();
-                setSemesters(response.data.semesters);
-            } catch (err) {
-                setError(err.response?.data?.message);
-            } finally {
-                setShowLoader(false);
-            }
-        }
-
-        loadSemesters();
-    }, []);
+    // Replace these values with your actual user/API data later
+    const user = {
+        name: "Siddharth",
+        userId: "22CS0000",
+        email: "siddharth@example.com",
+        cgpa: "9.04",
+        attendance: "87%"
+    };
 
     return (
-        <div className="div-homepage">
-            {showLoader && <PageLoader />}
+        <div className="home-page">
 
-            {!showLoader && (
-                <div className="div-all-semesters">
+            <main className="home-content">
 
-                    <div className="semesters-heading">
-                        Your Semesters
+                {/* Welcome */}
+                <div className="home-welcome">
+                    <div className="home-welcome-title">
+                        Welcome back, {user.name}
                     </div>
 
-                    <div className="semester-grid">
-                        {semesters &&
-                            semesters.map((semester) => {
-                                return (
-                                    <div
-                                        className="semester-item"
-                                        key={semester.semId}
-                                        onClick={() => {
-                                            selectSemester(semester);
-                                        }}
-                                    >
-                                        <SemesterBox
-                                            name={semester.semName}
-                                            from={formatDate(
-                                                semester.startDate
-                                            )}
-                                            to={formatDate(
-                                                semester.endDate
-                                            )}
-                                            onClick={() => {
-                                                onClickTrash(
-                                                    semester.semId
-                                                );
-                                            }}
-                                        />
-                                    </div>
-                                );
-                            })}
-                    </div>
-
-                    <div className="add-semester-container">
-                        <ButtonLogin
-                            text="Add Semester"
-                            onClick={() => {
-                                navigate("/user/add-semester");
-                            }}
-                        />
+                    <div className="home-welcome-subtitle">
+                        Here's your academic overview
                     </div>
                 </div>
-            )}
 
-            {error && (
-                <p className="semester-error">
-                    {error}
-                </p>
-            )}
+
+                {/* User Details */}
+                <section className="user-details-card">
+
+                    <div className="user-detail-row">
+                        <div className="user-detail-label">
+                            User Name
+                        </div>
+
+                        <div className="user-detail-value">
+                            <span>{user.name}</span>
+
+                            <button className="edit-button">
+                                <Pencil size={15} />
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div className="user-detail-row">
+                        <div className="user-detail-label">
+                            User ID
+                        </div>
+
+                        <div className="user-detail-value">
+                            {user.userId}
+                        </div>
+                    </div>
+
+
+                    <div className="user-detail-row">
+                        <div className="user-detail-label">
+                            Email
+                        </div>
+
+                        <div className="user-detail-value">
+                            <span>{user.email}</span>
+
+                            <button className="edit-button">
+                                <Pencil size={15} />
+                            </button>
+                        </div>
+                    </div>
+
+                </section>
+
+
+                {/* Academic Overview */}
+                <section className="academic-overview">
+
+                    {/* CGPA */}
+                    <div className="academic-card">
+
+                        <div className="academic-card-heading">
+                            Overall CGPA
+                        </div>
+
+                        <div className="academic-card-content">
+                            <div className="academic-number">
+                                {user.cgpa}
+                            </div>
+
+                            <div className="academic-description">
+                                Overall academic performance
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    {/* Attendance */}
+                    <div className="academic-card">
+
+                        <div className="academic-card-heading">
+                            Current Semester
+                        </div>
+
+                        <div className="attendance-content">
+
+                            <div className="attendance-circle">
+                                <div className="attendance-circle-inner">
+                                    {user.attendance}
+                                </div>
+                            </div>
+
+                            <div className="attendance-text">
+                                <div className="attendance-title">
+                                    Overall Attendance
+                                </div>
+
+                                <div className="attendance-description">
+                                    Current semester attendance
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                {/* Small bottom information area */}
+                <div className="home-footer-message">
+                    Keep track of your academics from one place.
+                </div>
+
+            </main>
+
         </div>
     );
 }

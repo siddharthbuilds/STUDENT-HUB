@@ -1,13 +1,14 @@
 import { LoginPage } from "./Pages/LoginPage";
 import { DashBoardPage } from "./Pages/DashBoardPage";
 import { RegisterPage } from "./Pages/RegisterPage";
+import { HomePage } from "./Pages/HomePage";
 import { AttendancePage } from "./Pages/AttendancePage";
 import { GradesPage } from "./Pages/GradesPage";
-import { HomePage } from "./Pages/HomePage";
+import { SemesterPage } from "./Pages/SemesterPage";
 import { AddSemPage } from "./Pages/AddSemPage";
 import { PlanYourBunksPage } from "./Pages/PlanYourBunks";
 import { SemesterLayout } from "./Components/home/SemesterLayout";
-import {Routes, Route} from "react-router";
+import {Routes, Route, Navigate} from "react-router";
 import { ProtectedRoute } from "./Components/routes/ProtectedRoutes";
 import { MainLayout } from "./Components/Layout";
 function App() {
@@ -21,7 +22,9 @@ function App() {
 
     <Route path="/user" element={<MainLayout />}>
 
-        <Route path="semesters" element={<HomePage/>} />
+        <Route index element={<Navigate to="home" replace />} />
+        <Route path="home" element={<HomePage />} />
+        <Route path="semesters" element={<SemesterPage/>} />
         <Route path="grades" element={<GradesPage/>} />
         <Route path="add-semester" element={<AddSemPage/>} />
 

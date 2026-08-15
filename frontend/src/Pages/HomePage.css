@@ -1,83 +1,374 @@
-.div-homepage {
+.home-page {
     width: 100%;
     min-height: 100%;
     box-sizing: border-box;
 }
 
-.div-all-semesters {
-    width: min(100%, 1100px);
+.home-content {
+    width: min(100%, 1000px);
     margin: 0 auto;
+
+    padding: 28px 40px 60px;
+
+    box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
-
-    padding: 10px 35px 50px;
-    box-sizing: border-box;
 }
 
-.semesters-heading {
+
+/* =========================
+   WELCOME
+========================= */
+
+.home-welcome {
     margin-bottom: 24px;
+}
 
-    font-size: 25px;
+.home-welcome-title {
+    font-size: 27px;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.25;
 }
 
-.semester-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+.home-welcome-subtitle {
+    margin-top: 6px;
 
-    width: 100%;
+    font-size: 14px;
+    opacity: 0.6;
 }
 
-.semester-item {
+
+/* =========================
+   USER DETAILS
+========================= */
+
+.user-details-card {
     width: 100%;
+    box-sizing: border-box;
+
+    padding: 8px 25px;
+
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.user-details-card:hover {
+    border-color: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.04);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.16);
+}
+
+.user-detail-row {
+    min-height: 57px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-detail-row:last-child {
+    border-bottom: none;
+}
+
+.user-detail-label {
+    font-size: 14px;
+    opacity: 0.55;
+}
+
+.user-detail-value {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    text-align: right;
+
     min-width: 0;
+}
+
+.edit-button {
+    width: 29px;
+    height: 29px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    color: rgba(255, 255, 255, 0.7);
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: 7px;
 
     cursor: pointer;
 
     transition:
-        transform 0.2s ease,
-        filter 0.2s ease;
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
-.semester-item:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.05);
+.edit-button:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
+
+    transform: scale(1.06);
 }
 
-.add-semester-container {
+.edit-button:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================
+   ACADEMIC OVERVIEW
+========================= */
+
+.academic-overview {
     margin-top: 28px;
-    align-self: flex-start;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
 }
 
-.semester-error {
-    margin: 20px 0 0;
+.academic-card {
+    min-height: 190px;
+
+    padding: 24px 26px;
+
+    box-sizing: border-box;
+
+    border: 1.5px solid rgba(255, 255, 255, 0.38);
+    border-radius: 17px;
+
+    background: rgba(255, 255, 255, 0.02);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        background-color 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+.academic-card:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(255, 255, 255, 0.68);
+    background: rgba(255, 255, 255, 0.045);
+
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+.academic-card-heading {
+    font-size: 17px;
+    font-weight: 600;
+
+    opacity: 0.85;
+}
+
+.academic-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.academic-number {
+    font-size: 45px;
+    line-height: 1;
+
+    font-weight: 700;
+
+    color: cyan;
+}
+
+.academic-description {
+    font-size: 13px;
+    opacity: 0.55;
+}
+
+
+/* =========================
+   ATTENDANCE
+========================= */
+
+.attendance-content {
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+}
+
+.attendance-circle {
+    width: 90px;
+    height: 90px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: conic-gradient(
+        cyan 0deg 313deg,
+        rgba(255, 255, 255, 0.1) 313deg 360deg
+    );
+
+    padding: 7px;
+    box-sizing: border-box;
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+.academic-card:hover .attendance-circle {
+    transform: scale(1.05);
+    filter: brightness(1.08);
+}
+
+.attendance-circle-inner {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgb(1, 1, 63);
+
+    font-size: 19px;
+    font-weight: 700;
+}
+
+.attendance-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.attendance-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.attendance-description {
+    font-size: 12px;
+    opacity: 0.55;
+
+    line-height: 1.4;
+}
+
+
+/* =========================
+   FOOTER MESSAGE
+========================= */
+
+.home-footer-message {
+    margin-top: 34px;
+
     text-align: center;
 
-    color: #ef4444;
-    font-size: 15px;
+    font-size: 13px;
+    opacity: 0.35;
+
+    transition: opacity 0.2s ease;
 }
 
-@media (max-width: 850px) {
-    .div-all-semesters {
-        padding-left: 25px;
-        padding-right: 25px;
+.home-footer-message:hover {
+    opacity: 0.6;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 750px) {
+
+    .home-content {
+        padding: 24px 25px 50px;
     }
 
-    .semester-grid {
+    .academic-overview {
         grid-template-columns: 1fr;
     }
+
+    .academic-card {
+        min-height: 170px;
+    }
 }
 
-@media (max-width: 550px) {
-    .div-all-semesters {
-        padding-left: 18px;
-        padding-right: 18px;
+
+@media (max-width: 500px) {
+
+    .home-content {
+        padding: 20px 18px 40px;
     }
 
-    .semesters-heading {
-        font-size: 22px;
+    .home-welcome-title {
+        font-size: 23px;
+    }
+
+    .user-details-card {
+        padding: 5px 18px;
+    }
+
+    .user-detail-row {
+        min-height: 53px;
+    }
+
+    .user-detail-value {
+        font-size: 14px;
+    }
+
+    .academic-card {
+        padding: 21px;
+    }
+
+    .attendance-content {
+        gap: 16px;
+    }
+
+    .attendance-circle {
+        width: 78px;
+        height: 78px;
+    }
+
+    .attendance-circle-inner {
+        font-size: 16px;
     }
 }
