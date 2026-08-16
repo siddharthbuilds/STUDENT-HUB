@@ -3,7 +3,7 @@ import { getAttendanceRows } from "../../../api/attendanceApi";
 import { useSemester } from "../../context/useSemester";
 export function DateSelector({
         data,setAttendanceRows,setAttendanceType,isDirty,
-        setTrackDirty,plannerMode,plannerRows
+        setTrackDirty,plannerMode,plannerRows,dateSelected, setDateSelected
     })
 {
     const starting = 1;
@@ -17,6 +17,7 @@ export function DateSelector({
     const semId = semesterDetails.semId;
     async function onSelectDate(num)
     {
+        setDateSelected(num);
         const date = `${data.year}-${data.monthNum<10?`0${data.monthNum}`:`${data.monthNum}`}-${num<10?`0${num}`:`${num}`}`;
         if(!plannerMode)
         {
@@ -52,7 +53,10 @@ export function DateSelector({
                 return (
                     <div key = {number} className="div-attendance-day">
                         <button 
-                        className="btn-attendance-day"
+                        className=
+                            {number===dateSelected?
+                                "btn-attendance-day selected"
+                                    :"btn-attendance-day"}
                         onClick={()=>{confirmationFunction(number)}}
                         >
                             {number}

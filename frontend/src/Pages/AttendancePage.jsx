@@ -27,6 +27,7 @@ export function AttendancePage({plannerMode=false})
     const [error, setError] = useState('');
     const [trackDirty, setTrackDirty] = useState(false);
     const [plannerRows, setPlannerRows] = useState([]);
+    const [dateSelected,setDateSelected] = useState(1);
 
     const semId = semesterDetails && semesterDetails.semId;
 
@@ -171,6 +172,8 @@ export function AttendancePage({plannerMode=false})
                                             setTrackDirty={setTrackDirty}
                                             plannerMode={plannerMode}
                                             plannerRows={plannerRows}
+                                            dateSelected={dateSelected}
+                                            setDateSelected={setDateSelected}
                                 />
 
                                 <div className="attendance-hours-panel">

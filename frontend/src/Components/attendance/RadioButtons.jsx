@@ -6,7 +6,7 @@ export function RadioButtons({months,
                 setAttendanceType,
                 isDirty, setTrackConfirmation,
                 setTrackDirty,
-                plannerMode,plannerRows
+                plannerMode,plannerRows,dateSelected,setDateSelected
             })
 {
     const [selectedMonth, setSelectedMonth] = useState(0);
@@ -22,7 +22,7 @@ export function RadioButtons({months,
                     id={`month-${month.month}`}
                     value={`${month.month}`}
                     defaultChecked={selectedMonth===index}
-                    onClick={()=>{setSelectedMonth(index)}}
+                    onClick={()=>{setSelectedMonth(index);setDateSelected(1);}}
                     />
                     <label htmlFor={`month-${month.month}`}> {`${month.month}`} </label>
                 </button>
@@ -36,6 +36,8 @@ export function RadioButtons({months,
                 setTrackDirty={setTrackDirty}
                 plannerMode={plannerMode}
                 plannerRows={plannerRows}
+                dateSelected={dateSelected}
+                setDateSelected={setDateSelected}
                 />
         </>
     )
