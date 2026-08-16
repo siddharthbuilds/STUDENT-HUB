@@ -1,14 +1,19 @@
 .div-attendance-container{
-    display: flex;
-    flex-direction: column;
-    row-gap: 8px;
-    background-color:transparent;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+    background:transparent;
     color:white;
-    font-family: 'Google Sans';
-    font-weight: 600;
-    font-size: 30px;
-    height: fit-content;
-    padding:8px;
-    /* width:600px; */
-    align-items: center;
+    font-family:'Google Sans';
+    font-weight:600;
+    font-size:16px;
+    height:fit-content;
+    padding:8px 0;
+    align-items:stretch;
+}
+
+.div-attendance-container>div{min-width:0}
+
+@media(max-width:800px){
+    .div-attendance-container{grid-template-columns:1fr}
 }

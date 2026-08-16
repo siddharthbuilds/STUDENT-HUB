@@ -1,6 +1,102 @@
 .div-noblur{
-    transition: filter 0.4s;
+    min-height:100%;
+    color:white;
+    transition:filter 0.4s ease;
 }
+
 .div-blur{
-    filter: blur(5px);
+    filter:blur(5px);
+}
+
+.attendance-page-shell{
+    width:100%;
+    min-height:100%;
+    box-sizing:border-box;
+}
+
+.attendance-page-content{
+    width:min(100%, 1000px);
+    margin:0 auto;
+    padding:0 40px 55px;
+    box-sizing:border-box;
+}
+
+.attendance-page-intro{
+    margin:4px 0 16px;
+}
+
+.attendance-page-title{
+    font-size:27px;
+    font-weight:700;
+    line-height:1.2;
+}
+
+.attendance-page-subtitle{
+    margin-top:5px;
+    font-size:13px;
+    opacity:.5;
+}
+
+.attendance-day-section,
+.attendance-course-section{
+    margin-top:16px;
+    padding:18px 20px 22px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:22px;
+    background:rgba(255,255,255,.018);
+    box-shadow:0 12px 35px rgba(0,0,0,.14);
+}
+
+.attendance-hours-panel,
+.attendance-course-section{
+    margin-top:18px;
+}
+
+.attendance-hours-heading,
+.attendance-course-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:8px;
+    font-size:17px;
+    font-weight:700;
+}
+
+.attendance-hours-hint{
+    font-size:11px;
+    font-weight:500;
+    opacity:.45;
+}
+
+.attendance-save-wrap{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:20px;
+}
+
+.attendance-error{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translateX(-50%);
+    z-index:1000;
+    margin:0;
+    padding:11px 17px;
+    border:1px solid rgba(255,70,70,.35);
+    border-radius:10px;
+    color:#ff8585;
+    background:rgba(40,0,15,.94);
+    box-shadow:0 8px 25px rgba(0,0,0,.3);
+}
+
+@media(max-width:750px){
+    .attendance-page-content{padding:0 24px 45px}
+    .attendance-day-section,.attendance-course-section{padding:15px}
+}
+
+@media(max-width:500px){
+    .attendance-page-content{padding:0 14px 35px}
+    .attendance-page-title{font-size:23px}
+    .attendance-hours-heading,.attendance-course-heading{font-size:15px}
 }

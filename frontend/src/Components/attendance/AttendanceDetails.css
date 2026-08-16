@@ -1,51 +1,59 @@
-
 .div-attendance-course{
     display:flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    column-gap:10px;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:5px 2px 12px;
+    font-size:18px;
+    font-weight:700;
 }
 
 .div-attendance-overall{
     display:flex;
     flex-direction:column;
-    row-gap:5px;
-    background-color: transparent;
-    border-radius: 20px;
-    border: 3px solid white;
-    padding:15px;
-    width:20lh;
+    gap:8px;
+    background:rgba(255,255,255,.018);
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.16);
+    padding:17px;
+    width:auto;
+    min-height:165px;
+    transition:transform .2s ease,border-color .2s ease,background .2s ease,box-shadow .2s ease;
+}
+
+.div-attendance-overall:hover{
+    transform:translateY(-3px);
+    background:rgba(0,255,255,.035);
+    border-color:rgba(0,255,255,.4);
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
 }
 
 .div-attendance-details{
-    display: flex;
-    column-gap:15px;
-    padding:8px;
-    justify-content: space-between;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:7px;
+    padding:9px 0 0;
+    justify-content:space-between;
 }
 
 .div-attendance-subdetails{
     display:flex;
-    flex-direction: column;
-    row-gap:5px;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Google Sans';
-    font-size: 20px;
+    flex-direction:column;
+    gap:4px;
+    justify-content:center;
+    align-items:center;
+    font-family:'Google Sans';
+    font-size:11px;
+    text-align:center;
+    opacity:.8;
 }
 
-.style-safe-bunk{
-    color: limegreen;
-    font-size:25px;
-}
+.div-attendance-subdetails>div:last-child{font-size:15px;opacity:1}
 
-.style-risk-bunk{
-    color:yellow;
-    font-size:25px;
-}
+.style-safe-bunk{color:#31e875;font-size:19px!important}
+.style-risk-bunk{color:#ffd84d;font-size:19px!important}
+.style-bad-bunk{color:#ff4b55;font-size:19px!important}
 
-.style-bad-bunk{
-    color: red;
-    font-size:25px;
+@media(max-width:500px){
+    .div-attendance-details{grid-template-columns:repeat(2,1fr);row-gap:12px}
 }

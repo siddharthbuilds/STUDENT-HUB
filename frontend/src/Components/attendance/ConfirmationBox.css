@@ -1,49 +1,62 @@
 .div-confirmation-container{
-    background-color: white;
-    font-family: 'Google Sans';
-    font-weight: 600;
-    font-size:large;
+    background:rgb(9,9,66);
+    color:white;
+    font-family:'Google Sans';
+    font-weight:600;
+    font-size:15px;
     display:flex;
-    flex-direction: column;
-    row-gap: 2px;
+    flex-direction:column;
+    gap:14px;
     position:fixed;
     top:50%;
     left:50%;
-    transform: translate3d(-50%,-50%,0);
-    width:300px;
-    padding:8px;
-    border:none;
-    border-radius:15px;
+    transform:translate3d(-50%,-50%,0);
+    width:min(360px,calc(100vw - 32px));
+    box-sizing:border-box;
+    padding:22px;
+    border:1px solid rgba(0,255,255,.35);
+    border-radius:18px;
+    box-shadow:0 25px 70px rgba(0,0,0,.55),0 0 35px rgba(0,255,255,.05);
+    z-index:100;
 }
 
 .div-confirmation-message{
-    color:black;
-    overflow-wrap: break-word;
-    display: flex;
-    flex-direction: column;
+    color:white;
+    overflow-wrap:break-word;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    line-height:1.45;
 }
+
+.div-confirmation-message>div:last-child{font-size:12px;opacity:.5}
 
 .div-confirmation-options{
-    color: rgb(1,1,63);
-    overflow-wrap: break-word;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 5px;
-}
-
-.div-cancel-option{
-    color:red;
-    border-top: 1px solid black;
-    /* width:300px; */
+    color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    gap:5px;
 }
 
 .div-confirmation-option{
-    padding:5px;
-    padding-bottom: 2px;
+    padding:10px;
+    text-align:center;
+    border-radius:9px;
+    cursor:pointer;
+    transition:background .2s ease,color .2s ease,transform .2s ease;
 }
 
 .div-confirmation-option:hover{
-    cursor: pointer;
-    background-color: rgba(193, 193, 193, 0.344);
+    background:rgba(0,255,255,.08);
+    color:#00ffff;
+}
+
+.div-confirmation-option:active{transform:scale(.98)}
+
+.div-cancel-option{
+    color:#ff6a73;
+    border-top:1px solid rgba(255,255,255,.1);
+    border-radius:0;
+    padding-top:12px;
 }

@@ -51,7 +51,6 @@ export function AttendancePage({plannerMode=false})
             else
             {
                 const response = await getCourseSummary(semId);
-
                 setCourseSummary(
                     response.data.courseSummary
                 );
@@ -95,8 +94,7 @@ export function AttendancePage({plannerMode=false})
         setAttendanceRows(originalRows);
         setIsDirty(false);
     }
- 
-    
+
     function calculatePlannerSummary(rows)
     {
         const grouped = {};
@@ -141,56 +139,90 @@ export function AttendancePage({plannerMode=false})
     const months = semesterDetails?
             getMonths(semesterDetails.startDate, semesterDetails.endDate)
             :[];
-    
+
     return(
         <>
-        <div className={trackConfirmation?"div-noblur div-blur":"div-noblur"}>
-            <HeaderDashBoard />
-            <AttendanceSelector dayWise={dayWise} 
-            styleDayWise={styleDayWise}
-            styleCourseWise={styleCourseWise}
+            <div className={trackConfirmation?"div-noblur div-blur":"div-noblur"}>
+                <div className="attendance-page-shell">
+                    <HeaderDashBoard />
 
-            />
-            {dayWise&&<>
-            <RadioButtons months={months} 
-                        setAttendanceRows={setAttendanceRows}
-                        setAttendanceType={setAttendanceType}
-                        isDirty={isDirty}
-                        setTrackConfirmation={setTrackConfirmation}
-                        setTrackDirty={setTrackDirty}
-                        plannerMode={plannerMode}
-                        plannerRows={plannerRows}
+                    <div className="attendance-page-content">
+                        <div className="attendance-page-intro">
+                            <div className="attendance-page-title">
+                                {plannerMode ? "Plan Your Bunks" : "Attendance"}
+                            </div>
+                            <div className="attendance-page-subtitle">
+                                Track your daily attendance and stay on top of your semester.
+                            </div>
+                        </div>
+
+                        <AttendanceSelector dayWise={dayWise}
+                        styleDayWise={styleDayWise}
+                        styleCourseWise={styleCourseWise}
                         />
-            <EachHour attendanceRows={attendanceRows} attendanceType={attendanceType}
-                 setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}
-                 originalRows={originalRows} setIsDirty={setIsDirty} 
-                 setPlannerRows={setPlannerRows} plannerRows={plannerRows}
-                 
-                 />
-            {!plannerMode&&<ButtonLogin text="Save" onClick={onClickSave}/>}
-            </>}
-            {courseWise&&<AttendanceContainer courseSummary={courseSummary}/>}
-        </div>
 
-            {trackDirty&&<ConfirmationBox 
-            message1="Save or revert your changes before proceeding.."
-            option1="Save"
-            option2="Revert"
-            setTrackConfirmation={setTrackDirty}
-            saveFunction={()=>{setTrackConfirmation(true)}}
-            cancelFunction={revertChanges}
+                        {dayWise&&<>
+                            <div className="attendance-day-section">
+                                <RadioButtons months={months}
+                                            setAttendanceRows={setAttendanceRows}
+                                            setAttendanceType={setAttendanceType}
+                                            isDirty={isDirty}
+                                            setTrackConfirmation={setTrackConfirmation}
+                                            setTrackDirty={setTrackDirty}
+                                            plannerMode={plannerMode}
+                                            plannerRows={plannerRows}
+                                />
+
+                                <div className="attendance-hours-panel">
+                                    <div className="attendance-hours-heading">
+                                        <span>Daily Classes</span>
+                                        <span className="attendance-hours-hint">Tap a status to cycle</span>
+                                    </div>
+
+                                    <EachHour attendanceRows={attendanceRows} attendanceType={attendanceType}
+                                        setAttendanceRows={setAttendanceRows} plannerMode={plannerMode}
+                                        originalRows={originalRows} setIsDirty={setIsDirty}
+                                        setPlannerRows={setPlannerRows} plannerRows={plannerRows}
+                                    />
+                                </div>
+
+                                {!plannerMode&&<div className="attendance-save-wrap">
+                                    <ButtonLogin text="Save" onClick={onClickSave}/>
+                                </div>}
+                            </div>
+                        </>}
+
+                        {courseWise&&<div className="attendance-course-section">
+                            <div className="attendance-course-heading">
+                                <span>Course Overview</span>
+                                <span className="attendance-hours-hint">Live attendance summary</span>
+                            </div>
+                            <AttendanceContainer courseSummary={courseSummary}/>
+                        </div>}
+                    </div>
+                </div>
+            </div>
+
+            {trackDirty&&<ConfirmationBox
+                message1="Save or revert your changes before proceeding.."
+                option1="Save"
+                option2="Revert"
+                setTrackConfirmation={setTrackDirty}
+                saveFunction={()=>{setTrackConfirmation(true)}}
+                cancelFunction={revertChanges}
             />}
-            
-            {trackConfirmation&&<ConfirmationBox 
-            message1="Are you sure want to save the changes?"
-            message2="Note: Data once Saved, cannot be edited."
-            option1="Save"
-            option2="Cancel"
-            toastmessage="All Changes Saved"
-            setTrackConfirmation={setTrackConfirmation}
-            saveFunction={saveAttendance}
+
+            {trackConfirmation&&<ConfirmationBox
+                message1="Are you sure want to save the changes?"
+                message2="Note: Data once Saved, cannot be edited."
+                option1="Save"
+                option2="Cancel"
+                toastmessage="All Changes Saved"
+                setTrackConfirmation={setTrackConfirmation}
+                saveFunction={saveAttendance}
             />}
-            {error && <p style={{ color: "#ef4444" }}>{error}</p>}
+
+            {error && <p className="attendance-error">{error}</p>}
         </>
     )
 }

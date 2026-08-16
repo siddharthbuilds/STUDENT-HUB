@@ -1,33 +1,65 @@
-.div-attendance-dates{
-    padding-top:12px;
-    display:flex;
-    align-items: center;
-    column-gap:5px;
-    flex-wrap: wrap;
-    width:640px;
-    row-gap:10px;
-    margin-left: 50%;
-    transform: translateX(-50%);
+.div-attendance-dates {
+    width: min(100%, 540px);
+    margin: 0 auto;
+    padding: 5px 0 3px;
+
+    display: grid;
+    grid-template-columns: repeat(7, minmax(38px, 1fr));
+    gap: 6px;
 }
 
-.btn-attendance-day{
-    background-color: transparent;
-    width:80px;
-    height:80px;
-    border: 2px solid white;
-    color:rgb(14, 255, 247);
+.div-attendance-day {
+    min-width: 0;
+}
+
+.btn-attendance-day {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    min-height: 40px;
+
+    background: rgba(255, 255, 255, 0.018);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+
+    color: #00ffff;
     font-family: 'Google Sans';
     font-weight: 600;
-    font-size: larger;
-    transition: background-color 0.18s;
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        color 0.18s ease;
 }
 
-.btn-attendance-day:hover{
-    cursor: pointer;
-    background-color:rgb(87, 0, 82);
+.btn-attendance-day:hover {
+    background: rgba(0, 255, 255, 0.075);
+    border-color: rgba(0, 255, 255, 0.65);
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.18);
 }
 
-.btn-attendance-day:focus{
-    cursor: pointer;
-    background-color:rgb(0, 79, 158);
+.btn-attendance-day:focus {
+    outline: none;
+    background: rgba(31, 78, 135, 0.7);
+    border-color: #00ffff;
+    color: white;
+    box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.12);
+}
+
+@media (max-width: 600px) {
+    .div-attendance-dates {
+        grid-template-columns: repeat(7, minmax(32px, 1fr));
+        gap: 5px;
+    }
+
+    .btn-attendance-day {
+        min-height: 34px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
 }

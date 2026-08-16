@@ -1,24 +1,46 @@
 .div-attendance-months{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 20px;
-    padding:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    padding:10px 4px 14px;
 }
 
 .btn-attendance-months{
-    padding: 15px;
-    background-color: rgb(1, 1, 63);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 15px;
+    background:rgba(255,255,255,.025);
     color:white;
-    font-family: 'Google Sans';
-    font-weight: 600;
-    font-size: larger;
-    border-radius:20px;
-    border: 3px solid white;
-    padding-left:4px;
+    font-family:'Google Sans';
+    font-weight:600;
+    font-size:15px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.22);
+    cursor:pointer;
+    transition:background .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+
+.btn-attendance-months:hover{
+    background:rgba(0,255,255,.055);
+    border-color:rgba(0,255,255,.4);
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(0,0,0,.16);
+}
+
+.btn-attendance-months:has(input:checked){
+    background:rgba(0,255,255,.09);
+    border-color:rgba(0,255,255,.7);
+    box-shadow:0 0 0 1px rgba(0,255,255,.08),0 7px 20px rgba(0,0,0,.18);
 }
 
 .input-month-radio{
-    width: 30px;
-    height: 18px;
+    width:15px;
+    height:15px;
+    accent-color:#00ffff;
+    cursor:pointer;
 }
+
+.btn-attendance-months label{cursor:pointer}
