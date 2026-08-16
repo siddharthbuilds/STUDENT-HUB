@@ -7,6 +7,7 @@ import { GradesPage } from "./Pages/GradesPage";
 import { SemesterPage } from "./Pages/SemesterPage";
 import { AddSemPage } from "./Pages/AddSemPage";
 import { PlanYourBunksPage } from "./Pages/PlanYourBunks";
+import { SemesterHome } from "./Pages/SemesterHome";
 import { SemesterLayout } from "./Components/home/SemesterLayout";
 import {Routes, Route, Navigate} from "react-router";
 import { ProtectedRoute } from "./Components/routes/ProtectedRoutes";
@@ -27,6 +28,9 @@ function App() {
         <Route path="semesters" element={<SemesterPage/>} />
         <Route path="grades" element={<GradesPage/>} />
         <Route path="add-semester" element={<AddSemPage/>} />
+        <Route path="semesters/dashboard" element={<SemesterHome/>} />
+        <Route path="semesters/attendance" element={<AttendancePage/>} />
+        <Route path="semesters/planner" element={<PlanYourBunksPage/>} />
 
     </Route>
 

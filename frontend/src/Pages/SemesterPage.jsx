@@ -30,7 +30,7 @@ export function SemesterPage() {
     function selectSemester(semester) {
         //localStorage.setItem('semId',semester.semId);
         setSemesterDetails(semester);
-        navigate(`/dashboard/${semester.semId}`);
+        navigate(`/user/semesters/dashboard`);
     }
 
     useEffect(() => {
