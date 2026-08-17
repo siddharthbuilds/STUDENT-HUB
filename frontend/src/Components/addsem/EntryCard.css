@@ -1,44 +1,26 @@
 .div-entry-card{
     display:flex;
-    flex-direction: column;
-    row-gap:20px;
-    padding:15px;
-    border: 3px solid white;
-    border-radius: 8px;
-    justify-content: space-between;
-    background-color: rgb(0, 38, 64);
-    color:rgb(255, 255, 255);
-    font-size:20px;
-    align-items: center;
-    width:7lh;
+    flex-direction:column;
+    row-gap:9px;
+    padding:14px 16px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:12px;
+    justify-content:space-between;
+    background:linear-gradient(145deg,rgba(16,26,70,.96),rgba(7,15,50,.96));
+    color:white;
+    font-size:16px;
+    align-items:center;
+    width:145px;
+    min-height:92px;
+    box-sizing:border-box;
+    box-shadow:0 7px 22px rgba(0,0,0,.16);
+    transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
 }
 
-.btn-entry-card{
-    background-color: transparent;
-    border:none;
-}
+.div-entry-card:hover{transform:translateY(-3px);border-color:rgba(0,255,255,.48);box-shadow:0 12px 28px rgba(0,0,0,.23),0 0 18px rgba(0,255,255,.05)}
 
-.btn-entry-card:hover{
-    cursor: pointer;
-}
+.btn-entry-card{background:transparent;border:none;padding:3px;border-radius:7px;transition:background .2s ease,transform .2s ease}
+.btn-entry-card:hover{cursor:pointer;background:rgba(255,70,90,.1);transform:scale(1.05)}
 
-.div-entry-card-content{
-    display:flex;
-    flex-direction: column;
-    row-gap:3px;
-    justify-content: center;
-    align-items: center;
-}
-
-.div-entry-card-content-description{
-    font-size: 18px;
-    color: gray;
-}
-
-.div-entry-card-content{
-    flex:1;
-    min-width: 0;
-    overflow-wrap: break-word;
-    text-align: center;
-}
-
+.div-entry-card-content{display:flex;flex-direction:column;row-gap:3px;justify-content:center;align-items:center;flex:1;min-width:0;overflow-wrap:break-word;text-align:center;line-height:1.25}
+.div-entry-card-content-description{font-size:11px;letter-spacing:1.6px;color:rgba(255,255,255,.48)}

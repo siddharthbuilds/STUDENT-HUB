@@ -1,35 +1,81 @@
-.div-course-box{
-    display: flex;
-    flex-direction: column;
-    row-gap: 15px;
+ .div-course-box{
+    display:flex;
+    flex-direction:column;
+    row-gap:20px;
     position:absolute;
-    top:-50px;
+    top:-55px;
     left:50%;
-    transform: translate3d(-50%,0%,0);
-    /* transform: translateY(-50%); */
-    border: 5px solid whitesmoke;
-    border-radius: 18px;
-    padding:30px;
-    background-color: #12193A;
-    z-index: 100;
+    transform:translate3d(-50%,0,0);
+    border:1px solid rgba(0,255,255,.34);
+    border-radius:16px;
+    padding:24px;
+    min-width:320px;
+    background:linear-gradient(145deg,#151c49,#090f35);
+    box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 25px rgba(0,255,255,.06);
+    z-index:100;
+    animation:entry-form-in .22s ease-out;
 }
 
-.div-course-attributes, .div-course-buttons{
+.div-course-attributes,
+.div-course-buttons{
     display:flex;
-    column-gap: 8px;
+    column-gap:14px;
+    row-gap:16px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
 }
 
 .div-course-attributes-input{
-    position: relative;
+    position:relative;
+}
+
+.div-course-attributes-input input{
+    border-color:rgba(255,255,255,.2)!important;
+    background:rgba(255,255,255,.035)!important;
+    border-radius:8px!important;
+}
+
+.div-course-attributes-input input:focus{
+    outline:none;
+    border-color:#00ffff!important;
+    box-shadow:0 0 0 3px rgba(0,255,255,.08),0 0 16px rgba(0,255,255,.08);
 }
 
 .div-course-attributes-tooltip{
-    position: absolute;
+    position:absolute;
     top:50%;
     left:50%;
+    z-index:120;
 }
 
 .div-type-date-plchdr{
-    margin-top: 3px;
-    text-align: center;
+    margin-top:7px;
+    text-align:center;
+    font-family:"Google Sans";
+    font-size:14px;
+    font-weight:700;
+    line-height:1.2;
+    letter-spacing:.5px;
+    color:#00ffff;
+    text-shadow:0 0 10px rgba(0,255,255,.18);
+    opacity:1;
+    white-space:nowrap;
+}
+
+.div-course-attributes-input:has(input[type="date"]){
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+@keyframes entry-form-in{
+    from{
+        opacity:0;
+        transform:translate3d(-50%,8px,0) scale(.98);
+    }
+    to{
+        opacity:1;
+        transform:translate3d(-50%,0,0) scale(1);
+    }
 }

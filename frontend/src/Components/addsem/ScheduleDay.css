@@ -1,45 +1,8 @@
-.div-schedule-day{
-    display: flex;
-    justify-content: center;
-    column-gap: 10px;
-}
-
-.btn-schedule-day{
-    font-family: 'Google Sans';
-    font-weight: bolder;
-    background-color: rgb(0, 80, 94);
-    padding:12px;
-    border: 3px solid white;
-    color: white;
-    border-radius:8px;
-    font-size: 20px;
-    transition: transform 0.4s;
-}
-
-.btn-schedule-day:hover{
-    cursor: pointer;
-    transform: translateY(-8px);
-    box-shadow: 2px 2px 2px white;
-}
-
-.btn-clicked{
-    transform: translateY(-8px);
-    box-shadow: 2px 10px 12px rgb(1, 119, 115);
-}
-
-.div-schedule-day-header{
-    font-size: 30px;
-    text-align: center;
-    margin-bottom: 18px;
-}
-
-.div-schedule-day-container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width:40lh;
-}
-
-.div-schedule-day-checker, .div-schedule-day-info{
-    font-size: 18px;
-}
+.div-schedule-day{display:flex;justify-content:center;column-gap:7px}
+.btn-schedule-day{font-family:'Google Sans';font-weight:700;background:rgba(0,104,119,.62);padding:9px 12px;border:1px solid rgba(255,255,255,.32);color:white;border-radius:8px;font-size:15px;transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease}
+.btn-schedule-day:hover{cursor:pointer;transform:translateY(-2px);border-color:#00ffff;background:rgba(0,255,255,.1);box-shadow:0 8px 18px rgba(0,255,255,.1)}
+.btn-clicked{transform:translateY(-2px);background:#00aeb8;border-color:#00ffff;color:#03142c;box-shadow:0 8px 20px rgba(0,255,255,.2)}
+.div-schedule-day-header{font-size:25px;font-weight:700;text-align:center;margin-bottom:15px;color:#fff}
+.div-schedule-day-container{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:680px;gap:18px}
+.div-schedule-day-checker,.div-schedule-day-info{font-size:13px;color:rgba(255,255,255,.62);white-space:nowrap}
+.div-schedule-day-checker input{accent-color:#00ffff;vertical-align:middle;margin-right:6px}

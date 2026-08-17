@@ -1,38 +1,20 @@
 .div-sat-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 10px;
-    background-color: #002640;
-    padding:14px 10px 14px 10px;
-    border-radius: 8px;
-    border: 2px solid wheat;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    row-gap:8px;
+    background:linear-gradient(145deg,rgba(16,35,73,.98),rgba(7,21,55,.98));
+    padding:13px 12px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.18);
+    min-width:118px;
+    box-shadow:0 7px 20px rgba(0,0,0,.16);
+    transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
 }
 
-.div-sat-body-opt{
-    font-size: 10px;
-    display: flex;
-    column-gap: 5px;
-}
-
-.btn-sat-body-opt{
-    background-color:darkcyan;
-    color:white;
-    border:none;
-    font-family: 'Google Sans';
-    font-weight: bold;
-    font-size: 18px;
-    padding:10px;
-    transition: background-color 0.4s;
-    transition: color 0.8s;
-}
-
-.btn-sat-body-opt:hover{
-    cursor: pointer;
-    box-shadow: 2px 2px 7px rgb(255, 255, 255);
-}
-
-.btn-sat-clicked{
-    background-color: white;
-    color:darkcyan;
-}
+.div-sat-body:hover{transform:translateY(-3px);border-color:rgba(0,255,255,.45);box-shadow:0 12px 26px rgba(0,0,0,.22)}
+.div-sat-body-date{color:#00ffff;font-size:16px;font-weight:700}
+.div-sat-body-opt{font-size:10px;display:flex;column-gap:4px}
+.btn-sat-body-opt{background:rgba(0,130,145,.72);color:white;border:1px solid rgba(255,255,255,.2);border-radius:6px;font-family:'Google Sans';font-weight:bold;font-size:14px;padding:6px 8px;transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
+.btn-sat-body-opt:hover{cursor:pointer;background:rgba(0,255,255,.15);border-color:#00ffff;transform:translateY(-1px)}
+.btn-sat-clicked{background:#00d7dc;color:#04152b;border-color:#00ffff;box-shadow:0 0 12px rgba(0,255,255,.2)}

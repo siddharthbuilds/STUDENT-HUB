@@ -86,7 +86,7 @@ export function AddSemPage()
                 <div>
                    <Input placeholder="Semester Label (eg: Semester 1)" 
                     type="text"
-                    fontSize="30"
+                    fontSize="25"
                     backgroundColor="#12193A"
                     onChange={setSemName}
                     /> 

@@ -1,21 +1,29 @@
 .div-addcourse{
-    display: flex;
-    flex-direction: column;
-    row-gap: 5px;
-    justify-content: center;
-    transition: opacity 0.4s;
-    font-size: 30px;
-    align-items: center;
+    display:flex;
+    flex-direction:column;
+    row-gap:8px;
+    justify-content:center;
+    transition:opacity .25s,transform .25s;
+    font-size:26px;
+    align-items:center;
+    color:#fff;
+}
+
+.div-addcourse-text{
+    font-size:27px;
+    font-weight:700;
+    color:#fff;
 }
 
 .div-btn-addcourse{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    row-gap:9px;
 }
 
 .div-btn-addcourse-count{
-    font-size: 22px;
+    font-size:14px;
+    color:rgba(255,255,255,.58);
 }

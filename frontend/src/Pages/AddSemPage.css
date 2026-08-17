@@ -1,43 +1,223 @@
 .div-addsem-dates{
     display:flex;
-    column-gap: 5px;
+    flex-direction:row !important;
+    align-items:flex-start;
+    justify-content:center;
+    gap:24px;
+    width:100%;
 }
 
 .div-addsem-page{
-    display: flex;
-    flex-direction: column;
-    row-gap: 30px;
-    padding:50px;
-    align-items: center;
-    transform: translate3d(40%,0%,0);
-    width:40lh;
-    border: 5px solid rgb(255, 255, 255);
-    border-radius:30px;
-    background-color: #12193A;
-    position: relative;
-    margin-left:-400px;
+    display:flex;
+    flex-direction:column;
+    row-gap:28px;
+    padding:66px 54px 58px;
+    align-items:center;
+    width:min(790px,calc(100vw - 230px));
+    max-width:790px;
+    box-sizing:border-box;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:26px;
+    background:linear-gradient(
+        145deg,
+        rgba(18,25,58,.98),
+        rgba(7,10,48,.97)
+    );
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.32),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    position:relative;
+    margin:32px auto 60px;
+    overflow:visible;
+    animation:addsem-enter .4s ease-out;
+    color:#fff;
+    font-family:'Google Sans';
+}
+
+.div-addsem-page::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:12%;
+    right:12%;
+    height:3px;
+    border-radius:0 0 4px 4px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #00ffff,
+        #668cff,
+        transparent
+    );
+}
+
+.div-addsem-page > div:not(
+    .div-option-cancel-addsem,
+    .div-option-save-addsem,
+    .div-addsem-dates
+){
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.div-addsem-name{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.div-addsem-name input{
+    width:min(560px,100%);
+}
+
+.div-addsem-page hr{
+    width:100%;
+    border:0;
+    height:1px;
+    margin:0;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.22),
+        rgba(0,255,255,.28),
+        rgba(255,255,255,.22),
+        transparent
+    );
+}
+
+.div-addsem-page input{
+    box-sizing:border-box;
+    color:#fff !important;
+    background:rgba(255,255,255,.035) !important;
+    border:1px solid rgba(255,255,255,.23) !important;
+    border-radius:9px !important;
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease,
+        transform .2s ease;
+}
+
+.div-addsem-page input:hover{
+    border-color:rgba(0,255,255,.5) !important;
+}
+
+.div-addsem-page input:focus{
+    outline:none;
+    border-color:#00ffff !important;
+    background:rgba(0,255,255,.045) !important;
+    box-shadow:0 0 0 3px rgba(0,255,255,.08);
+    transform:translateY(-1px);
 }
 
 .div-addsem-eachdate{
-    display: flex;
-    flex-direction: column;
-    row-gap: 3px;
-    align-items: center;
+    display:flex;
+    flex-direction:column;
+    row-gap:7px;
+    align-items:center;
+    justify-content:flex-start;
+    flex:0 1 245px;
+    min-width:220px;
+    color:#00ffff;
+    font-size:13px;
+    font-weight:700;
+    text-align:center;
+}
+
+.div-addsem-eachdate > div{
+    color:#00ffff;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.2px;
+    text-shadow:0 0 10px rgba(0,255,255,.18);
 }
 
 .div-option-cancel-addsem{
     position:absolute;
-    left:5%;
-    top:2%;
+    left:28px;
+    top:23px;
 }
 
 .div-option-save-addsem{
     position:absolute;
-    right:5%;
-    top:2%;
+    right:28px;
+    top:23px;
 }
 
 .blurred{
     opacity:0;
-    pointer-events: none;
+    pointer-events:none;
+}
+
+@keyframes addsem-enter{
+    from{
+        opacity:0;
+        transform:translateY(16px) scale(.985);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@media (max-width:900px){
+
+    .div-addsem-page{
+        width:min(700px,calc(100vw - 210px));
+        padding:64px 32px 48px;
+    }
+
+    .div-schedule-day-container{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .div-addsem-dates{
+        gap:18px;
+    }
+
+    .div-addsem-eachdate{
+        min-width:190px;
+    }
+}
+
+@media (max-width:650px){
+
+    .div-addsem-page{
+        width:calc(100vw - 28px);
+        padding:68px 18px 38px;
+        border-radius:20px;
+        row-gap:22px;
+    }
+
+    .div-addsem-dates{
+        flex-direction:column !important;
+        align-items:center;
+        gap:14px;
+    }
+
+    .div-addsem-eachdate{
+        width:100%;
+        min-width:0;
+        flex:0 1 auto;
+    }
+
+    .div-option-cancel-addsem{
+        left:16px;
+        top:17px;
+    }
+
+    .div-option-save-addsem{
+        right:16px;
+        top:17px;
+    }
+
+    .div-course-box{
+        min-width:260px;
+        padding:18px;
+    }
 }
