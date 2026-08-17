@@ -1,6 +1,7 @@
 import "./DateSelector.css";
 import { getAttendanceRows } from "../../../api/attendanceApi";
 import { useSemester } from "../../context/useSemester";
+import formatDate from "../../Utils/FormatDate";
 export function DateSelector({
         data,setAttendanceRows,setAttendanceType,isDirty,
         setTrackDirty,plannerMode,plannerRows,dateSelected, setDateSelected
@@ -46,8 +47,10 @@ export function DateSelector({
         else{
             onSelectDate(number);
         }
-    }  
+    }
+      
     return(
+        <div>
         <div className="div-attendance-dates">
             {myRange.map(number=>{
                 return (
@@ -64,6 +67,12 @@ export function DateSelector({
                     </div>
                 )
             })}
+        </div>
+        <div className="div-attendance-page-title"
+                style={{display:"flex", justifyContent:"center",marginTop:"5px"}}
+            >
+                {`Selected Date: ${formatDate(`${data.year}-${data.month}-${dateSelected}`)}`}
+        </div>
         </div>
     )
 }

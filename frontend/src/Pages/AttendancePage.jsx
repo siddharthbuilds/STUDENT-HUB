@@ -178,7 +178,7 @@ export function AttendancePage({plannerMode=false})
 
                                 <div className="attendance-hours-panel">
                                     <div className="attendance-hours-heading">
-                                        <span>Daily Classes</span>
+                                        <span>Today's Hours</span>
                                         <span className="attendance-hours-hint">Tap a status to cycle</span>
                                     </div>
 
