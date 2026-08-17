@@ -3,6 +3,7 @@ import Schedule from "../models/scheduleModel.js";
 import Course from "../models/courseModel.js";
 import Calendar from "../models/calendarModel.js";
 import Attendance from "../models/attendanceModel.js";
+import Grade from "../models/gradesModel.js";
 import mydb from "../config/database.js";
 
 export async function addSemesterController(req,res)
@@ -22,6 +23,8 @@ export async function addSemesterController(req,res)
         await Calendar.addCalendar({connection,semId,list: req.body.exams,code: 2});
         await Calendar.addSaturdays({connection,semId,saturdays: req.body.saturdays});
         await Attendance.generateAttendance({connection,semId,fromDate: req.body.startDate,toDate:req.body.endDate});
+        const semCourses = await Course.semCourses({connection, semId});
+        await Grade.createGrades({connection,semId,userId,courses: semCourses})
         await connection.commit();
         return res.status(201).json({message: 'Semester Added successfully'});
     }

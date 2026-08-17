@@ -1,15 +1,17 @@
 import "./GradesPage.css";
-import { HeaderDashBoard } from "../Components/dashboard/HeaderDashBoard";
 import { OverallGradeBox } from "../Components/grades/OverallGradeBox";
+import { ButtonLogin } from "../Components/login/ButtonLogin";
 
 export function GradesPage() {
     return (
         <div className="grades-page">
-            <HeaderDashBoard />
 
             <main className="grades-main">
                 <OverallGradeBox />
             </main>
+            <div style={{display:"flex", justifyContent:"center"}}>
+                <ButtonLogin text="+ Add / Edit your Grades"/>
+            </div>
         </div>
     );
 }

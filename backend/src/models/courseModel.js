@@ -22,12 +22,18 @@ class Course
         return courseMap;
     }
 
-    static async semCourses({semId})
+    static async semCourses({semId,connection})
     {
         const query = `SELECT course_name AS courseName, 
-                        course_credits AS courseCredits
+                        course_credits AS courseCredits,
+                        course_id AS courseId
                         FROM courses
                         WHERE sem_id=?`;
+        if(connection)
+        {
+            const[courses] = await connection.query(query,[semId]);
+            return courses;
+        }
         const [courses] = await mydb.query(query,[semId]);
         return courses;
     }
