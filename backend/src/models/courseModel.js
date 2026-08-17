@@ -21,6 +21,16 @@ class Course
 
         return courseMap;
     }
+
+    static async semCourses({semId})
+    {
+        const query = `SELECT course_name AS courseName, 
+                        course_credits AS courseCredits
+                        FROM courses
+                        WHERE sem_id=?`;
+        const [courses] = await mydb.query(query,[semId]);
+        return courses;
+    }
 }
 
 export default Course;

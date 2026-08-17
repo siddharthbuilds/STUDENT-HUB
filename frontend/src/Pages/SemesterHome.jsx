@@ -1,41 +1,43 @@
 import "./SemesterHome.css";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { useNavigate } from "react-router";
 import { ChevronDown, Check } from "lucide-react";
+import {useSemester} from "../context/useSemester.js";
+import {getSemesterSummary} from "../../api/semesterApi.js";
+import formatDate from "../Utils/FormatDate.js";
 
 export function SemesterHome() {
+    const {semesterDetails} = useSemester();
+    const [semSummary,setSemSummary] = useState(null);
+    useEffect(()=>{
+        async function semSummary()
+        {
+            const response = await getSemesterSummary(semesterDetails.semId);
+            setSemSummary(response.data); 
+        }
+        semSummary();
+    },[])
     const navigate = useNavigate();
 
     const [showCourses, setShowCourses] = useState(false);
-
-    const semester = {
-        name: "Semester 6",
-        startDate: "Sep 1, 2026",
-        endDate: "Sep 30, 2026",
-        courses: [
-            "Java Programming",
-            "Data Structures",
-            "Digital System Design",
-            "Computer Organization",
-            "Engineering Mathematics",
-            "Database Management Systems"
-        ],
-        credits: 22,
-        workingDays: 24
-    };
+    const startDate = new Date (semesterDetails.startDate);
+    const endDate = new Date(semesterDetails.endDate);
 
     return (
         <div className="semester-home">
-            <main className="semester-home-content">
+            {semSummary&&semesterDetails&&
+                 <main className="semester-home-content">
 
                 <div className="semester-home-header">
                     <div>
                         <div className="semester-home-title">
-                            {semester.name}
+                            {semesterDetails.semName}
                         </div>
 
                         <div className="semester-home-subtitle">
-                            {semester.startDate} — {semester.endDate}
+                            {formatDate(startDate.toLocaleDateString('en-CA'))} 
+                                — 
+                                {formatDate(endDate.toLocaleDateString('en-CA'))}
                         </div>
                     </div>
                 </div>
@@ -64,7 +66,7 @@ export function SemesterHome() {
                                     </span>
 
                                     <span className="semester-detail-value">
-                                        {semester.courses.length}
+                                        {semSummary.courses.length}
                                     </span>
                                 </div>
 
@@ -80,7 +82,7 @@ export function SemesterHome() {
 
                             {showCourses && (
                                 <div className="courses-list">
-                                    {semester.courses.map((course, index) => (
+                                    {semSummary.courses.map((course) => (
                                         <div
                                             className="course-item"
                                             key={course}
@@ -89,13 +91,13 @@ export function SemesterHome() {
 
                                             <div>
                                             <span className="course-name">
-                                                {course}
+                                                {course.courseName}
                                             </span>
                                             </div>
 
                                             <div>
                                            <span className="course-credits">
-                                                {index + 1}
+                                                {course.courseCredits}
                                             </span>
                                             </div>
 
@@ -107,26 +109,24 @@ export function SemesterHome() {
                         </div>
 
 
-                        {/* Credits */}
                         <div className="semester-detail">
                             <span className="semester-detail-label">
                                 Credits
                             </span>
 
                             <span className="semester-detail-value">
-                                {semester.credits}
+                                {semSummary.totalCredits}
                             </span>
                         </div>
 
 
-                        {/* Working Days */}
                         <div className="semester-detail">
                             <span className="semester-detail-label">
-                                Working Days
+                                Total Hours
                             </span>
 
                             <span className="semester-detail-value">
-                                {semester.workingDays}
+                                {semSummary.totalHours}
                             </span>
                         </div>
 
@@ -135,7 +135,6 @@ export function SemesterHome() {
                 </section>
 
 
-                {/* Semester Features */}
                 <section className="semester-options-section">
 
                     <div className="semester-options-heading">
@@ -196,6 +195,8 @@ export function SemesterHome() {
                 </section>
 
             </main>
+            }
+           
         </div>
     );
 }

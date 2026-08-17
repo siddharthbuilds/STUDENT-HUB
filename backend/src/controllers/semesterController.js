@@ -64,3 +64,23 @@ export async function getSemesterController(req,res)
         return res.status(500).json({message:err.message});
     }
 }
+
+export async function semesterSummaryController(req,res)
+{
+    try{
+        const semId = req.params.semId;
+        const courses = await Course.semCourses({semId});
+        const attendance = await Attendance.currentAttendance({semId});
+        const totalHours = attendance.length;
+        let totalCredits=0;
+        courses.forEach(course=>{
+            totalCredits+= course.courseCredits;
+        });
+        return res.status(200).json({courses,totalCredits,totalHours});
+    }
+    catch(err)
+    {
+        return res.status(500).json({message:err.message});
+    }
+    
+}

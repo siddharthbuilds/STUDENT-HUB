@@ -15,3 +15,8 @@ export function deleteSemester(semId)
 {
     return api.delete(`${route}/delete/${semId}`);
 }
+
+export function getSemesterSummary(semId)
+{
+    return api.get(`${route}/sem-summary/${semId}`)
+}
