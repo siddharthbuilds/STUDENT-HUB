@@ -24,7 +24,8 @@ export function LoginBox({setLoginId, loginPassword,
                 
                 <ButtonLogin text="Log In" onClick={buttonActivity}/>
                 
-                <Link to="/register">
+                <Link to="/register" 
+                    style={{ color: 'inherit', textDecoration: 'none' }}>
                     <div className="div-login-txt2">
                         New User? Register
                     </div>

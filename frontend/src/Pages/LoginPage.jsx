@@ -40,6 +40,7 @@ export function LoginPage() {
                 height={20} colorStart="#22d3ee" colorEnd="#a855f7"
                 />
             <Headerbox />
+            <div style={{display:"flex", justifyContent:"center"}}>
             <LoginBox
                 loginId={loginId}
                 loginPassword={loginPassword}
@@ -47,6 +48,7 @@ export function LoginPage() {
                 setLoginPassword={setLoginPassword}
                 buttonActivity={onClickLogin}
             />
+            </div>
             {error && <p style={{ color: "#ef4444" }}>{error}</p>}
         </>
     );

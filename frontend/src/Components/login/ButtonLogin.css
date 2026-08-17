@@ -1,21 +1,100 @@
-.btn-login, .btn-alert{
-    background-color:rgb(1,1,63);
-    color:white;
-    font-family: "Google Sans";
-    font-size:20px;
-    font-weight: bolder;
-    padding:10px;
-    border:3px solid rgb(255, 255, 255);
-    border-radius:8px;
-    transition: background-color 0.4s;
+.btn-login,
+.btn-alert{
+    min-width:100px;
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    font-family:"Google Sans";
+    font-size:18px;
+    font-weight:700;
+
+    color:#ffffff;
+
+    cursor:pointer;
+
+    transition:
+        transform .2s ease,
+        background-color .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease,
+        color .2s ease;
 }
 
-.btn-login:hover, .btn-alert:hover{
-    cursor: pointer;
-    opacity:0.85;
-    background-color:blue;
+
+/* NORMAL BUTTON */
+
+.btn-login{
+    background:rgba(0,255,255,.06);
+
+    border:1.5px solid #00d9ff;
+
+    box-shadow:
+        0 0 0 rgba(0,255,255,0);
+}
+
+.btn-login:hover{
+    background:rgba(0,255,255,.14);
+
+    border-color:#00ffff;
+
+    box-shadow:
+        0 0 18px rgba(0,255,255,.18);
+
+    transform:translateY(-2px);
+}
+
+.btn-login:active{
+    transform:translateY(0);
+
+    box-shadow:
+        0 0 8px rgba(0,255,255,.12);
+}
+
+
+/* ALERT / DANGER BUTTON */
+
+.btn-alert{
+    background:rgba(255,70,70,.06);
+
+    border:1.5px solid #ff6262;
+
+    box-shadow:
+        0 0 0 rgba(255,70,70,0);
 }
 
 .btn-alert:hover{
-    background-color: red;
+    background:rgba(255,70,70,.14);
+
+    border-color:#ff7474;
+
+    box-shadow:
+        0 0 18px rgba(255,70,70,.18);
+
+    transform:translateY(-2px);
+}
+
+.btn-alert:active{
+    transform:translateY(0);
+
+    box-shadow:
+        0 0 8px rgba(255,70,70,.12);
+}
+
+
+.btn-login:focus-visible,
+.btn-alert:focus-visible{
+    outline:none;
+}
+
+.btn-login:focus-visible{
+    box-shadow:
+        0 0 0 3px rgba(0,255,255,.15),
+        0 0 18px rgba(0,255,255,.18);
+}
+
+.btn-alert:focus-visible{
+    box-shadow:
+        0 0 0 3px rgba(255,70,70,.15),
+        0 0 18px rgba(255,70,70,.18);
 }

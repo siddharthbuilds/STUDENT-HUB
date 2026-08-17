@@ -83,7 +83,7 @@ export function AddSemPage()
                     }}
                     />
                 </div>
-                <div>
+                <div className="div-addsem-name">
                    <Input placeholder="Semester Label (eg: Semester 1)" 
                     type="text"
                     fontSize="25"

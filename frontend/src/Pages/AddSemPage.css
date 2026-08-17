@@ -10,11 +10,12 @@
 .div-addsem-page{
     display:flex;
     flex-direction:column;
+    align-items: center;
     row-gap:28px;
     padding:66px 54px 58px;
     align-items:center;
-    width:min(790px,calc(100vw - 230px));
-    max-width:790px;
+    width:min(850px,calc(100vw - 230px));
+    max-width:850px;
     box-sizing:border-box;
     border:1px solid rgba(255,255,255,.25);
     border-radius:26px;
@@ -63,14 +64,24 @@
 }
 
 .div-addsem-name{
+    margin-top:10px;
     width:100%;
     display:flex;
     justify-content:center;
     align-items:center;
+    text-align:center;
+}
+
+.div-addsem-name > *{
+    width:560px;
+    max-width:100%;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .div-addsem-name input{
-    width:min(560px,100%);
+    width:100%;
+    margin:0;
 }
 
 .div-addsem-page hr{
