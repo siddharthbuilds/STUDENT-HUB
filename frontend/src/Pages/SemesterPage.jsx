@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import formatDate from "../Utils/FormatDate.js";
 import { useSemester } from "../context/useSemester.js";
 import { NavBar } from "../Components/navbar.jsx";
+import { ConfirmationBox } from "../Components/attendance/ConfirmationBox.jsx";
 
 export function SemesterPage() {
     const [semesters, setSemesters] = useState();
@@ -15,6 +16,8 @@ export function SemesterPage() {
     const [showLoader, setShowLoader] = useState(true);
     const navigate = useNavigate();
     const { setSemesterDetails } = useSemester();
+    const [showConfirmation,setShowConfirmation] = useState(false);
+    const [currentSem, setCurrentSem] = useState(null);
 
     async function onClickTrash(semId) {
         await deleteSemester(semId);
@@ -79,9 +82,8 @@ export function SemesterPage() {
                                                 semester.endDate
                                             )}
                                             onClick={() => {
-                                                onClickTrash(
-                                                    semester.semId
-                                                );
+                                               setCurrentSem(semester.semId)
+                                               setShowConfirmation(true); 
                                             }}
                                         />
                                     </div>
@@ -99,6 +101,18 @@ export function SemesterPage() {
                     </div>
                 </div>
             )}
+
+            {showConfirmation&&
+            <ConfirmationBox 
+                message1="Are you sure want to delete this semester"
+                message2="Note: This action cannot be undone!"
+                option1="Cancel"
+                option2="Delete"
+                toastmessage="Semester Deleted"
+                saveFunction={()=>{setShowConfirmation(false)}}
+                cancelFunction={()=>{onClickTrash(currentSem)}}
+                setTrackConfirmation={setShowConfirmation}
+            />}
 
             {error && (
                 <p className="semester-error">

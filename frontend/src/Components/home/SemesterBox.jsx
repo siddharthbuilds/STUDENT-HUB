@@ -15,11 +15,12 @@ export function SemesterBox({ name, from, to, onClick }) {
             </div>
 
             <div className="div-options-each-semester">
-                <button className="btn-options-each-semester">
+                <button className="btn-options-each-semester"
+                    onClick={(event)=>{event.stopPropagation();onClick();}}
+                >
                     <TrashImage
                         color="white"
                         size="25"
-                        onClick={onClick}
                     />
                 </button>
             </div>
