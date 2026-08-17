@@ -10,3 +10,8 @@ export function register(data)
 {
      return api.post(`${route}/register`,data);
 }
+
+export function userDetails()
+{
+    return api.get(`${route}/user-details`);
+}

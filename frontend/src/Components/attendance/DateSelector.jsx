@@ -46,7 +46,7 @@ export function DateSelector({
         else{
             onSelectDate(number);
         }
-    }
+    }  
     return(
         <div className="div-attendance-dates">
             {myRange.map(number=>{

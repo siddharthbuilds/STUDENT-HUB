@@ -1,26 +1,28 @@
 import "./HomePage.css";
 import { Pencil } from "lucide-react";
+import { userDetails } from "../../api/authApi";
+import { useEffect, useState } from "react";
 
 export function HomePage() {
-
-    // Replace these values with your actual user/API data later
-    const user = {
-        name: "Siddharth",
-        userId: "22CS0000",
-        email: "siddharth@example.com",
-        cgpa: "9.04",
-        attendance: "87%"
-    };
+    const [user,setUser] = useState(null);
+    useEffect(()=>{
+        async function getUserDetails()
+        {
+            const response = await userDetails();
+            setUser(response.data.userDetails);
+        }
+        getUserDetails();
+    },[]);
+    const angle = user&& (user.attendance/100)*360;
 
     return (
         <div className="home-page">
+            {user&&
+                <main className="home-content">
 
-            <main className="home-content">
-
-                {/* Welcome */}
                 <div className="home-welcome">
                     <div className="home-welcome-title">
-                        Welcome back, {user.name}
+                        Welcome back, {user.userName}
                     </div>
 
                     <div className="home-welcome-subtitle">
@@ -29,7 +31,6 @@ export function HomePage() {
                 </div>
 
 
-                {/* User Details */}
                 <section className="user-details-card">
 
                     <div className="user-detail-row">
@@ -38,7 +39,7 @@ export function HomePage() {
                         </div>
 
                         <div className="user-detail-value">
-                            <span>{user.name}</span>
+                            <span>{user.userName}</span>
 
                             <button className="edit-button">
                                 <Pencil size={15} />
@@ -75,10 +76,8 @@ export function HomePage() {
                 </section>
 
 
-                {/* Academic Overview */}
                 <section className="academic-overview">
 
-                    {/* CGPA */}
                     <div className="academic-card">
 
                         <div className="academic-card-heading">
@@ -97,8 +96,6 @@ export function HomePage() {
 
                     </div>
 
-
-                    {/* Attendance */}
                     <div className="academic-card">
 
                         <div className="academic-card-heading">
@@ -107,7 +104,13 @@ export function HomePage() {
 
                         <div className="attendance-content">
 
-                            <div className="attendance-circle">
+                            <div className="attendance-circle" 
+                                style={{ background: `conic-gradient(
+                                            cyan 0deg ${angle}deg,
+                                            rgba(255, 255, 255, 0.1) ${angle}deg 360deg
+                                            )`}}
+                            
+                            >
                                 <div className="attendance-circle-inner">
                                     {user.attendance}
                                 </div>
@@ -130,12 +133,14 @@ export function HomePage() {
                 </section>
 
 
-                {/* Small bottom information area */}
                 <div className="home-footer-message">
                     Keep track of your academics from one place.
                 </div>
 
             </main>
+
+            }
+            
 
         </div>
     );

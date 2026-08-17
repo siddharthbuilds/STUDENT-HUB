@@ -22,7 +22,7 @@ export function RadioButtons({months,
                     id={`month-${month.month}`}
                     value={`${month.month}`}
                     defaultChecked={selectedMonth===index}
-                    onClick={()=>{setSelectedMonth(index);setDateSelected(1);}}
+                    onClick={()=>{setSelectedMonth(index);}}
                     />
                     <label htmlFor={`month-${month.month}`}> {`${month.month}`} </label>
                 </button>

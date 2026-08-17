@@ -17,10 +17,6 @@
 }
 
 
-/* =========================
-   WELCOME
-========================= */
-
 .home-welcome {
     margin-bottom: 24px;
 }
@@ -39,9 +35,6 @@
 }
 
 
-/* =========================
-   USER DETAILS
-========================= */
 
 .user-details-card {
     width: 100%;
@@ -143,10 +136,6 @@
 }
 
 
-/* =========================
-   ACADEMIC OVERVIEW
-========================= */
-
 .academic-overview {
     margin-top: 28px;
 
@@ -216,10 +205,6 @@
 }
 
 
-/* =========================
-   ATTENDANCE
-========================= */
-
 .attendance-content {
     display: flex;
     align-items: center;
@@ -238,11 +223,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: conic-gradient(
-        cyan 0deg 313deg,
-        rgba(255, 255, 255, 0.1) 313deg 360deg
-    );
 
     padding: 7px;
     box-sizing: border-box;
@@ -293,10 +273,6 @@
 }
 
 
-/* =========================
-   FOOTER MESSAGE
-========================= */
-
 .home-footer-message {
     margin-top: 34px;
 
@@ -313,9 +289,6 @@
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 750px) {
 

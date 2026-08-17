@@ -29,6 +29,15 @@ class Semester{
         const [semesters] = await mydb.query(query,[userId]);
         return semesters;
     }
+
+    static async getCurrentSemester({userId})
+    {
+        const query = `SELECT sem_id AS semId FROM semesters 
+                        WHERE user_id=? AND 
+                        CURDATE() BETWEEN start_date AND end_date`;
+        const [currentSemester] = await mydb.query(query,[userId]);
+        return currentSemester[0];
+    }
 }
 
 export default Semester

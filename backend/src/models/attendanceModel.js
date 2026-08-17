@@ -205,6 +205,13 @@ class Attendance
         return attendanceRows;
 
     }
+
+    static async currentAttendance({semId})
+    {
+        const query = `SELECT status FROM attendance WHERE sem_id=?`;
+        const [attendance] = await mydb.query(query,[semId]);
+        return attendance;
+    }
 }
 
 export default Attendance;

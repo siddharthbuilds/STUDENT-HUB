@@ -42,5 +42,13 @@ class User{
         const userPassword = queryResult[0].password_hash;
         return await bcrypt.compare(password,userPassword); 
     }
+
+    static async getUserDetails({userId})
+    {
+        const query = `SELECT user_name AS userName, email FROM users WHERE 
+                        user_id=?`;
+        const [details] = await mydb.query(query,[userId]);
+        return details[0];
+    }
 }
 export default User
