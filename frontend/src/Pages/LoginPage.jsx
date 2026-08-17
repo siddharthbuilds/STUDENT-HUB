@@ -26,7 +26,7 @@ export function LoginPage() {
                     wait(5000),
                 ]);
             localStorage.setItem("accessToken", response.data.accessToken);
-            navigate("/semesters");
+            navigate("/user");
         } catch (err) {
             setError(err.response?.data?.message || "Login failed");
         } finally {
