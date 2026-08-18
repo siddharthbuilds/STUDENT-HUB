@@ -3,7 +3,7 @@ import { useState } from "react";
 import dropdownImage from "../../images/dropdown.png";
 import dropupImage from "../../images/dropup.png";
 
-export function ViewButton({ message, component }) {
+export function ViewButton({ message, component, data}) {
     const Component = component;
     const [viewButton, setViewButton] = useState(false);
 
@@ -28,7 +28,7 @@ export function ViewButton({ message, component }) {
 
             {viewButton && (
                 <div className="course-details-wrapper">
-                    <Component />
+                    <Component data={data}/>
                 </div>
             )}
 

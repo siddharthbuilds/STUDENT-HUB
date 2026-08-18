@@ -13,7 +13,7 @@ class Grade{
 
     static async getGrades({userId})
     {
-        const query = `SELECT grade_id AS gradeId, grades.sem_id AS semID,
+        const query = `SELECT grade_id AS gradeId, grades.sem_id AS semId,
                         grades.course_id AS courseId, grades.grade, courses.course_credits AS
                         courseCredits, courses.course_name AS courseName, semesters.sem_name AS semName
                         FROM grades 

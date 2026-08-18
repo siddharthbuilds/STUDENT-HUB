@@ -2,7 +2,7 @@ import "./GradeBox.css";
 import { ViewButton } from "./ViewButton";
 import { GradeCourse } from "./GradeCourse";
 
-export function GradeBox() {
+export function GradeBox({semester}) {
     return (
         <div className="semester-grade-card">
 
@@ -10,7 +10,7 @@ export function GradeBox() {
 
                 <div className="semester-info">
                     <div className="semester-name">
-                        Semester 1
+                        {semester.courses[0].semName}
                     </div>
 
                     <div className="semester-label">
@@ -19,7 +19,7 @@ export function GradeBox() {
                 </div>
 
                 <div className="sgpa-box">
-                    <span>9.04</span>
+                    <span>{semester.sgpa}</span>
                     <small>SGPA</small>
                 </div>
 
@@ -28,6 +28,7 @@ export function GradeBox() {
             <ViewButton
                 message="View Course Wise"
                 component={GradeCourse}
+                data={semester.courses}
             />
 
         </div>

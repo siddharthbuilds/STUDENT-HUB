@@ -2,7 +2,8 @@ import "./OverallGradeBox.css";
 import { CGPACircle } from "./CGPACirle";
 import { GradeBox } from "./GradeBox";
 
-export function OverallGradeBox() {
+export function OverallGradeBox({grades}) {
+    const semList = grades&&Object.values(grades.semesters);
     return (
         <div className="overall-grades-wrapper">
 
@@ -18,7 +19,7 @@ export function OverallGradeBox() {
                         </div>
                     </div>
 
-                    <CGPACircle cgpa="9.04" />
+                    <CGPACircle cgpa={grades&&grades.cgpa} />
                 </div>
             </section>
 
@@ -28,9 +29,12 @@ export function OverallGradeBox() {
                 </div>
 
                 <div className="semester-grades-list">
-                    <GradeBox />
-                    <GradeBox />
-                    <GradeBox />
+                    {semList&&semList.map(semester=>{
+                        return(<>
+                            <GradeBox semester={semester}/>
+                        </>)
+                    })}
+                    
                 </div>
             </section>
 
