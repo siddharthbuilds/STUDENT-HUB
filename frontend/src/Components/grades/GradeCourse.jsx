@@ -1,4 +1,5 @@
 import "./GradeCourse.css";
+import { Fragment } from "react";
 
 export function GradeCourse({data}) {
     return (
@@ -7,7 +8,7 @@ export function GradeCourse({data}) {
             <div className="div-grades-course">
                 {data.map(course=>{
                     return(
-                        <>
+                        <Fragment key={course.courseId}>
                             <div className="div-grades-coursename">
                                 {course.courseName}
                             </div>
@@ -15,7 +16,7 @@ export function GradeCourse({data}) {
                             <div className="div-grades-coursegrade">
                                 {course.grade}
                             </div>
-                        </>
+                        </Fragment>
                     )
                 })}
                 

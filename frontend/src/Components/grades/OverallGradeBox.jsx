@@ -1,6 +1,7 @@
 import "./OverallGradeBox.css";
 import { CGPACircle } from "./CGPACirle";
 import { GradeBox } from "./GradeBox";
+import { Fragment } from "react";
 
 export function OverallGradeBox({grades}) {
     const semList = grades&&Object.values(grades.semesters);
@@ -30,9 +31,9 @@ export function OverallGradeBox({grades}) {
 
                 <div className="semester-grades-list">
                     {semList&&semList.map(semester=>{
-                        return(<>
+                        return(<Fragment key={semester.courses[0].semId}>
                             <GradeBox semester={semester}/>
-                        </>)
+                        </Fragment>)
                     })}
                     
                 </div>
