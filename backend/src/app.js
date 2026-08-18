@@ -3,6 +3,7 @@ import cors from "cors"
 import userRoutes from "./routes/userRoutes.js"
 import semesterRoutes from "./routes/semesterRoutes.js"
 import attendanceRoutes from "./routes/attendanceRoutes.js"
+import gradeRoutes from "./routes/gradeRoutes.js"
 const app = express();
 
 const corsOptions = {
@@ -17,4 +18,5 @@ app.use('/',express.json());
 app.use('/api/users',userRoutes);
 app.use('/api/semesters',semesterRoutes);
 app.use('/api/attendance',attendanceRoutes);
+app.use('/api/grades',gradeRoutes);
 app.listen(3000);
