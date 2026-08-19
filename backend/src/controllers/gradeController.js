@@ -1,4 +1,6 @@
 import Grade from "../models/gradesModel.js";
+import mydb from "../config/database.js";
+
 const gradePointMap = new Map();
 const grades=['S','A+','A','B','C','D'];
 let index=10;
@@ -45,5 +47,30 @@ export async function getGradesController(req,res)
     catch(err)
     {
         return res.status(500).json({message:err.message})
+    }
+}
+
+export async function updateGradesController(req,res)
+{
+    const connection = await mydb.getConnection();
+    await connection.beginTransaction();
+    try{
+        const gradeChanges = req.body.gradeChanges;
+        const insertData=[];
+        const changes = Object.entries(gradeChanges);
+        changes.forEach(([id,grade])=>{
+            insertData.push(grade,id);
+        });
+        await Grade.updateGrades({insertData,connection});
+        await connection.commit();
+        return res.status(200).json({message:"Grades Updated!"});
+    }
+    catch(err)
+    {
+        await connection.rollback();
+        return res.status(500).json({message: err.message});
+    }
+    finally{
+        await connection.release();
     }
 }

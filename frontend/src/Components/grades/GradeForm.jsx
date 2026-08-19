@@ -1,36 +1,45 @@
 import { useState } from "react";
 import "./GradeForm.css";
+import { updateGrades } from "../../../api/gradeApi.js";
 
-export function GradeForm({ semesters, onClose, onSave }) {
+export function GradeForm({ semesters, onClose, onSave}) {
 
+    const [error, setError] = useState('');
     const [selectedSemId, setSelectedSemId] = useState("");
     const [grades, setGrades] = useState({});
 
     const selectedSemester = semesters?.find(
-        sem => String(sem.semId) === String(selectedSemId)
+        sem => {if (String(sem.courses[0].semId) === String(selectedSemId))
+        {
+            return true;
+        }
+        }
     );
 
-    const handleGradeChange = (courseId, grade) => {
+    const handleGradeChange = (gradeId, grade) => {
         setGrades(prev => ({
             ...prev,
-            [courseId]: grade
+            [gradeId]: grade
         }));
     };
 
-    const handleSave = () => {
+    async function  handleSave () {
 
         if (!selectedSemId) {
             alert("Please select a semester.");
             return;
         }
+        try{
 
-        const gradeData = selectedSemester.courses.map(course => ({
-            semId: selectedSemId,
-            courseId: course.courseId,
-            grade: grades[course.courseId] || null
-        }));
+            await updateGrades({gradeChanges:grades});
+            onSave();
+        }
 
-        onSave(gradeData);
+        catch(error)
+        {
+            setError(error.message);
+        }
+        
     };
 
     return (
@@ -72,10 +81,10 @@ export function GradeForm({ semesters, onClose, onSave }) {
 
                         {semesters?.map(semester => (
                             <option
-                                key={semester.semId}
-                                value={semester.semId}
+                                key={semester.courses[0].semId}
+                                value={semester.courses[0].semId}
                             >
-                                {semester.semName}
+                                {semester.courses[0].semName}
                             </option>
                         ))}
 
@@ -96,7 +105,7 @@ export function GradeForm({ semesters, onClose, onSave }) {
 
                             <div
                                 className="grade-course-row"
-                                key={course.courseId}
+                                key={course.gradeId}
                             >
 
                                 <div className="course-details">
@@ -114,20 +123,24 @@ export function GradeForm({ semesters, onClose, onSave }) {
 
                                 <div className="grade-options">
 
-                                    {["A", "B", "C", "D", "E", "F"].map(
+                                    {["S","A+","A", "B", "C", "D"].map(
                                         grade => (
 
                                             <button
                                                 key={grade}
                                                 type="button"
                                                 className={
-                                                    grades[course.courseId] === grade
+                                                    Object.hasOwn(grades,course.gradeId)?
+                                                    grades[course.gradeId]===grade
+                                                    ?"grade-option selected"
+                                                    : "grade-option"
+                                                    :course.grade === grade
                                                         ? "grade-option selected"
                                                         : "grade-option"
                                                 }
                                                 onClick={() =>
                                                     handleGradeChange(
-                                                        course.courseId,
+                                                        course.gradeId,
                                                         grade
                                                     )
                                                 }
@@ -168,6 +181,8 @@ export function GradeForm({ semesters, onClose, onSave }) {
                 </div>
 
             </div>
+
+            {error && <p className="attendance-error">{error}</p>}
 
         </div>
     );

@@ -5,3 +5,8 @@ export function getGrades()
 {
     return api.get(`${route}/get`);
 }
+
+export function updateGrades({gradeChanges})
+{
+    return api.patch(`${route}/update`,{gradeChanges})
+}

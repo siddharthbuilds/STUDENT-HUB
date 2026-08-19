@@ -24,6 +24,18 @@ class Grade{
         return userGrades;
                         
     }
+
+    static async updateGrades({insertData,connection})
+    {
+        const query=`UPDATE grades SET grade=? WHERE grade_id=?`;
+        for(let i=0; i<insertData.length;i+=2)
+        {
+            const grade = insertData[i];
+            const gradeId = insertData[i+1];
+            await connection.query(query, [grade, gradeId]);
+        }
+
+    }
 }
 
 export default Grade;
