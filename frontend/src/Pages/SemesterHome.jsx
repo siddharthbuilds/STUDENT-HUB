@@ -85,7 +85,7 @@ export function SemesterHome() {
                                     {semSummary.courses.map((course) => (
                                         <div
                                             className="course-item"
-                                            key={course}
+                                            key={course.courseId}
                                         >
                                             <div className="course-item-list">
 
