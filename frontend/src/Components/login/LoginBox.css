@@ -23,6 +23,11 @@
     font-size: 18px;
 }
 
+.div-login-txt2:hover{
+    color:cyan;
+    cursor: pointer;
+}
+
 @keyframes type{
     from{
         width: 0;

@@ -33,7 +33,7 @@ export function AddSemPage()
     {
         try{
             await addSemester(semDetails);
-            navigate("/semesters");
+            navigate("/user/semesters");
         }
         catch(err){
             setError(err.response?.data?.message || "Login failed");

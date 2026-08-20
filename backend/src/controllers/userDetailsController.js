@@ -20,7 +20,7 @@ export async function userDetailsController(req,res)
             statusList.forEach(({status})=>{
                 if(status===1) present+=1;
             });
-            userDetails.attendance = total!=0 && +((present/total)*100).toFixed(2);
+            userDetails.attendance = total!=0 ? +((present/total)*100).toFixed(2):0;
         }
         else {userDetails.attendance=0;}
         return res.status(200).json({userDetails});

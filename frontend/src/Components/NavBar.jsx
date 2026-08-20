@@ -1,8 +1,10 @@
 import "./NavBar.css";
 import {House,LayoutList,Percent,LogOut} from "lucide-react";
 import {NavLink} from "react-router";
+import { useNavigate } from "react-router";
 export function NavBar()
 {
+    const navigate = useNavigate();
     const links = [
                 {
                     path: "/user/home",
@@ -51,7 +53,12 @@ export function NavBar()
                 </NavLink>
             );
         })}
-                    <li className="links-list">
+                    <li className="links-list"
+                        onClick={()=>{
+                            localStorage.removeItem("accessToken");
+                            navigate('/login');
+                        }}
+                    >
                         <div>
                             <LogOut size="18px"/>
                         </div> 

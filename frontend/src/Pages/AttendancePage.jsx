@@ -1,11 +1,9 @@
 import "./AttendancePage.css"
-import {HeaderDashBoard} from "../Components/dashboard/HeaderDashBoard"
 import { RadioButtons } from "../Components/attendance/RadioButtons"
 import {EachHour } from "../Components/attendance/EachHour"
 import {AttendanceContainer} from "../Components/attendance/AttendanceContainer"
 import {AttendanceSelector} from "../Components/attendance/AttendanceSelector"
 import { ButtonLogin } from "../Components/login/ButtonLogin"
-import { Toast } from "../Components/register/Toast"
 import { ConfirmationBox } from "../Components/attendance/ConfirmationBox"
 import { useEffect, useState } from "react"
 import {useSemester} from "../context/useSemester.js";
@@ -147,8 +145,6 @@ export function AttendancePage({plannerMode=false})
         <>
             <div className={trackConfirmation?"div-noblur div-blur":"div-noblur"}>
                 <div className="attendance-page-shell">
-                    <HeaderDashBoard />
-
                     <div className="attendance-page-content">
                         <div className="attendance-page-intro">
                             <div className="attendance-page-title">

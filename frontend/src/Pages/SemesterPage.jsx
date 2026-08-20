@@ -7,7 +7,6 @@ import PageLoader from "../Components/Loader.jsx";
 import { useNavigate } from "react-router";
 import formatDate from "../Utils/FormatDate.js";
 import { useSemester } from "../context/useSemester.js";
-import { NavBar } from "../Components/navbar.jsx";
 import { ConfirmationBox } from "../Components/attendance/ConfirmationBox.jsx";
 
 export function SemesterPage() {
