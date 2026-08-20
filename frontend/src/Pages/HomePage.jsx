@@ -1,15 +1,28 @@
 import "./HomePage.css";
 import { Pencil } from "lucide-react";
 import { userDetails } from "../../api/authApi";
+import { getGrades } from "../../api/gradeApi";
+
 import { useEffect, useState } from "react";
 
 export function HomePage() {
     const [user,setUser] = useState(null);
+    const [cgpa,setCgpa] = useState(null);
+    const [error, setError] = useState('');
     useEffect(()=>{
         async function getUserDetails()
         {
-            const response = await userDetails();
-            setUser(response.data.userDetails);
+            try{
+                const response = await userDetails();
+                setUser(response.data.userDetails);
+                const gradeReponse = await getGrades();
+                const {cgpa} = gradeReponse.data.grades;
+                setCgpa(cgpa);
+            }
+            catch(error)
+            {
+                setError(error.response?.data?.message)
+            }
         }
         getUserDetails();
     },[]);
@@ -86,7 +99,7 @@ export function HomePage() {
 
                         <div className="academic-card-content">
                             <div className="academic-number">
-                                {user.cgpa}
+                                {cgpa}
                             </div>
 
                             <div className="academic-description">
@@ -141,7 +154,7 @@ export function HomePage() {
 
             }
             
-
+            {error && <p style={{ color: "#ef4444" }}>{error}</p>}
         </div>
     );
 }

@@ -132,6 +132,8 @@ export function AttendancePage({plannerMode=false})
             course.remainingBunks =
                 course.allowedBunks - course.total_absent;
 
+            if(course.remainingBunks<0) {course.remainingBunks=0;}
+
         });
 
         setCourseSummary(summary);

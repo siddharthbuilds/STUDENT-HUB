@@ -36,6 +36,13 @@ class Semester{
                         WHERE user_id=? AND 
                         CURDATE() BETWEEN start_date AND end_date`;
         const [currentSemester] = await mydb.query(query,[userId]);
+        if(currentSemester.length==0)
+        {
+            const requery = `SELECT sem_id AS semId FROM semesters 
+                            WHERE user_id=?`;
+            const [currentSem] = await mydb.query(requery,[userId]);
+            return currentSem[0];
+        }
         return currentSemester[0];
     }
 }

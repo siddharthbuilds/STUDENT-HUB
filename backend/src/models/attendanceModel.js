@@ -172,6 +172,7 @@ class Attendance
             course.allowedBunks = Math.floor(course.total_hours * 0.25);
             course.remainingBunks =
                 course.allowedBunks - course.total_absent;
+            if(course.remainingBunks<0) {course.remainingBunks=0;}
         });
         return rows;
     }
