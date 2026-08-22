@@ -1,25 +1,31 @@
 import Attendance from "../models/attendanceModel.js";
 import Calendar from "../models/calendarModel.js";
+import Semester from "../models/semesterModel.js";
 import mydb from "../config/database.js";
 export async function getAttendanceController(req,res)
 {
     const semId = parseInt(req.params.semId);
     const attendanceDate = req.params.date;
-    try{
-        let attendanceRows = await Calendar.getCalendar({semId, attendanceDate});
-        if(attendanceRows.length>0 && attendanceRows[0].code !=3)
-        {
-            return res.status(200).json({attendanceRows, type: 0});
+    const checkDate = await Semester.checkAttendanceDate({semId,attendanceDate});
+    if(checkDate==0) 
+        {return res.status(200).json({attendanceRows:[],type:-1})}
+    else{
+        try{
+            let attendanceRows = await Calendar.getCalendar({semId, attendanceDate});
+            if(attendanceRows&&attendanceRows.length>0 && attendanceRows[0].code !=3)
+            {
+                return res.status(200).json({attendanceRows, type: 0});
+            }
+            else
+            {
+                attendanceRows = await Attendance.getAttendance({semId, attendanceDate});
+                return res.status(200).json({attendanceRows, type:1});
+            }
         }
-        else
+        catch(err)
         {
-            attendanceRows = await Attendance.getAttendance({semId, attendanceDate});
-            return res.status(200).json({attendanceRows, type:1});
+            return res.status(500).json({message: err.message});
         }
-    }
-    catch(err)
-    {
-        return res.status(500).json({message: err.message});
     }
 }
 

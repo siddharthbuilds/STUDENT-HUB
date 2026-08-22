@@ -45,6 +45,15 @@ class Semester{
         }
         return currentSemester[0];
     }
+
+    static async checkAttendanceDate({semId, attendanceDate})
+    {
+        const query = `SELECT CASE WHEN ? BETWEEN start_date AND end_date THEN 1 
+                        ELSE 0 END AS is_between FROM semesters WHERE sem_id=?`;
+        //attendanceDate=String(attendanceDate);
+        const [response] = await mydb.query(query,[attendanceDate,semId]);
+        return response[0].is_between;
+    }
 }
 
 export default Semester

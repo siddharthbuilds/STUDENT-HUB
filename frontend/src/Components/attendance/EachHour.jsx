@@ -1,5 +1,6 @@
 import "./EachHour.css";
 import { useState } from "react";
+import { DisplayCard } from "./DisplayCard";
 
 export function EachHour({
     attendanceRows,
@@ -102,6 +103,19 @@ export function EachHour({
                 </p>
             }
 
+            {attendanceType==0&&<DisplayCard 
+                    type={attendanceRows.length>0?attendanceRows[0].code:3}
+                    content={attendanceRows.length>0?
+                        attendanceRows[0].description:" "}
+                />}
+
+            {attendanceType==1&&attendanceRows.length==0&&
+                <DisplayCard 
+                    content="Sunday"
+                />}
+
         </div>
     );
+
+    
 }

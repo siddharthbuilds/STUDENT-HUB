@@ -187,7 +187,7 @@ export function AttendancePage({plannerMode=false})
                                     />
                                 </div>
 
-                                {!plannerMode&&<div className="attendance-save-wrap">
+                                {!plannerMode&&attendanceType==1&&<div className="attendance-save-wrap">
                                     <ButtonLogin text="Save" onClick={onClickSave}/>
                                 </div>}
                             </div>
