@@ -6,13 +6,14 @@ import {getAttendanceController,
 } from "../controllers/attendanceController.js";
 
 import { authenticateToken } from "../middlewares/authMiddleware.js";
+import { verifyUser } from "../middlewares/verifyMiddleware.js";
 
 const router = Router();
 
 router.use(authenticateToken);
 
-router.patch('/update/:semId',updateAttendanceController);
-router.get('/get/course-summary/:semId',courseSummaryController);
-router.get('/get/plan-your-bunks/:semId',planYourBunksController);
-router.get('/get/:semId/:date',getAttendanceController);
+router.patch('/update/:semId',verifyUser,updateAttendanceController);
+router.get('/get/course-summary/:semId',verifyUser,courseSummaryController);
+router.get('/get/plan-your-bunks/:semId',verifyUser,planYourBunksController);
+router.get('/get/:semId/:date',verifyUser,getAttendanceController);
 export default router;
