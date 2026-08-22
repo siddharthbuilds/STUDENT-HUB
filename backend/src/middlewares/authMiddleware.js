@@ -1,6 +1,6 @@
-import User from "../models/userModel.js"
-import jwt from "jsonwebtoken"
-import dotenv from "dotenv"
+import User from "../models/userModel.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 dotenv.config();
 export async function registerMiddleware(req,res,next)
 {

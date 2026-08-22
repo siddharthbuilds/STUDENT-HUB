@@ -50,9 +50,19 @@ class Semester{
     {
         const query = `SELECT CASE WHEN ? BETWEEN start_date AND end_date THEN 1 
                         ELSE 0 END AS is_between FROM semesters WHERE sem_id=?`;
-        //attendanceDate=String(attendanceDate);
         const [response] = await mydb.query(query,[attendanceDate,semId]);
         return response[0].is_between;
+    }
+
+    static async verifyUser({userId, semId})
+    {
+        const query = `SELECT EXISTS(
+                            SELECT 1 
+                            FROM semesters 
+                            WHERE user_id =? AND sem_id = ?
+                        ) AS is_present `;
+        const [response] = await mydb.query(query,[userId,semId]);
+        return response[0].is_present;
     }
 }
 

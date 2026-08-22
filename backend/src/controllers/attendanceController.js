@@ -6,11 +6,13 @@ export async function getAttendanceController(req,res)
 {
     const semId = parseInt(req.params.semId);
     const attendanceDate = req.params.date;
-    const checkDate = await Semester.checkAttendanceDate({semId,attendanceDate});
-    if(checkDate==0) 
-        {return res.status(200).json({attendanceRows:[],type:-1})}
-    else{
-        try{
+   
+    try{
+        const checkDate = await Semester.checkAttendanceDate({semId,attendanceDate});
+        if(checkDate==0) 
+            {return res.status(200).json({attendanceRows:[],type:-1})}
+        else
+        {
             let attendanceRows = await Calendar.getCalendar({semId, attendanceDate});
             if(attendanceRows&&attendanceRows.length>0 && attendanceRows[0].code !=3)
             {
@@ -22,10 +24,10 @@ export async function getAttendanceController(req,res)
                 return res.status(200).json({attendanceRows, type:1});
             }
         }
-        catch(err)
-        {
-            return res.status(500).json({message: err.message});
-        }
+    }
+    catch(err)
+    {
+        return res.status(500).json({message: err.message});
     }
 }
 
