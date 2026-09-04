@@ -1,7 +1,7 @@
 import "./EntryForm.css"
 import { Input } from "../login/Input.jsx"
 import {ButtonLogin} from "../login/ButtonLogin.jsx"
-import { Tooltip } from "../ToolTip.jsx"
+import { Tooltip } from "../Tooltip.jsx";
 import CustomDropdown from "./DropDown.jsx"
 
 export function EntryForm({inputs,buttons})
