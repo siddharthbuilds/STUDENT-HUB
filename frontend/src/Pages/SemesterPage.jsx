@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import formatDate from "../Utils/FormatDate.js";
 import { useSemester } from "../context/useSemester.js";
 import { ConfirmationBox } from "../Components/attendance/ConfirmationBox.jsx";
+import {SemesterHint} from "../Components/home/SemesterHint.jsx";
 
 export function SemesterPage() {
     const [semesters, setSemesters] = useState();
@@ -97,6 +98,9 @@ export function SemesterPage() {
                                 navigate("/user/add-semester");
                             }}
                         />
+                    </div>
+                    <div>
+                        <SemesterHint />
                     </div>
                 </div>
             )}

@@ -54,9 +54,9 @@ export function HomePage() {
                         <div className="user-detail-value">
                             <span>{user.userName}</span>
 
-                            <button className="edit-button">
+                            {/* <button className="edit-button">
                                 <Pencil size={15} />
-                            </button>
+                            </button> */}
                         </div>
                     </div>
 
@@ -80,9 +80,9 @@ export function HomePage() {
                         <div className="user-detail-value">
                             <span>{user.email}</span>
 
-                            <button className="edit-button">
+                            {/* <button className="edit-button">
                                 <Pencil size={15} />
-                            </button>
+                            </button> */}
                         </div>
                     </div>
 

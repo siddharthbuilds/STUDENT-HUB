@@ -150,8 +150,18 @@ export function AttendancePage({plannerMode=false})
                             <div className="attendance-page-title">
                                 {plannerMode ? "Plan Your Bunks" : "Attendance"}
                             </div>
-                            <div className="attendance-page-subtitle">
-                                Track your daily attendance and stay on top of your semester.
+                            <div className={`attendance-page-subtitle ${plannerMode ? "planner-description" : ""}`}>
+                                <div className="attendance-description-main">
+                                    {!plannerMode?
+                                    `• Track your daily attendance and stay on top of your semester.`:
+                                    `• Play around with your attendance-changing any past or future day's attendance and instantly see how your attendance and remaining bunks change.`}
+                                </div>
+
+                                <div className={plannerMode ? "planner-unsaved-note" : "attendance-description-main"}>
+                                    {!plannerMode?
+                                    `• Mark classes as Present or Absent and keep your attendance records up to date.`:
+                                    `• Nothing is saved — all changes are temporary and are only for planning and experimenting.`}
+                                </div>
                             </div>
                         </div>
 
@@ -177,7 +187,9 @@ export function AttendancePage({plannerMode=false})
                                 <div className="attendance-hours-panel">
                                     <div className="attendance-hours-heading">
                                         <span>Today's Hours</span>
-                                        <span className="attendance-hours-hint">Tap a status to cycle</span>
+                                        <span className="attendance-hours-hint">
+                                            Tap the circle to change: Present → Absent → Not Marked
+                                        </span>
                                     </div>
 
                                     <EachHour attendanceRows={attendanceRows} attendanceType={attendanceType}

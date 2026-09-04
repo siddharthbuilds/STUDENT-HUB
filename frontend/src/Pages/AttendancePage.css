@@ -32,9 +32,40 @@
 }
 
 .attendance-page-subtitle{
-    margin-top:5px;
+    margin-top:8px;
     font-size:13px;
-    opacity:.5;
+    line-height:1.5;
+    color:#8f9abe;
+}
+
+.attendance-description-main{
+    max-width:900px;
+}
+
+.planner-description{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.planner-unsaved-note{
+    width:fit-content;
+    max-width:100%;
+    box-sizing:border-box;
+    padding:7px 12px;
+
+    border:1px solid rgba(255,209,102,.25);
+    border-radius:8px;
+
+    color:#ffd166;
+    background:rgba(255,209,102,.055);
+
+    font-size:12px;
+    font-weight:600;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025),
+        0 4px 15px rgba(0,0,0,.08);
 }
 
 .attendance-day-section,
@@ -64,9 +95,22 @@
 }
 
 .attendance-hours-hint{
+    padding:6px 11px;
+    border:1px solid rgba(0,229,255,.22);
+    border-radius:8px;
+
+    color:#00e5ff;
+    background:rgba(0,229,255,.055);
+
     font-size:11px;
-    font-weight:500;
-    opacity:.45;
+    font-weight:600;
+    letter-spacing:.1px;
+
+    white-space:nowrap;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025),
+        0 4px 12px rgba(0,0,0,.08);
 }
 
 .attendance-save-wrap{
@@ -99,4 +143,15 @@
     .attendance-page-content{padding:0 14px 35px}
     .attendance-page-title{font-size:23px}
     .attendance-hours-heading,.attendance-course-heading{font-size:15px}
+
+    .attendance-hours-hint{
+        white-space:normal;
+        text-align:right;
+        font-size:10px;
+        padding:5px 8px;
+    }
+
+     .planner-unsaved-note{
+        width:100%;
+    }
 }
