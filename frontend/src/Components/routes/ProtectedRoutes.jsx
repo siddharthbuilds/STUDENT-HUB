@@ -7,5 +7,5 @@ export function ProtectedRoute()
     {
         return <Outlet />;
     }
-    return <Navigate to="/register" />;
+    return <Navigate to="/login" replace/>;
 }

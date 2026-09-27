@@ -171,6 +171,13 @@ export function AttendancePage({plannerMode=false})
                                     `• Mark classes as Present or Absent and keep your attendance records up to date.`:
                                     `• Nothing is saved — all changes are temporary and are only for planning and experimenting.`}
                                 </div>
+
+                                <div className={!plannerMode?"planner-unsaved-note" : ""}>
+                                    {!plannerMode&&
+                                    `
+                                    🔒 Saved Present/Absent entries cannot be edited. Visit Plan Your Bunks to experiment with attendance changes.
+                                    `}
+                                </div>
                             </div>
                         </div>
 
@@ -237,7 +244,7 @@ export function AttendancePage({plannerMode=false})
 
             {trackConfirmation&&<ConfirmationBox
                 message1="Are you sure want to save the changes?"
-                message2="Note: Data once Saved, cannot be edited."
+                message2="Once an entry is saved as Present or Absent, it cannot be edited later. Unmarked entries can still be updated."
                 option1="Save"
                 option2="Cancel"
                 toastmessage="All Changes Saved"

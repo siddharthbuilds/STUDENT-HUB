@@ -11,6 +11,7 @@ import { SemesterHome } from "./Pages/SemesterHome";
 import { SemesterLayout } from "./Components/home/SemesterLayout";
 import {Routes, Route, Navigate} from "react-router";
 import { ProtectedRoute } from "./Components/routes/ProtectedRoutes";
+import { AuthRedirect } from "./Components/routes/AuthRedirect";
 import { MainLayout } from "./Components/Layout";
 function App() {
   
@@ -18,20 +19,35 @@ function App() {
   return (
     <>
     <Routes>
-    <Route path="/login" element={<LoginPage />}></Route>
-    <Route path="/register" element={<RegisterPage />}></Route>
 
-    <Route path="/user" element={<MainLayout />}>
+    <Route path="/" element={<Navigate to="/login" replace />} />
 
-        <Route index element={<Navigate to="home" replace />} />
-        <Route path="home" element={<HomePage />} />
-        <Route path="semesters" element={<SemesterPage/>} />
-        <Route path="grades" element={<GradesPage/>} />
-        <Route path="add-semester" element={<AddSemPage/>} />
-        <Route path="semesters/dashboard" element={<SemesterHome/>} />
-        <Route path="semesters/attendance" element={<AttendancePage/>} />
-        <Route path="semesters/planner" element={<PlanYourBunksPage/>} />
+    <Route path="/login" 
+          element={
+                <AuthRedirect>
+                    <LoginPage />
+                </AuthRedirect>}>
+    </Route>
 
+    <Route path="/register" 
+          element={
+                <AuthRedirect>
+                    <RegisterPage />
+                </AuthRedirect>}>
+    </Route>
+
+
+    <Route path="/user" element={<ProtectedRoute />}>
+      <Route element={<MainLayout />}>
+          <Route index element={<Navigate to="home" replace />} />
+          <Route path="home" element={<HomePage />} />
+          <Route path="semesters" element={<SemesterPage />} />
+          <Route path="grades" element={<GradesPage />} />
+          <Route path="add-semester" element={<AddSemPage />} />
+          <Route path="semesters/dashboard" element={<SemesterHome />} />
+          <Route path="semesters/attendance" element={<AttendancePage />} />
+          <Route path="semesters/planner" element={<PlanYourBunksPage />} />
+      </Route>
     </Route>
 
       </Routes>
