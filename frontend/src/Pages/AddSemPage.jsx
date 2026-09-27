@@ -32,6 +32,18 @@ export function AddSemPage()
 
     async function onClickAddSem()
     {
+        const days = ['tue','wed','thu','fri'];
+        if(sameSchedule)
+        {
+            const newCourseList = courseList.map(course=>{
+                const updatedCourse = {... course};
+                days.forEach(day=>{
+                    updatedCourse[day]=updatedCourse.mon;
+                })
+                return updatedCourse;
+            });
+            semDetails.courses = newCourseList;
+        }
         try{
             await addSemester(semDetails);
             navigate("/user/semesters");
