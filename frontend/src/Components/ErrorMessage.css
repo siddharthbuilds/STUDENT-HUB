@@ -1,0 +1,28 @@
+.div-error-toast {
+    position: fixed;
+    left: 50%;
+    bottom: -200px;
+    transform: translateX(-50%);
+    z-index: 2000;
+    max-width: min(90vw, 420px);
+    transition: bottom 0.4s ease;
+    pointer-events: none;
+}
+
+.div-error-toast-show {
+    bottom: 25px;
+}
+
+.div-error-toast-box {
+    padding: 11px 17px;
+    border: 1px solid rgba(255, 70, 70, 0.35);
+    border-radius: 10px;
+    background: rgba(40, 0, 15, 0.94);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.error-toast-text {
+    color: #ff8585;
+    font-size: 15px;
+    word-break: break-word;
+}
