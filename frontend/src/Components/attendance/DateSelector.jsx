@@ -4,7 +4,8 @@ import { useSemester } from "../../context/useSemester";
 import formatDate from "../../Utils/FormatDate";
 export function DateSelector({
         data,setAttendanceRows,setAttendanceType,isDirty,
-        setTrackDirty,plannerMode,plannerRows,dateSelected, setDateSelected
+        setTrackDirty,plannerMode,plannerRows,dateSelected, setDateSelected,
+        setError
     })
 {
     const starting = 1;
@@ -22,9 +23,15 @@ export function DateSelector({
         const date = `${data.year}-${data.monthNum<10?`0${data.monthNum}`:`${data.monthNum}`}-${num<10?`0${num}`:`${num}`}`;
         if(!plannerMode)
         {
-            const attendanceData = await getAttendanceRows(date,semId);
-            setAttendanceRows(attendanceData.data.attendanceRows);
-            setAttendanceType(attendanceData.data.type);
+            try {
+                const attendanceData = await getAttendanceRows(date,semId);
+                setAttendanceRows(attendanceData.data.attendanceRows);
+                setAttendanceType(attendanceData.data.type);
+            } catch (err) {
+                if (setError) {
+                    setError(err.response?.data?.message || "Failed to load attendance");
+                }
+            }
         }
         else
         {

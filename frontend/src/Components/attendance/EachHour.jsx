@@ -1,6 +1,7 @@
 import "./EachHour.css";
 import { useState } from "react";
 import { DisplayCard } from "./DisplayCard";
+import { ErrorMessage } from "../ErrorMessage";
 
 export function EachHour({
     attendanceRows,
@@ -98,9 +99,7 @@ export function EachHour({
 
             {
                 error &&
-                <p style={{ color: "#ef4444" }}>
-                    {error}
-                </p>
+                <ErrorMessage message={error} />
             }
 
             {attendanceType==0&&<DisplayCard 

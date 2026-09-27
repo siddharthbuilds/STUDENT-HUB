@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./GradeForm.css";
 import { updateGrades } from "../../../api/gradeApi.js";
+import { ErrorMessage } from "../ErrorMessage.jsx";
 
 export function GradeForm({ semesters, onClose, onSave}) {
 
@@ -182,7 +183,7 @@ export function GradeForm({ semesters, onClose, onSave}) {
 
             </div>
 
-            {error && <p className="attendance-error">{error}</p>}
+            <ErrorMessage message={error} onDismiss={() => setError('')} />
 
         </div>
     );
