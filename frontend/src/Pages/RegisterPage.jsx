@@ -8,6 +8,8 @@ import "./RegisterPage.css";
 import { register } from "../../api/authApi";
 import { useNavigate } from "react-router";
 import {PageLoader} from "../Components/Loader";
+import { Link } from "react-router";
+
 
 export function RegisterPage()
 {
@@ -67,6 +69,13 @@ export function RegisterPage()
             <ButtonLogin text="Register" 
             onClick={onClickRegister}
             />
+
+        <Link to="/login" 
+                    style={{ color: 'inherit', textDecoration: 'none' }}>
+                    <div className="div-login-txt2">
+                        Already Registered? Login
+                    </div>
+        </Link>
             
         </div>
         <Toast message="Account Registered Successfully!" show={toastView}/>

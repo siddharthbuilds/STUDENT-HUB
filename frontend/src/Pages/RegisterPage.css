@@ -10,3 +10,12 @@
 .div-register-txt1{
     font-size: 45px;
 }
+
+.div-login-txt2{
+    font-size: 18px;
+}
+
+.div-login-txt2:hover{
+    color:cyan;
+    cursor: pointer;
+}

@@ -14,7 +14,7 @@ export function GradeCourse({data}) {
                             </div>
 
                             <div className="div-grades-coursegrade">
-                                {course.grade}
+                                {course.grade =='Y'?'-':course.grade}
                             </div>
                         </Fragment>
                     )
