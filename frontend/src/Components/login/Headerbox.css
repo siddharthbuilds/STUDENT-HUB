@@ -4,9 +4,10 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:22px 34px 18px;
-    border-bottom:1px solid rgba(255,255,255,0.16);
+    padding:20px 34px 17px;
+    border-bottom:1px solid rgba(255,255,255,0.14);
     background:transparent;
+    position:relative;
 }
 
 .header-brand{
@@ -16,17 +17,21 @@
 }
 
 .header-title{
-    color:white;
+    color:#ffffff;
     font-size:24px;
     font-weight:700;
-    letter-spacing:-0.5px;
+    letter-spacing:-0.6px;
+}
+
+.header-title span{
+    color:#00d9ff;
 }
 
 .header-slogan{
     display:flex;
     align-items:center;
     gap:10px;
-    color:rgba(255,255,255,0.58);
+    color:rgba(255,255,255,0.56);
     font-size:13px;
     font-weight:500;
     letter-spacing:0.3px;
@@ -42,18 +47,40 @@
     position:absolute;
     left:50%;
     transform:translateX(-50%);
-    color:rgb(0, 251, 255);
-    font-size:15px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:rgba(255,255,255,0.64);
+    font-size:11px;
     font-weight:500;
-    letter-spacing:0.2px;
+    letter-spacing:1.15px;
+    text-transform:uppercase;
     white-space:nowrap;
+}
+
+.description-line{
+    width:26px;
+    height:1px;
+    background:linear-gradient(
+        to right,
+        transparent,
+        rgba(0,217,255,0.7)
+    );
+}
+
+.description-line:last-child{
+    background:linear-gradient(
+        to left,
+        transparent,
+        rgba(0,217,255,0.7)
+    );
 }
 
 .header-status{
     display:flex;
     align-items:center;
     gap:8px;
-    color:rgba(255,255,255,0.48);
+    color:rgba(255,255,255,0.46);
     font-size:12px;
     font-weight:500;
     letter-spacing:0.4px;
@@ -67,7 +94,7 @@
     box-shadow:0 0 9px rgba(0,217,255,0.65);
 }
 
-@media (max-width:900px){
+@media (max-width:1050px){
     .header-description{
         display:none;
     }

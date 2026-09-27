@@ -5,7 +5,9 @@ export function Headerbox()
     return(
         <header className="div-header">
             <div className="header-brand">
-                <div className="header-title">Student Hub</div>
+                <div className="header-title">
+                    Student <span>Hub</span>
+                </div>
 
                 <div className="header-slogan">
                     <span>Plan</span>
@@ -15,7 +17,9 @@ export function Headerbox()
             </div>
 
             <div className="header-description">
-                Manage all your academic essentials in one place !
+                <span className="description-line"></span>
+                <span>Your academic essentials, all in one place</span>
+                <span className="description-line"></span>
             </div>
 
             <div className="header-status">
