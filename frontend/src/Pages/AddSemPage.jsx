@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { addSemester } from "../../api/semesterApi.js";
 import { useNavigate } from "react-router";
+import { ErrorMessage } from "../Components/ErrorMessage.jsx";
 export function AddSemPage()
 {
     const [semName,setSemName] = useState('');
@@ -141,9 +142,8 @@ export function AddSemPage()
                 {satDates&&<div>
                     <SatSchedule satDates={filteredList} setSatDates={setSatDates}/>
                 </div>}
-            {error && <p style={{ color: "#ef4444" }}>{error}</p>}
             </div>
-            
+            <ErrorMessage message={error} onDismiss={() => setError('')} />
             
             
         </>

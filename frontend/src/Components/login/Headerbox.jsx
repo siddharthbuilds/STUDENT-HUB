@@ -15,7 +15,7 @@ export function Headerbox()
             </div>
 
             <div className="header-description">
-                Manage all your academic essentials in one place!!
+                Manage all your academic essentials in one place !
             </div>
 
             <div className="header-status">

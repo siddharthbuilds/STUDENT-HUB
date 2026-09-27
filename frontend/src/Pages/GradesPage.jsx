@@ -4,18 +4,24 @@ import { ButtonLogin } from "../Components/login/ButtonLogin";
 import { getGrades } from "../../api/gradeApi";
 import { useEffect, useState} from "react";
 import {GradeForm} from "../Components/grades/GradeForm";
+import { ErrorMessage } from "../Components/ErrorMessage";
 
 
 export function GradesPage() {
     const [grades,setGrades] = useState(null);
     const [showFrom,setShowForm] = useState(false);
+    const [error, setError] = useState('');
 
     async function onSave()
     {
         async function fetchGrades()
         {
-            const response = await getGrades();
-            setGrades(response.data.grades);
+            try {
+                const response = await getGrades();
+                setGrades(response.data.grades);
+            } catch (err) {
+                setError(err.response?.data?.message || "Failed to load grades");
+            }
         }
             fetchGrades();
         setShowForm(false);
@@ -24,8 +30,12 @@ export function GradesPage() {
     useEffect(()=>{
     async function fetchGrades()
     {
-        const response = await getGrades();
-        setGrades(response.data.grades);
+        try {
+            const response = await getGrades();
+            setGrades(response.data.grades);
+        } catch (err) {
+            setError(err.response?.data?.message || "Failed to load grades");
+        }
     }
     fetchGrades();
 },[])
@@ -47,6 +57,7 @@ export function GradesPage() {
                     semesters={Object.values(grades.semesters)}
                     onSave={onSave}
                     />}
+            <ErrorMessage message={error} onDismiss={() => setError('')} />
         </div>
     );
 }

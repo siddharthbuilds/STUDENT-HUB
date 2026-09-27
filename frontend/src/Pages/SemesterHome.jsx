@@ -5,15 +5,26 @@ import { ChevronDown, Check } from "lucide-react";
 import {useSemester} from "../context/useSemester.js";
 import {getSemesterSummary} from "../../api/semesterApi.js";
 import formatDate from "../Utils/FormatDate.js";
+import { ErrorMessage } from "../Components/ErrorMessage.jsx";
+import PageLoader from "../Components/Loader.jsx";
 
 export function SemesterHome() {
     const {semesterDetails} = useSemester();
     const [semSummary,setSemSummary] = useState(null);
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
     useEffect(()=>{
         async function semSummary()
         {
-            const response = await getSemesterSummary(semesterDetails.semId);
-            setSemSummary(response.data); 
+            setLoading(true);
+            try {
+                const response = await getSemesterSummary(semesterDetails.semId);
+                setSemSummary(response.data);
+            } catch (err) {
+                setError(err.response?.data?.message || "Failed to load semester summary");
+            } finally {
+                setLoading(false);
+            }
         }
         semSummary();
     },[])
@@ -25,7 +36,9 @@ export function SemesterHome() {
 
     return (
         <div className="semester-home">
-            {semSummary&&semesterDetails&&
+            {loading && <PageLoader />}
+
+            {!loading && semSummary&&semesterDetails&&
                  <main className="semester-home-content">
 
                 <div className="semester-home-header">
@@ -196,7 +209,7 @@ export function SemesterHome() {
 
             </main>
             }
-           
+            <ErrorMessage message={error} onDismiss={() => setError('')} />
         </div>
     );
 }

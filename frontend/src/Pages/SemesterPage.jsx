@@ -9,6 +9,7 @@ import formatDate from "../Utils/FormatDate.js";
 import { useSemester } from "../context/useSemester.js";
 import { ConfirmationBox } from "../Components/attendance/ConfirmationBox.jsx";
 import {SemesterHint} from "../Components/home/SemesterHint.jsx";
+import { ErrorMessage } from "../Components/ErrorMessage.jsx";
 
 export function SemesterPage() {
     const [semesters, setSemesters] = useState();
@@ -20,14 +21,18 @@ export function SemesterPage() {
     const [currentSem, setCurrentSem] = useState(null);
 
     async function onClickTrash(semId) {
-        await deleteSemester(semId);
-        const currentSemesters = [...semesters];
+        try {
+            await deleteSemester(semId);
+            const currentSemesters = [...semesters];
 
-        setSemesters(
-            currentSemesters.filter((semester) => {
-                return semester.semId != semId;
-            })
-        );
+            setSemesters(
+                currentSemesters.filter((semester) => {
+                    return semester.semId != semId;
+                })
+            );
+        } catch (err) {
+            setError(err.response?.data?.message || "Failed to delete semester");
+        }
     }
 
     function selectSemester(semester) {
@@ -117,11 +122,7 @@ export function SemesterPage() {
                 setTrackConfirmation={setShowConfirmation}
             />}
 
-            {error && (
-                <p className="semester-error">
-                    {error}
-                </p>
-            )}
+            <ErrorMessage message={error} onDismiss={() => setError('')} />
         </div>
     );
 }

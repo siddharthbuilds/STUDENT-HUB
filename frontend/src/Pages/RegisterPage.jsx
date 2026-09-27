@@ -8,8 +8,7 @@ import "./RegisterPage.css";
 import { register } from "../../api/authApi";
 import { useNavigate } from "react-router";
 import {PageLoader} from "../Components/Loader";
-import { Link } from "react-router";
-
+import { ErrorMessage } from "../Components/ErrorMessage";
 
 export function RegisterPage()
 {
@@ -21,6 +20,7 @@ export function RegisterPage()
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [showLoader,setShowLoader] = useState(false);
+    const [error, setError] = useState('');
 
     function wait(ms) 
     {
@@ -30,6 +30,7 @@ export function RegisterPage()
     async function onClickRegister()
     {
         setShowLoader(true);
+        setError('');
         try{
             await Promise.all([register ({userId, userName, email, password}),
                 wait(5000)
@@ -38,7 +39,7 @@ export function RegisterPage()
         }
         
             catch(err){
-                console.log(err.response.data.message);
+                setError(err.response?.data?.message || "Registration failed");
             }
             finally{
                 setShowLoader(false);
@@ -69,18 +70,12 @@ export function RegisterPage()
             <ButtonLogin text="Register" 
             onClick={onClickRegister}
             />
-
-        <Link to="/login" 
-                    style={{ color: 'inherit', textDecoration: 'none' }}>
-                    <div className="div-login-txt2">
-                        Already Registered? Login
-                    </div>
-        </Link>
             
         </div>
         <Toast message="Account Registered Successfully!" show={toastView}/>
             </>
         }
+        <ErrorMessage message={error} onDismiss={() => setError('')} />
         </>
     )
 }

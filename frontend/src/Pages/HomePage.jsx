@@ -2,6 +2,8 @@ import "./HomePage.css";
 import { Pencil } from "lucide-react";
 import { userDetails } from "../../api/authApi";
 import { getGrades } from "../../api/gradeApi";
+import { ErrorMessage } from "../Components/ErrorMessage";
+import PageLoader from "../Components/Loader";
 
 import { useEffect, useState } from "react";
 
@@ -9,9 +11,11 @@ export function HomePage() {
     const [user,setUser] = useState(null);
     const [cgpa,setCgpa] = useState(null);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
     useEffect(()=>{
         async function getUserDetails()
         {
+            setLoading(true);
             try{
                 const response = await userDetails();
                 setUser(response.data.userDetails);
@@ -23,6 +27,10 @@ export function HomePage() {
             {
                 setError(error.response?.data?.message)
             }
+            finally
+            {
+                setLoading(false);
+            }
         }
         getUserDetails();
     },[]);
@@ -30,7 +38,9 @@ export function HomePage() {
 
     return (
         <div className="home-page">
-            {user&&
+            {loading && <PageLoader />}
+
+            {!loading && user&&
                 <main className="home-content">
 
                 <div className="home-welcome">
@@ -154,7 +164,7 @@ export function HomePage() {
 
             }
             
-            {error && <p style={{ color: "#ef4444" }}>{error}</p>}
+            <ErrorMessage message={error} onDismiss={() => setError('')} />
         </div>
     );
 }

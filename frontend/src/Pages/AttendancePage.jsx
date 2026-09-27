@@ -11,6 +11,8 @@ import { getMonths } from "../Utils/getMonths.js";
 import { getCourseSummary } from "../../api/attendanceApi.js";
 import { updateAttendance } from "../../api/attendanceApi.js";
 import { planYourBunks } from "../../api/attendanceApi.js"
+import { ErrorMessage } from "../Components/ErrorMessage.jsx";
+import { TopBarLoader } from "../Components/Loader.jsx";
 export function AttendancePage({plannerMode=false})
 {
     const [courseWise, setCourseWise] = useState(false);
@@ -26,6 +28,7 @@ export function AttendancePage({plannerMode=false})
     const [trackDirty, setTrackDirty] = useState(false);
     const [plannerRows, setPlannerRows] = useState([]);
     const [dateSelected,setDateSelected] = useState(1);
+    const [courseLoading, setCourseLoading] = useState(false);
 
     const semId = semesterDetails && semesterDetails.semId;
 
@@ -41,6 +44,7 @@ export function AttendancePage({plannerMode=false})
 
     async function styleCourseWise()
     {
+        setCourseLoading(true);
         try
         {
             if(plannerMode)
@@ -64,6 +68,10 @@ export function AttendancePage({plannerMode=false})
                 err.response?.data?.message ||
                 "Failed to get course summary"
             );
+        }
+        finally
+        {
+            setCourseLoading(false);
         }
     }
 
@@ -143,6 +151,7 @@ export function AttendancePage({plannerMode=false})
 
     return(
         <>
+            <TopBarLoader active={courseLoading} height={4} />
             <div className={trackConfirmation?"div-noblur div-blur":"div-noblur"}>
                 <div className="attendance-page-shell">
                     <div className="attendance-page-content">
@@ -161,13 +170,6 @@ export function AttendancePage({plannerMode=false})
                                     {!plannerMode?
                                     `• Mark classes as Present or Absent and keep your attendance records up to date.`:
                                     `• Nothing is saved — all changes are temporary and are only for planning and experimenting.`}
-                                </div>
-
-                                <div className={!plannerMode?"planner-unsaved-note" : ""}>
-                                    {!plannerMode&&
-                                    `
-                                    🔒 Saved Present/Absent entries cannot be edited. Visit Plan Your Bunks to experiment with attendance changes.
-                                    `}
                                 </div>
                             </div>
                         </div>
@@ -189,6 +191,7 @@ export function AttendancePage({plannerMode=false})
                                             plannerRows={plannerRows}
                                             dateSelected={dateSelected}
                                             setDateSelected={setDateSelected}
+                                            setError={setError}
                                 />
 
                                 <div className="attendance-hours-panel">
@@ -234,7 +237,7 @@ export function AttendancePage({plannerMode=false})
 
             {trackConfirmation&&<ConfirmationBox
                 message1="Are you sure want to save the changes?"
-                message2="Once an entry is saved as Present or Absent, it cannot be edited later. Unmarked entries can still be updated."
+                message2="Note: Data once Saved, cannot be edited."
                 option1="Save"
                 option2="Cancel"
                 toastmessage="All Changes Saved"
@@ -242,7 +245,7 @@ export function AttendancePage({plannerMode=false})
                 saveFunction={saveAttendance}
             />}
 
-            {error && <p className="attendance-error">{error}</p>}
+            <ErrorMessage message={error} onDismiss={() => setError('')} />
         </>
     )
 }

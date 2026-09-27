@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { login } from "../../api/authApi";
 import { useState } from "react";
 import { TopBarLoader } from "../Components/Loader";
+import { ErrorMessage } from "../Components/ErrorMessage";
 
 export function LoginPage() {
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ export function LoginPage() {
                 buttonActivity={onClickLogin}
             />
             </div>
-            {error && <p style={{ color: "#ef4444" }}>{error}</p>}
+            <ErrorMessage message={error} onDismiss={() => setError('')} />
         </>
     );
 }
