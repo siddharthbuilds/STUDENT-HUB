@@ -108,10 +108,16 @@ export function EachHour({
                         attendanceRows[0].description:" "}
                 />}
 
-            {attendanceType==1&&attendanceRows.length==0&&
+            {!plannerMode&& attendanceType==1&&attendanceRows.length==0&&
                 <DisplayCard 
                     content="Sunday"
                 />}
+
+            {plannerMode&& attendanceType==1&&attendanceRows.length==0&&
+                <DisplayCard 
+                    content="No Classes Today!"
+                />}
+
 
         </div>
     );
