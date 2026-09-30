@@ -18,7 +18,11 @@ export async function userDetailsController(req,res)
             const total=statusList&&statusList.length;
             let present=0;
             statusList.forEach(({status})=>{
-                if(status===1) present+=1;
+                if(status != 0)
+                {
+                    total +=1;
+                    if(status == 1) present+=1;
+                }
             });
             userDetails.attendance = total!=0 ? +((present/total)*100).toFixed(2):0;
         }
