@@ -15,7 +15,7 @@ export async function userDetailsController(req,res)
         {
             const semId = currentSemester.semId;
             const statusList = await Attendance.currentAttendance({semId});
-            const total=statusList&&statusList.length;
+            let total=0;
             let present=0;
             statusList.forEach(({status})=>{
                 if(status != 0)
