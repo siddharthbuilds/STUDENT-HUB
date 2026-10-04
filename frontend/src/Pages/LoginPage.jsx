@@ -13,18 +13,12 @@ export function LoginPage() {
     const [showLoader, setShowLoader] = useState(false);
     const [error, setError] = useState('');
 
-    function wait(ms) 
-    {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
-
     async function onClickLogin() {
         setShowLoader(true);
         setError('');
         try {
             const [response] = await Promise.all(
-                [login({ userId: loginId, password: loginPassword }),
-                    wait(5000),
+                [login({ userId: loginId, password: loginPassword })
                 ]);
             localStorage.setItem("accessToken", response.data.accessToken);
             navigate("/user");

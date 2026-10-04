@@ -24,18 +24,13 @@ export function RegisterPage()
     const [showLoader,setShowLoader] = useState(false);
     const [error, setError] = useState('');
 
-    function wait(ms) 
-    {
-        return new Promise((resolve) => setTimeout(resolve, ms));
-    }
 
     async function onClickRegister()
     {
         setShowLoader(true);
         setError('');
         try{
-            await Promise.all([register ({userId, userName, email, password}),
-                wait(5000)
+            await Promise.all([register ({userId, userName, email, password})
             ]);
             navigate("/login");
         }
