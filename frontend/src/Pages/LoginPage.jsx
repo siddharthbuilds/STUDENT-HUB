@@ -5,6 +5,8 @@ import { login } from "../../api/authApi";
 import { useState } from "react";
 import { TopBarLoader } from "../Components/Loader";
 import { ErrorMessage } from "../Components/ErrorMessage";
+import { useLocation } from "react-router";
+import { Toast } from "../Components/register/Toast";
 
 export function LoginPage() {
     const navigate = useNavigate();
@@ -12,6 +14,7 @@ export function LoginPage() {
     const [loginPassword, setLoginPassword] = useState('');
     const [showLoader, setShowLoader] = useState(false);
     const [error, setError] = useState('');
+    const location = useLocation();
 
     async function onClickLogin() {
         setShowLoader(true);
@@ -43,8 +46,10 @@ export function LoginPage() {
                 setLoginPassword={setLoginPassword}
                 buttonActivity={onClickLogin}
             />
+            
             </div>
             <ErrorMessage message={error} onDismiss={() => setError('')} />
+            {location.state?.message && <Toast message={location.state.message} show={true} /> }
         </>
     );
 }

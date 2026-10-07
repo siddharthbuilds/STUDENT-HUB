@@ -32,9 +32,10 @@ export function RegisterPage()
         try{
             await Promise.all([register ({userId, userName, email, password})
             ]);
-            navigate("/login");
+            navigate("/login",{state: {
+            message: "Registration successful! Please login."
+        }});
         }
-        
             catch(err){
                 setError(err.response?.data?.message || "Registration failed");
             }
