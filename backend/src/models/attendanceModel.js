@@ -109,12 +109,18 @@ class Attendance
         return attendanceRows;
     }
 
-    static async updateAttendance({attendanceChanges,connection})
+    static async updateAttendance({attendanceChanges,connection,userId})
     {
         // if(attendanceChanges.length===0)
         //     {return;}
-        const newStatusQuery=`UPDATE attendance SET status=?, editable = ?
-                            WHERE attendance_id=? AND editable=1`;
+        const newStatusQuery=`UPDATE attendance a
+                                INNER JOIN semesters s
+                                    ON a.sem_id = s.sem_id
+                                SET a.status = ?, a.editable = ?
+                                    WHERE a.attendance_id = ?
+                                    AND s.user_id = ?
+                                    AND editable = 1;`  ;
+                            
         let editable;
         for (const attendance of attendanceChanges) {
             if (![1, 0, -1].includes(attendance.status)) {
@@ -127,7 +133,7 @@ class Attendance
             else {editable = 1;}
             await connection.query(
                 newStatusQuery,
-                [attendance.status, editable, attendance.attendance_id]
+                [attendance.status, editable, attendance.attendance_id,userId]
             );
         }
     }

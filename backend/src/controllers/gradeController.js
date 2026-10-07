@@ -53,6 +53,7 @@ export async function getGradesController(req,res)
 export async function updateGradesController(req,res)
 {
     const connection = await mydb.getConnection();
+    const userId = req.user.userId;
     await connection.beginTransaction();
     try{
         const gradeChanges = req.body.gradeChanges;
@@ -61,7 +62,7 @@ export async function updateGradesController(req,res)
         changes.forEach(([id,grade])=>{
             insertData.push(grade,id);
         });
-        await Grade.updateGrades({insertData,connection});
+        await Grade.updateGrades({insertData,userId,connection});
         await connection.commit();
         return res.status(200).json({message:"Grades Updated!"});
     }

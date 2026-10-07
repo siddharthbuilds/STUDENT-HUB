@@ -33,13 +33,13 @@ export async function getAttendanceController(req,res)
 
 export async function updateAttendanceController(req,res)
 {
-    const semId = parseInt(req.params.semId);
+    const userId = req.user.userId;
     const connection = await mydb.getConnection();
     await connection.beginTransaction();
     const attendanceChanges = req.body.attendanceChanges;
     try
     {
-        await Attendance.updateAttendance({attendanceChanges,connection});
+        await Attendance.updateAttendance({attendanceChanges,connection,userId});
         await connection.commit();
         return res.status(200).json({message: "Attendance Updated!"});
     }

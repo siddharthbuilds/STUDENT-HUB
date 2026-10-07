@@ -25,14 +25,14 @@ class Grade{
                         
     }
 
-    static async updateGrades({insertData,connection})
+    static async updateGrades({insertData,userId,connection})
     {
-        const query=`UPDATE grades SET grade=? WHERE grade_id=?`;
+        const query=`UPDATE grades SET grade=? WHERE grade_id=? AND user_id=?`;
         for(let i=0; i<insertData.length;i+=2)
         {
             const grade = insertData[i];
             const gradeId = insertData[i+1];
-            await connection.query(query, [grade, gradeId]);
+            await connection.query(query, [grade, gradeId,userId]);
         }
 
     }
