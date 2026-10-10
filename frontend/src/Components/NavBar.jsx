@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 export function NavBar()
 {
     const navigate = useNavigate();
+    const isDemo = localStorage.getItem("isDemoSession") === "true";
     const links = [
                 {
                     path: "/user/home",
@@ -25,6 +26,7 @@ export function NavBar()
     return(
         <>
         <nav className="nav">
+        {isDemo && <div className="demo-session-label">Demo session</div>}
         <ul className="links">
         {links.map(({path, text, icon}) => {
     const Icon = icon;
@@ -56,6 +58,7 @@ export function NavBar()
                     <li className="links-list"
                         onClick={()=>{
                             localStorage.removeItem("accessToken");
+                            localStorage.removeItem("isDemoSession");
                             navigate('/login');
                         }}
                     >
@@ -63,7 +66,7 @@ export function NavBar()
                             <LogOut size="18px"/>
                         </div> 
                         <div>
-                            Logout
+                            {isDemo ? "Exit demo" : "Logout"}
                         </div>
                     </li>
                 </ul>

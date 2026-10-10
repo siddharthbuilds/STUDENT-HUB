@@ -5,7 +5,7 @@ import { Headerbox } from "../Components/login/Headerbox";
 import { Toast } from "../Components/register/Toast";
 import { useState } from "react";
 import "./RegisterPage.css";
-import { register } from "../../api/authApi";
+import { register, startDemoSession } from "../../api/authApi";
 import { useNavigate } from "react-router";
 import {PageLoader} from "../Components/Loader";
 import { ErrorMessage } from "../Components/ErrorMessage";
@@ -23,6 +23,22 @@ export function RegisterPage()
     const [password,setPassword] = useState('');
     const [showLoader,setShowLoader] = useState(false);
     const [error, setError] = useState('');
+    const [demoLoading, setDemoLoading] = useState(false);
+
+    async function onClickDemo() {
+        setDemoLoading(true);
+        setError('');
+        try {
+            const response = await startDemoSession();
+            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem("isDemoSession", "true");
+            navigate("/user");
+        } catch (err) {
+            setError(err.response?.data?.message || "Could not start demo session");
+        } finally {
+            setDemoLoading(false);
+        }
+    }
 
 
     async function onClickRegister()
@@ -68,6 +84,20 @@ export function RegisterPage()
             <ButtonLogin text="Register" 
             onClick={onClickRegister}
             />
+            <button
+                type="button"
+                className="btn-demo"
+                onClick={onClickDemo}
+                disabled={demoLoading}
+            >
+                <span className="btn-demo-title">
+                    {demoLoading ? "Starting demo..." : "Just Try Student Hub"}
+                </span>
+
+                <span className="btn-demo-subtitle">
+                    No account required
+                </span>
+            </button>
 
         <Link to="/login" 
                     style={{ color: 'inherit', textDecoration: 'none' }}>

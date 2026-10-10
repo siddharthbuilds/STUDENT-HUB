@@ -1,7 +1,7 @@
 import { Headerbox } from "../Components/login/Headerbox";
 import { LoginBox } from "../Components/login/LoginBox";
 import { useNavigate } from "react-router";
-import { login } from "../../api/authApi";
+import { login, startDemoSession } from "../../api/authApi";
 import { useState } from "react";
 import { TopBarLoader } from "../Components/Loader";
 import { ErrorMessage } from "../Components/ErrorMessage";
@@ -32,6 +32,21 @@ export function LoginPage() {
         }
     }
 
+    async function onClickDemo() {
+        setShowLoader(true);
+        setError('');
+        try {
+            const response = await startDemoSession();
+            localStorage.setItem("accessToken", response.data.accessToken);
+            localStorage.setItem("isDemoSession", "true");
+            navigate("/user");
+        } catch (err) {
+            setError(err.response?.data?.message || "Could not start demo session");
+        } finally {
+            setShowLoader(false);
+        }
+    }
+
     return (
         <>
             <TopBarLoader active={showLoader} 
@@ -45,6 +60,8 @@ export function LoginPage() {
                 setLoginId={setLoginId}
                 setLoginPassword={setLoginPassword}
                 buttonActivity={onClickLogin}
+                demoActivity={onClickDemo}
+                demoLoading={showLoader}
             />
             
             </div>

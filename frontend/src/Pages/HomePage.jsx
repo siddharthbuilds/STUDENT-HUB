@@ -77,7 +77,7 @@ export function HomePage() {
                         </div>
 
                         <div className="user-detail-value">
-                            {user.userId}
+                            {user.isDemo ? "demo123" : user.userId}
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@ export function HomePage() {
                         </div>
 
                         <div className="user-detail-value">
-                            <span>{user.email}</span>
+                            <span>{user.isDemo ? "demo@mail.com" : user.email}</span>
 
                             {/* <button className="edit-button">
                                 <Pencil size={15} />
