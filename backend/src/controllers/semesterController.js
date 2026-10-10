@@ -6,25 +6,32 @@ import Attendance from "../models/attendanceModel.js";
 import Grade from "../models/gradesModel.js";
 import mydb from "../config/database.js";
 
+export async function createSemesterData({connection,userId,data,initialGrades,seedDemoAttendance=false})
+{
+    const semId = await Semester.addSemester({connection,userId,
+        semName: data.semName, startDate: data.startDate, endDate: data.endDate});
+    const courseMap = await Course.addCourses({connection,semId,courses:data.courses});
+    await Schedule.addSchedule({connection,semId,courseMap});
+    await Calendar.addCalendar({connection,semId,list:data.holidays,code:1});
+    await Calendar.addCalendar({connection,semId,list:data.exams,code:2});
+    await Calendar.addSaturdays({connection,semId,saturdays:data.saturdays});
+    await Attendance.generateAttendance({connection,semId,fromDate:data.startDate,toDate:data.endDate});
+    if(seedDemoAttendance)
+    {
+        await Attendance.seedDemoAttendance({connection,semId,fromDate:data.startDate});
+    }
+    const semCourses = await Course.semCourses({connection,semId});
+    await Grade.createGrades({connection,semId,userId,courses:semCourses,initialGrades});
+    return semId;
+}
+
 export async function addSemesterController(req,res)
 {
     const connection = await mydb.getConnection();
     await connection.beginTransaction();
     const userId = req.user.userId;
-    const params = {userId: userId, semName: req.body.semName, 
-        startDate : req.body.startDate, endDate : req.body.endDate,connection
-    };
     try{
-        const semId = await Semester.addSemester(params);
-        const courses = req.body.courses;
-        const courseMap = await Course.addCourses({connection,semId,courses});
-        await Schedule.addSchedule({connection,semId,courseMap});
-        await Calendar.addCalendar({connection,semId,list: req.body.holidays,code: 1});
-        await Calendar.addCalendar({connection,semId,list: req.body.exams,code: 2});
-        await Calendar.addSaturdays({connection,semId,saturdays: req.body.saturdays});
-        await Attendance.generateAttendance({connection,semId,fromDate: req.body.startDate,toDate:req.body.endDate});
-        const semCourses = await Course.semCourses({connection, semId});
-        await Grade.createGrades({connection,semId,userId,courses: semCourses})
+        await createSemesterData({connection,userId,data:req.body});
         await connection.commit();
         return res.status(201).json({message: 'Semester Added successfully'});
     }

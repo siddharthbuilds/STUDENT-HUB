@@ -17,7 +17,7 @@ class User{
         return exist;
     }
 
-    static async createUser({userId,userName,password,email})
+    static async createUser({userId,userName,password,email,connection})
     {
         userId = userId.replaceAll(" ","").toLowerCase();
         const passwordHashed = await bcrypt.hash(password,10);
@@ -26,7 +26,7 @@ class User{
             const addQuery = `INSERT INTO users (user_id, user_name, password_hash, email) 
             VALUES (?, ?, ?, ?)`;
             const params = [userId, userName, passwordHashed, email];
-            await mydb.query(addQuery,params)
+            await (connection || mydb).query(addQuery,params)
         }
         catch(err)
         {

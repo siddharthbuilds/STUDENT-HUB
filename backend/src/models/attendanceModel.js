@@ -84,6 +84,37 @@ class Attendance
         
     }
 
+    static async seedDemoAttendance({connection,semId,fromDate})
+    {
+        const firstDate = new Date(`${fromDate}T00:00:00Z`);
+        for(let offset=0; offset<2; offset++)
+        {
+            const date = new Date(firstDate);
+            date.setUTCDate(date.getUTCDate()+offset);
+            const attendanceDate = date.toISOString().slice(0,10);
+            const [hours] = await connection.query(
+                `SELECT a.attendance_id AS attendanceId
+                 FROM attendance a
+                 JOIN schedules s ON a.schedule_id=s.schedule_id
+                 WHERE a.sem_id=? AND a.attendance_date=?
+                 ORDER BY s.hour
+                 LIMIT 2`,
+                [semId,attendanceDate]
+            );
+            if(hours.length === 2)
+            {
+                await connection.query(
+                    `UPDATE attendance SET status=1, editable=0 WHERE attendance_id=?`,
+                    [hours[0].attendanceId]
+                );
+                await connection.query(
+                    `UPDATE attendance SET status=-1, editable=0 WHERE attendance_id=?`,
+                    [hours[1].attendanceId]
+                );
+            }
+        }
+    }
+
     static async getAttendance({semId,attendanceDate})
     {
         const attendanceQuery = `SELECT

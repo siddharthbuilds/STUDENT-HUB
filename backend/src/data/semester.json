@@ -1,0 +1,94 @@
+{
+  "semName": "Demo Semester",
+  "startDate": "2026-10-01",
+  "endDate": "2026-10-31",
+  "courses": [
+    {
+      "uuid": "dc3ba13b-1008-4114-860f-7484239bd088",
+      "courseName": "Engineering Mathematics",
+      "courseCredits": "4",
+      "mon": "x 1",
+      "tue": "0",
+      "wed": "x 1",
+      "thu": "x 1",
+      "fri": "x 1"
+    },
+    {
+      "uuid": "5b63c958-d30f-4eae-ba8d-47d4edcac3a6",
+      "courseName": "Data Structures",
+      "courseCredits": "4",
+      "mon": "x 1",
+      "tue": "x 2",
+      "wed": "0",
+      "thu": "0",
+      "fri": "x 1"
+    },
+    {
+      "uuid": "f42eb67c-a0ee-46e7-93dd-c0d09441712a",
+      "courseName": "Digital Signal Processing",
+      "courseCredits": "4",
+      "mon": "x 1",
+      "tue": "0",
+      "wed": "x 2",
+      "thu": "x 1",
+      "fri": "0"
+    },
+    {
+      "uuid": "bee2a6d2-98d9-4c85-941c-bf1d7aba9615",
+      "courseName": "Fluid Mechanics",
+      "courseCredits": "3",
+      "mon": "0",
+      "tue": "x 1",
+      "wed": "0",
+      "thu": "x 2",
+      "fri": "0"
+    },
+    {
+      "uuid": "4dc88799-7989-4f90-a08d-419329033285",
+      "courseName": "Effective Communication",
+      "courseCredits": "2",
+      "mon": "0",
+      "tue": "x 1",
+      "wed": "0",
+      "thu": "0",
+      "fri": "x 1"
+    }
+  ],
+  "exams": [
+    {
+      "uuid": "f91463a1-2bc9-4e33-85d9-c09658a40e5e",
+      "from": "2026-10-29",
+      "to": "2026-10-31",
+      "description": "Internal Exam - 1"
+    }
+  ],
+  "holidays": [
+    {
+      "uuid": "7398226c-2201-4f48-b5a2-4a6f2fea2bb3",
+      "from": "2026-10-17",
+      "to": "2026-10-20",
+      "description": "Dussehra"
+    }
+  ],
+  "saturdays": [
+    {
+      "uuid": "302188c7-421e-4442-bdfe-eb49fb60721b",
+      "date": "2026-10-03",
+      "status": "0",
+      "order": null
+    },
+    {
+      "uuid": "bb4776e4-daf8-48b7-a79c-056a1c9d3703",
+      "date": "2026-10-10",
+      "status": "1",
+      "order": "fri"
+    },
+    {
+      "uuid": "0f022411-25bb-49ac-a6c4-a51061086401",
+      "date": "2026-10-24",
+      "status": "0",
+      "order": null
+    }
+  ],
+  "sameSchedule": "false"
+}

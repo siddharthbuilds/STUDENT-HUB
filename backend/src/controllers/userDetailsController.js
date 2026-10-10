@@ -9,6 +9,7 @@ export async function userDetailsController(req,res)
         const userId = req.user.userId;
         const userDetails = await User.getUserDetails({userId});
         userDetails.userId = req.user.userId;
+        userDetails.isDemo = req.user.isDemo === true;
 
         const currentSemester = await Semester.getCurrentSemester({userId});
         if(currentSemester)

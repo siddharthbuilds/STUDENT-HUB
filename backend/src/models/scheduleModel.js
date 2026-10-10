@@ -27,7 +27,7 @@ class Schedule
         {
             for(const [dayName, dayNumber] of Object.entries(dayMap))
             {
-                if(course[dayName] === 0) {continue;}
+                if(!course[dayName] || course[dayName] === 0 || course[dayName] === "0") {continue;}
                 const multiplier = parseInt(course[dayName].split(' ')[1]);
                 for(let i=1;i<=multiplier;i++)
                 {

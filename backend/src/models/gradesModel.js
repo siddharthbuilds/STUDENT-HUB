@@ -1,10 +1,10 @@
 import mydb from "../config/database.js";
 class Grade{
-    static async createGrades({userId, semId, courses,connection})
+    static async createGrades({userId, semId, courses,connection,initialGrades})
     {
         const insertData = [];
-        courses.forEach(course=>{
-            insertData.push([userId,semId,course.courseId,'Y'])
+        courses.forEach((course,index)=>{
+            insertData.push([userId,semId,course.courseId,initialGrades?.[index] || 'Y'])
         });
         const query = `INSERT INTO grades (user_id, sem_id, course_id,grade)
                         VALUES ?`;

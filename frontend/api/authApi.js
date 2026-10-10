@@ -11,6 +11,11 @@ export function register(data)
      return api.post(`${route}/register`,data);
 }
 
+export function startDemoSession()
+{
+    return api.post(`${route}/demo-session`);
+}
+
 export function userDetails()
 {
     return api.get(`${route}/user-details`);
